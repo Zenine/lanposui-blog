@@ -1,0 +1,77 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollections } from "../../data/blog";
+
+const collections = getCollections();
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
+---
+
+<BaseLayout title="合集" description="按连续主题阅读蓝破碎半圆文章合集。">
+  <main class="wrap taxonomy-page">
+    <p class="kicker">Collections</p>
+    <h1>合集</h1>
+    <div class="taxonomy-list">
+      {collections.map(collection => (
+        <a href={withBase(`collections/${collection.slug}/`)}>
+          <span>{collection.posts.length} 篇</span>
+          <strong>{collection.name}</strong>
+          <p>{collection.posts.map(post => post.title).join(" / ")}</p>
+        </a>
+      ))}
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .taxonomy-page {
+    padding-top: 3rem;
+    padding-bottom: 6rem;
+  }
+
+  h1 {
+    margin: 0.5rem 0 2rem;
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 1;
+  }
+
+  .taxonomy-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .taxonomy-list a {
+    min-height: 14rem;
+    padding: 1.4rem;
+    border: 1px solid var(--line);
+    background: rgba(246, 248, 245, 0.94);
+    text-decoration: none;
+  }
+
+  .taxonomy-list span {
+    color: var(--blue);
+    font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .taxonomy-list strong {
+    display: block;
+    margin-top: 2.5rem;
+    font-size: 1.8rem;
+  }
+
+  .taxonomy-list p {
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 760px) {
+    .taxonomy-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -3,6 +3,8 @@ const {
   title = "蓝破碎半圆",
   description = "一个 AI 时代技术决策者的判断笔记。",
   pageClass = "",
+  image = "/images/002-chopping-vs-herding-cover.png",
+  type = "website",
 } = Astro.props;
 
 const siteTitle = title === "蓝破碎半圆" ? title : `${title} | 蓝破碎半圆`;
@@ -10,6 +12,8 @@ const base = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
+const canonical = new URL(Astro.url.pathname, "https://zenine.github.io").toString();
+const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString();
 ---
 
 <!doctype html>
@@ -19,8 +23,21 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title="蓝破碎半圆 RSS" href={withBase("rss.xml")} />
     <link rel="icon" type="image/svg+xml" href={withBase("favicon.svg")} />
     <link rel="icon" href={withBase("favicon.ico")} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:site_name" content="蓝破碎半圆" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={siteTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <slot name="head" />
     <title>{siteTitle}</title>
   </head>
   <body class={pageClass}>
@@ -34,6 +51,9 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
       </a>
       <nav aria-label="主导航">
         <a href={withBase("articles/")}>文章</a>
+        <a href={withBase("categories/")}>分类</a>
+        <a href={withBase("collections/")}>合集</a>
+        <a href={withBase("search/")}>检索</a>
         <span class="wechat-nav">
           <a href="http://weixin.qq.com/r/mp/njrl-WTEHTlirSCe92_M">公众号</a>
           <span class="wechat-qr" role="tooltip" aria-label="公众号二维码">
@@ -43,20 +63,32 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
       </nav>
     </header>
     <slot />
+    <footer class="site-footer">
+      <div>
+        <strong>蓝破碎半圆</strong>
+        <span>在破碎信息里，留下判断的现场。</span>
+      </div>
+      <nav aria-label="页脚导航">
+        <a href={withBase("rss.xml")}>RSS</a>
+        <a href={withBase("search/")}>检索</a>
+        <a href={withBase("categories/")}>分类</a>
+      </nav>
+    </footer>
   </body>
 </html>
 
 <style is:global>
   :root {
-    --paper: #f5f1e8;
-    --paper-2: #ebe4d7;
-    --ink: #14171a;
-    --muted: #666154;
-    --line: rgba(20, 23, 26, 0.14);
-    --blue: #1f79ff;
+    --paper: #f6f8f5;
+    --paper-2: #e6edf0;
+    --ink: #121820;
+    --muted: #5c6670;
+    --line: rgba(18, 24, 32, 0.14);
+    --blue: #1268f3;
     --cyan: #5cd6e8;
-    --ochre: #b88736;
-    --deep: #0a1b2e;
+    --ochre: #a6602a;
+    --green: #267867;
+    --deep: #081724;
     --max: 1120px;
   }
 
@@ -75,9 +107,10 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     margin: 0;
     min-height: 100vh;
     background:
-      linear-gradient(90deg, rgba(20, 23, 26, 0.035) 1px, transparent 1px) 0 0 / 34px 34px,
-      linear-gradient(rgba(20, 23, 26, 0.03) 1px, transparent 1px) 0 0 / 34px 34px,
-      radial-gradient(circle at 15% 0%, rgba(92, 214, 232, 0.16), transparent 28rem),
+      linear-gradient(90deg, rgba(18, 24, 32, 0.035) 1px, transparent 1px) 0 0 / 34px 34px,
+      linear-gradient(rgba(18, 24, 32, 0.03) 1px, transparent 1px) 0 0 / 34px 34px,
+      radial-gradient(circle at 16% 0%, rgba(18, 104, 243, 0.12), transparent 28rem),
+      radial-gradient(circle at 92% 18%, rgba(38, 120, 103, 0.12), transparent 24rem),
       var(--paper);
   }
 
@@ -171,7 +204,7 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     padding: 0.6rem;
     border: 1px solid var(--line);
     border-radius: 8px;
-    background: rgba(245, 241, 232, 0.98);
+    background: rgba(246, 248, 245, 0.98);
     box-shadow: 0 16px 38px rgba(10, 27, 46, 0.18);
     opacity: 0;
     pointer-events: none;
@@ -189,7 +222,7 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     height: 0.8rem;
     border-top: 1px solid var(--line);
     border-left: 1px solid var(--line);
-    background: rgba(245, 241, 232, 0.98);
+    background: rgba(246, 248, 245, 0.98);
     content: "";
     transform: rotate(45deg);
   }
@@ -221,11 +254,43 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     letter-spacing: 0;
   }
 
+  .site-footer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 3rem 1.2rem 2rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .site-footer strong,
+  .site-footer span {
+    display: block;
+  }
+
+  .site-footer span {
+    margin-top: 0.35rem;
+    color: var(--muted);
+    font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    font-size: 0.86rem;
+  }
+
   @media (max-width: 640px) {
     .site-header {
       align-items: flex-start;
       flex-direction: column;
       padding-top: 1rem;
+    }
+
+    nav,
+    .site-footer {
+      flex-wrap: wrap;
+    }
+
+    .site-footer {
+      flex-direction: column;
     }
 
     .wechat-qr {

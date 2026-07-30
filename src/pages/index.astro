@@ -1,8 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { posts } from "../data/posts";
+import { getCategories, getCollections, sortedPosts } from "../data/blog";
 
+const posts = sortedPosts;
 const latest = posts[0];
+const categories = getCategories();
+const collections = getCollections();
+const recommended = posts.slice(1, 4);
 const base = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
@@ -30,13 +34,61 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
       <div class="section-head">
         <p class="kicker">文章</p>
         <h2 id="article-list-title">已发布</h2>
+        <a href={withBase("articles/")}>全部文章</a>
       </div>
       <div class="posts">
         {posts.map((post) => (
           <a class="post-card" href={withBase(post.href)}>
+            <small>{post.category}</small>
             <h3>{post.title}</h3>
             <p>{post.description}</p>
             <time datetime={post.date}>{post.date}</time>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="wrap discovery" aria-labelledby="discovery-title">
+      <div class="section-head">
+        <p class="kicker">导航</p>
+        <h2 id="discovery-title">按分类阅读</h2>
+      </div>
+      <div class="taxonomy-grid">
+        {categories.map(category => (
+          <a href={withBase(`categories/${category.slug}/`)}>
+            <strong>{category.name}</strong>
+            <span>{category.posts.length} 篇</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="wrap discovery" aria-labelledby="collections-title">
+      <div class="section-head">
+        <p class="kicker">专题</p>
+        <h2 id="collections-title">合集</h2>
+        <a href={withBase("collections/")}>全部合集</a>
+      </div>
+      <div class="taxonomy-grid collections-grid">
+        {collections.map(collection => (
+          <a href={withBase(`collections/${collection.slug}/`)}>
+            <strong>{collection.name}</strong>
+            <span>{collection.posts.map(post => post.title).join(" / ")}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="wrap recommended" aria-labelledby="recommended-title">
+      <div class="section-head">
+        <p class="kicker">继续</p>
+        <h2 id="recommended-title">继续读相关判断</h2>
+      </div>
+      <div class="rail">
+        {recommended.map(post => (
+          <a href={withBase(post.href)}>
+            <time datetime={post.date}>{post.date}</time>
+            <strong>{post.title}</strong>
           </a>
         ))}
       </div>
@@ -53,9 +105,9 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(280px, 430px);
     gap: 3rem;
-    align-items: end;
-    min-height: calc(100vh - 7rem);
-    padding-top: 2rem;
+    align-items: center;
+    min-height: min(680px, calc(100vh - 7rem));
+    padding-top: 4rem;
     padding-bottom: 4rem;
   }
 
@@ -78,7 +130,7 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     display: block;
     padding: 0.9rem;
     border: 1px solid var(--line);
-    background: rgba(245, 241, 232, 0.74);
+    background: rgba(246, 248, 245, 0.74);
     text-decoration: none;
   }
 
@@ -120,6 +172,13 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     gap: 1rem;
   }
 
+  .section-head > a {
+    color: var(--muted);
+    font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    font-size: 0.86rem;
+    text-decoration: none;
+  }
+
   h2 {
     margin: 0;
     font-size: 2rem;
@@ -128,19 +187,19 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
   .posts {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1px;
+    gap: 0.9rem;
     margin-top: 1.5rem;
-    background: var(--line);
-    border: 1px solid var(--line);
   }
 
   .post-card {
     min-height: 250px;
     padding: 1.4rem;
-    background: rgba(245, 241, 232, 0.92);
+    border: 1px solid var(--line);
+    background: rgba(246, 248, 245, 0.92);
     text-decoration: none;
   }
 
+  .post-card small,
   .post-card time {
     color: var(--muted);
     font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif;
@@ -158,9 +217,70 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     line-height: 1.75;
   }
 
+  .discovery,
+  .recommended {
+    padding-top: 3.4rem;
+  }
+
+  .taxonomy-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.9rem;
+    margin-top: 1.4rem;
+  }
+
+  .taxonomy-grid a,
+  .rail a {
+    min-height: 9rem;
+    padding: 1.2rem;
+    border: 1px solid var(--line);
+    background: rgba(246, 248, 245, 0.9);
+    text-decoration: none;
+  }
+
+  .taxonomy-grid strong,
+  .taxonomy-grid span,
+  .rail time,
+  .rail strong {
+    display: block;
+  }
+
+  .taxonomy-grid strong {
+    font-size: 1.2rem;
+  }
+
+  .taxonomy-grid span,
+  .rail time {
+    margin-top: 0.75rem;
+    color: var(--muted);
+    font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .collections-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .rail {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem;
+    margin-top: 1.4rem;
+  }
+
+  .rail strong {
+    margin-top: 1.1rem;
+    font-size: 1.2rem;
+    line-height: 1.45;
+  }
+
   @media (max-width: 760px) {
     .home-grid,
-    .posts {
+    .posts,
+    .taxonomy-grid,
+    .collections-grid,
+    .rail {
       grid-template-columns: 1fr;
     }
 
