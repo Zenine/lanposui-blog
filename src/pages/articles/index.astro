@@ -1,0 +1,72 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { posts } from "../../data/posts";
+
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
+---
+
+<BaseLayout title="文章" description="蓝破碎半圆已发布文章列表。">
+  <main class="wrap archive">
+    <p class="kicker">Archive</p>
+    <h1>文章</h1>
+    <div class="list">
+      {posts.map((post) => (
+        <a class="row" href={withBase(post.href)}>
+          <strong>{post.title}</strong>
+          <time datetime={post.date}>{post.date}</time>
+        </a>
+      ))}
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .archive {
+    padding-top: 3rem;
+    padding-bottom: 6rem;
+  }
+
+  h1 {
+    margin: 0.5rem 0 2rem;
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 1;
+  }
+
+  .list {
+    border-top: 1px solid var(--line);
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 8rem;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 1.3rem 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+  }
+
+  .row time {
+    color: var(--muted);
+    font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    font-size: 0.86rem;
+  }
+
+  .row strong {
+    font-size: 1.25rem;
+    line-height: 1.45;
+  }
+
+  @media (max-width: 640px) {
+    .row {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .row time {
+      grid-column: 1;
+    }
+  }
+</style>

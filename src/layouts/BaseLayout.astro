@@ -1,0 +1,241 @@
+---
+const {
+  title = "蓝破碎半圆",
+  description = "一个 AI 时代技术决策者的判断笔记。",
+  pageClass = "",
+} = Astro.props;
+
+const siteTitle = title === "蓝破碎半圆" ? title : `${title} | 蓝破碎半圆`;
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href={withBase("favicon.svg")} />
+    <link rel="icon" href={withBase("favicon.ico")} />
+    <title>{siteTitle}</title>
+  </head>
+  <body class={pageClass}>
+    <header class="site-header">
+      <a class="brand" href={base}>
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>
+          <strong>蓝破碎半圆</strong>
+          <small>判断笔记</small>
+        </span>
+      </a>
+      <nav aria-label="主导航">
+        <a href={withBase("articles/")}>文章</a>
+        <span class="wechat-nav">
+          <a href="http://weixin.qq.com/r/mp/njrl-WTEHTlirSCe92_M">公众号</a>
+          <span class="wechat-qr" role="tooltip" aria-label="公众号二维码">
+            <img src={withBase("images/wechat-qr.jpg")} alt="公众号二维码" width="172" height="172" />
+          </span>
+        </span>
+      </nav>
+    </header>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --paper: #f5f1e8;
+    --paper-2: #ebe4d7;
+    --ink: #14171a;
+    --muted: #666154;
+    --line: rgba(20, 23, 26, 0.14);
+    --blue: #1f79ff;
+    --cyan: #5cd6e8;
+    --ochre: #b88736;
+    --deep: #0a1b2e;
+    --max: 1120px;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", Georgia, serif;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      linear-gradient(90deg, rgba(20, 23, 26, 0.035) 1px, transparent 1px) 0 0 / 34px 34px,
+      linear-gradient(rgba(20, 23, 26, 0.03) 1px, transparent 1px) 0 0 / 34px 34px,
+      radial-gradient(circle at 15% 0%, rgba(92, 214, 232, 0.16), transparent 28rem),
+      var(--paper);
+  }
+
+  a {
+    color: inherit;
+    text-decoration-color: rgba(31, 121, 255, 0.45);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 1.3rem 1.2rem;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+  }
+
+  .brand-mark {
+    width: 2.15rem;
+    height: 2.15rem;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    border-right-color: transparent;
+    border-bottom-color: var(--blue);
+    box-shadow: inset 0 0 0 5px rgba(31, 121, 255, 0.08);
+  }
+
+  .brand strong,
+  .brand small {
+    display: block;
+    line-height: 1.1;
+  }
+
+  .brand strong {
+    font-size: 1rem;
+  }
+
+  .brand small,
+  nav a {
+    color: var(--muted);
+    font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    font-size: 0.82rem;
+  }
+
+  nav {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  nav a {
+    text-decoration: none;
+  }
+
+  .wechat-nav {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .wechat-nav::after {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 12rem;
+    height: 0.8rem;
+    content: "";
+  }
+
+  .wechat-qr {
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    right: 0;
+    z-index: 10;
+    width: 12rem;
+    padding: 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: rgba(245, 241, 232, 0.98);
+    box-shadow: 0 16px 38px rgba(10, 27, 46, 0.18);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-0.25rem);
+    transition:
+      opacity 160ms ease,
+      transform 160ms ease;
+  }
+
+  .wechat-qr::before {
+    position: absolute;
+    top: -0.45rem;
+    right: 1.1rem;
+    width: 0.8rem;
+    height: 0.8rem;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    background: rgba(245, 241, 232, 0.98);
+    content: "";
+    transform: rotate(45deg);
+  }
+
+  .wechat-qr img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+  }
+
+  .wechat-nav:hover .wechat-qr,
+  .wechat-nav:focus-within .wechat-qr {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .wrap {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 1.2rem;
+  }
+
+  .kicker {
+    color: var(--blue);
+    font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  @media (max-width: 640px) {
+    .site-header {
+      align-items: flex-start;
+      flex-direction: column;
+      padding-top: 1rem;
+    }
+
+    .wechat-qr {
+      right: auto;
+      left: 0;
+    }
+
+    .wechat-qr::before {
+      right: auto;
+      left: 1.1rem;
+    }
+  }
+</style>

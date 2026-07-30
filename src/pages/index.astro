@@ -1,0 +1,172 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { posts } from "../data/posts";
+
+const latest = posts[0];
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
+---
+
+<BaseLayout>
+  <main>
+    <section class="wrap home-grid">
+      <div class="intro">
+        <p class="kicker">AI 时代技术决策者的判断笔记</p>
+        <h1>在破碎信息里，留下判断的现场。</h1>
+        <p>
+          这里不追逐更响的观点，只保存问题发生时的依据、边界、选择和代价。
+        </p>
+      </div>
+      <a class="feature" href={withBase(latest.href)}>
+        <img src={withBase(latest.cover)} alt="" />
+        <span>最新文章</span>
+        <strong>{latest.title}</strong>
+      </a>
+    </section>
+
+    <section class="wrap article-list" aria-labelledby="article-list-title">
+      <div class="section-head">
+        <p class="kicker">文章</p>
+        <h2 id="article-list-title">已发布</h2>
+      </div>
+      <div class="posts">
+        {posts.map((post) => (
+          <a class="post-card" href={withBase(post.href)}>
+            <h3>{post.title}</h3>
+            <p>{post.description}</p>
+            <time datetime={post.date}>{post.date}</time>
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  main {
+    padding-bottom: 5rem;
+  }
+
+  .home-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 430px);
+    gap: 3rem;
+    align-items: end;
+    min-height: calc(100vh - 7rem);
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+  }
+
+  h1 {
+    margin: 0.8rem 0 1.2rem;
+    max-width: 720px;
+    font-size: clamp(3rem, 8vw, 7.4rem);
+    line-height: 0.94;
+    letter-spacing: 0;
+  }
+
+  .intro p:last-child {
+    max-width: 560px;
+    color: var(--muted);
+    font-size: 1.18rem;
+    line-height: 1.85;
+  }
+
+  .feature {
+    display: block;
+    padding: 0.9rem;
+    border: 1px solid var(--line);
+    background: rgba(245, 241, 232, 0.74);
+    text-decoration: none;
+  }
+
+  .feature img {
+    aspect-ratio: 1.82;
+    width: 100%;
+    object-fit: cover;
+    border: 1px solid rgba(20, 23, 26, 0.18);
+  }
+
+  .feature span,
+  .feature strong {
+    display: block;
+  }
+
+  .feature span {
+    margin-top: 1rem;
+    color: var(--blue);
+    font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .feature strong {
+    margin-top: 0.35rem;
+    font-size: 1.35rem;
+    line-height: 1.35;
+  }
+
+  .article-list {
+    padding-top: 3rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .section-head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 2rem;
+  }
+
+  .posts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    margin-top: 1.5rem;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .post-card {
+    min-height: 250px;
+    padding: 1.4rem;
+    background: rgba(245, 241, 232, 0.92);
+    text-decoration: none;
+  }
+
+  .post-card time {
+    color: var(--muted);
+    font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    font-size: 0.82rem;
+  }
+
+  .post-card h3 {
+    margin: 2.4rem 0 0.9rem;
+    font-size: 1.55rem;
+    line-height: 1.35;
+  }
+
+  .post-card p {
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  @media (max-width: 760px) {
+    .home-grid,
+    .posts {
+      grid-template-columns: 1fr;
+    }
+
+    .home-grid {
+      min-height: auto;
+      padding-top: 1rem;
+    }
+  }
+</style>
