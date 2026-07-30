@@ -67,7 +67,7 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
         <a href={withBase("search/")}>检索</a>
         <a href="https://github.com/Zenine" rel="me noopener">GitHub</a>
         <span class="wechat-nav">
-          <a href="http://weixin.qq.com/r/mp/njrl-WTEHTlirSCe92_M">公众号</a>
+          <a href="https://weixin.qq.com/r/mp/njrl-WTEHTlirSCe92_M">公众号</a>
           <span class="wechat-qr" role="tooltip" aria-label="公众号二维码">
             <img src={withBase("images/wechat-qr.jpg")} alt="公众号二维码" width="172" height="172" />
           </span>
@@ -87,6 +87,10 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
           <a href={withBase("categories/")}>分类</a>
           <a href="https://github.com/Zenine" rel="me noopener">GitHub</a>
         </nav>
+        <div class="footer-qr">
+          <img src={withBase("images/wechat-qr.jpg")} alt="公众号二维码" width="96" height="96" loading="lazy" />
+          <span>扫码关注公众号</span>
+        </div>
       </div>
     </footer>
   </body>
@@ -347,6 +351,18 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
 
   .site-footer nav a:hover {
     color: var(--cyan);
+  }
+
+  .footer-qr img {
+    border-radius: 6px;
+  }
+
+  .footer-qr span {
+    display: block;
+    margin-top: 0.5rem;
+    color: color-mix(in srgb, var(--footer-ink) 62%, transparent);
+    font-family: var(--sans);
+    font-size: 0.78rem;
   }
 
   @media (max-width: 640px) {

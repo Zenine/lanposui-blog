@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    .b { stroke: #1268f3; }
+    .c { stroke: #5cd6e8; }
+    @media (prefers-color-scheme: dark) {
+      .b { stroke: #4f8dff; }
+    }
+  </style>
+  <path class="b" d="M6 46 A 26 26 0 0 1 32 20" fill="none" stroke-width="6" />
+  <g transform="translate(3 -3) rotate(8 46 25)">
+    <path class="b" d="M40.9 21.6 A 26 26 0 0 1 51.9 29.3" fill="none" stroke-width="5.5" />
+  </g>
+  <g transform="translate(5 -1) rotate(16 57 40)">
+    <path class="c" d="M56.1 36.3 A 26 26 0 0 1 57.7 42.4" fill="none" stroke-width="4.5" />
+  </g>
+</svg>

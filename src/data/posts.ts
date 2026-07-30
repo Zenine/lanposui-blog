@@ -27,7 +27,7 @@ export const posts: Post[] = [
     description:
       "AI 时代最大的差距，不是会不会用工具，而是有没有把一次性劳动沉淀成能够持续积累的系统。",
     cover: "/images/002-chopping-vs-herding-cover.webp",
-    wechat: "http://weixin.qq.com/r/mp/njrl-WTEHTlirSCe92_M",
+    wechat: "https://weixin.qq.com/r/mp/njrl-WTEHTlirSCe92_M",
   },
   {
     issue: 1,
@@ -83,6 +83,6 @@ export const posts: Post[] = [
       "从 meta 的概念讲起，重新理解元认知、元学习和“关于什么的什么”。",
     cover: "/images/archive/2021-meta-start/image-001.jpg",
     wechat:
-      "http://mp.weixin.qq.com/s?__biz=MzI1MDQ2OTE5Mg==&mid=100000018&idx=1&sn=97c600511e848244014a212d03f5c0bd&chksm=69808f355ef7062300322b2627f303fa413304067723786248474d0be1a8d250e78d3d60549f#rd",
+      "https://mp.weixin.qq.com/s?__biz=MzI1MDQ2OTE5Mg==&mid=100000018&idx=1&sn=97c600511e848244014a212d03f5c0bd&chksm=69808f355ef7062300322b2627f303fa413304067723786248474d0be1a8d250e78d3d60549f#rd",
   },
 ];

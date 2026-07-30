@@ -47,7 +47,10 @@ assertIncludes(home, "hero-arc", "home");
 for (const page of pages) {
   const html = readFileSync(page, "utf8");
   assertIncludes(html, "footer-inner", page);
+  assertIncludes(html, "footer-qr", page);
+  assertExcludes(html, 'href="http://', page);
 }
+assertIncludes(home, "fetchpriority", "home");
 
 // 文章页:阅读进度弧 + 阅读时长
 const articleDirs = readdirSync(join(root, "dist", "articles"), { withFileTypes: true })

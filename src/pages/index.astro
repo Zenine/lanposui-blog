@@ -70,7 +70,7 @@ const siteLd = {
       </div>
       <div class="hero-panel">
         <a class="feature" href={withBase(latest.href)}>
-          <img src={withBase(latest.cover)} alt="" />
+          <img src={withBase(latest.cover)} alt="" fetchpriority="high" />
           <span>最新文章 · {latest.category}</span>
           <strong>{latest.title}</strong>
           <p>{latest.description}</p>

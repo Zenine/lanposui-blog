@@ -6,7 +6,7 @@ description: "AI 时代最大的差距，不是会不会用工具，而是有没
 issue: 2
 category: "创作与职业"
 cover: "/lanposui-blog/images/002-chopping-vs-herding-cover.webp"
-wechat: "http://weixin.qq.com/r/mp/njrl-WTEHTlirSCe92_M"
+wechat: "https://weixin.qq.com/r/mp/njrl-WTEHTlirSCe92_M"
 ---
 
 大家好，我是 Azen。
