@@ -21,6 +21,8 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f8f5" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#081724" />
     <meta name="description" content={description} />
     <meta name="author" content="ZENINEXU" />
     <meta name="generator" content={Astro.generator} />
@@ -44,7 +46,15 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
   <body class={pageClass}>
     <header class="site-header">
       <a class="brand" href={base}>
-        <img class="brand-mark" src={withBase("images/wechat-logo.jpg")} alt="" width="44" height="44" />
+        <svg class="brand-arc" viewBox="0 0 52 28" width="48" height="26" aria-hidden="true">
+          <path d="M6 25 A 18 18 0 0 1 24 7" fill="none" stroke="var(--blue)" stroke-width="3.2" />
+          <g transform="translate(2.6 -2.4) rotate(8 34 11)">
+            <path d="M30.2 8.1 A 18 18 0 0 1 37.8 13.4" fill="none" stroke="var(--blue)" stroke-width="3" />
+          </g>
+          <g transform="translate(5.4 -1.2) rotate(16 41 20)">
+            <path d="M40.3 17.4 A 18 18 0 0 1 41.7 21.9" fill="none" stroke="var(--cyan)" stroke-width="2.4" />
+          </g>
+        </svg>
         <span>
           <strong>蓝破碎半圆</strong>
           <small>ZENINEXU · 判断笔记</small>
@@ -66,33 +76,55 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
     </header>
     <slot />
     <footer class="site-footer">
-      <div>
-        <strong>蓝破碎半圆</strong>
-        <span>ZENINEXU · 在破碎信息里，留下判断的现场。</span>
+      <div class="footer-inner">
+        <div>
+          <strong>蓝破碎半圆</strong>
+          <span>ZENINEXU · 在破碎信息里，留下判断的现场。</span>
+        </div>
+        <nav aria-label="页脚导航">
+          <a href={withBase("rss.xml")}>RSS</a>
+          <a href={withBase("search/")}>检索</a>
+          <a href={withBase("categories/")}>分类</a>
+          <a href="https://github.com/Zenine" rel="me noopener">GitHub</a>
+        </nav>
       </div>
-      <nav aria-label="页脚导航">
-        <a href={withBase("rss.xml")}>RSS</a>
-        <a href={withBase("search/")}>检索</a>
-        <a href={withBase("categories/")}>分类</a>
-        <a href="https://github.com/Zenine" rel="me noopener">GitHub</a>
-      </nav>
     </footer>
   </body>
 </html>
 
 <style is:global>
   :root {
+    color-scheme: light dark;
     --paper: #f6f8f5;
-    --paper-2: #e6edf0;
     --ink: #121820;
     --muted: #5c6670;
     --line: rgba(18, 24, 32, 0.14);
+    --grid: rgba(18, 24, 32, 0.032);
+    --card: rgba(250, 251, 249, 0.92);
+    --card-solid: #fbfcfa;
     --blue: #1268f3;
     --cyan: #5cd6e8;
-    --ochre: #a6602a;
-    --green: #267867;
     --deep: #081724;
+    --footer-ink: #e9eef4;
+    --serif: "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", Georgia, "SimSun", serif;
+    --sans: "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    --arc-tick: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 11'%3E%3Cpath d='M2 11 A 9 9 0 0 1 11 2' fill='none' stroke='%231268f3' stroke-width='2.4'/%3E%3Cg transform='translate(1.6 -1.2) rotate(10 17 5)'%3E%3Cpath d='M15.5 3.2 A 9 9 0 0 1 19.2 7.2' fill='none' stroke='%231268f3' stroke-width='2.4'/%3E%3C/g%3E%3C/svg%3E");
     --max: 1120px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0a1522;
+      --ink: #e6ecf2;
+      --muted: #93a1ae;
+      --line: rgba(230, 236, 242, 0.15);
+      --grid: rgba(230, 236, 242, 0.045);
+      --card: rgba(17, 29, 43, 0.92);
+      --card-solid: #101d2b;
+      --blue: #4f8dff;
+      --arc-tick: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 11'%3E%3Cpath d='M2 11 A 9 9 0 0 1 11 2' fill='none' stroke='%234f8dff' stroke-width='2.4'/%3E%3Cg transform='translate(1.6 -1.2) rotate(10 17 5)'%3E%3Cpath d='M15.5 3.2 A 9 9 0 0 1 19.2 7.2' fill='none' stroke='%234f8dff' stroke-width='2.4'/%3E%3C/g%3E%3C/svg%3E");
+    }
   }
 
   * {
@@ -102,7 +134,7 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
   html {
     background: var(--paper);
     color: var(--ink);
-    font-family: "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", Georgia, serif;
+    font-family: var(--serif);
     text-rendering: optimizeLegibility;
   }
 
@@ -110,16 +142,26 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
     margin: 0;
     min-height: 100vh;
     background:
-      linear-gradient(90deg, rgba(18, 24, 32, 0.035) 1px, transparent 1px) 0 0 / 34px 34px,
-      linear-gradient(rgba(18, 24, 32, 0.03) 1px, transparent 1px) 0 0 / 34px 34px,
-      radial-gradient(circle at 16% 0%, rgba(18, 104, 243, 0.12), transparent 28rem),
-      radial-gradient(circle at 92% 18%, rgba(38, 120, 103, 0.12), transparent 24rem),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0 / 34px 34px,
+      linear-gradient(var(--grid) 1px, transparent 1px) 0 0 / 34px 34px,
+      radial-gradient(circle at 16% 0%, color-mix(in srgb, var(--blue) 12%, transparent), transparent 28rem),
+      radial-gradient(circle at 92% 18%, color-mix(in srgb, var(--cyan) 10%, transparent), transparent 24rem),
       var(--paper);
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--blue) 88%, var(--ink));
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
   }
 
   a {
     color: inherit;
-    text-decoration-color: rgba(31, 121, 255, 0.45);
+    text-decoration-color: color-mix(in srgb, var(--blue) 45%, transparent);
     text-decoration-thickness: 1px;
     text-underline-offset: 0.18em;
   }
@@ -146,12 +188,8 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
     text-decoration: none;
   }
 
-  .brand-mark {
-    width: 2.5rem;
-    height: 2.5rem;
-    border: 1px solid rgba(18, 24, 32, 0.18);
-    border-radius: 8px;
-    box-shadow: 0 10px 24px rgba(8, 23, 36, 0.1);
+  .brand-arc {
+    flex: none;
   }
 
   .brand strong,
@@ -167,7 +205,7 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
   .brand small,
   nav a {
     color: var(--muted);
-    font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    font-family: var(--sans);
     font-size: 0.82rem;
   }
 
@@ -179,6 +217,11 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
 
   nav a {
     text-decoration: none;
+    transition: color 160ms ease;
+  }
+
+  nav a:hover {
+    color: var(--blue);
   }
 
   .wechat-nav {
@@ -205,7 +248,7 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
     padding: 0.6rem;
     border: 1px solid var(--line);
     border-radius: 8px;
-    background: rgba(246, 248, 245, 0.98);
+    background: var(--card-solid);
     box-shadow: 0 16px 38px rgba(10, 27, 46, 0.18);
     opacity: 0;
     pointer-events: none;
@@ -223,7 +266,7 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
     height: 0.8rem;
     border-top: 1px solid var(--line);
     border-left: 1px solid var(--line);
-    background: rgba(246, 248, 245, 0.98);
+    background: var(--card-solid);
     content: "";
     transform: rotate(45deg);
   }
@@ -249,21 +292,41 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
 
   .kicker {
     color: var(--blue);
-    font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    font-family: var(--sans);
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0;
   }
 
+  .kicker::before {
+    display: inline-block;
+    width: 1em;
+    height: 0.52em;
+    margin-right: 0.45em;
+    background: var(--arc-tick) no-repeat center / contain;
+    content: "";
+  }
+
+  time,
+  .mono {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+  }
+
   .site-footer {
+    margin-top: 4rem;
+    background: var(--deep);
+    color: var(--footer-ink);
+  }
+
+  .footer-inner {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     gap: 1.5rem;
     max-width: var(--max);
     margin: 0 auto;
-    padding: 3rem 1.2rem 2rem;
-    border-top: 1px solid var(--line);
+    padding: 2.6rem 1.2rem;
   }
 
   .site-footer strong,
@@ -273,9 +336,17 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
 
   .site-footer span {
     margin-top: 0.35rem;
-    color: var(--muted);
-    font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    color: color-mix(in srgb, var(--footer-ink) 62%, transparent);
+    font-family: var(--sans);
     font-size: 0.86rem;
+  }
+
+  .site-footer nav a {
+    color: color-mix(in srgb, var(--footer-ink) 74%, transparent);
+  }
+
+  .site-footer nav a:hover {
+    color: var(--cyan);
   }
 
   @media (max-width: 640px) {
@@ -286,11 +357,11 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
     }
 
     nav,
-    .site-footer {
+    .footer-inner {
       flex-wrap: wrap;
     }
 
-    .site-footer {
+    .footer-inner {
       flex-direction: column;
     }
 

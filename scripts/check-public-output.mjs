@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
 const root = new URL("..", import.meta.url).pathname;
@@ -41,9 +41,46 @@ assertIncludes(home, 'rel="canonical"', "home");
 const search = readFileSync(join(root, "dist", "search", "index.html"), "utf8");
 assertIncludes(search, "PagefindUI", "search page");
 
+// 品牌签名元素:页眉品牌弧、首页大弧、深色页脚带
+assertIncludes(home, "brand-arc", "home");
+assertIncludes(home, "hero-arc", "home");
+for (const page of pages) {
+  const html = readFileSync(page, "utf8");
+  assertIncludes(html, "footer-inner", page);
+}
+
+// 文章页:阅读进度弧 + 阅读时长
+const articleDirs = readdirSync(join(root, "dist", "articles"), { withFileTypes: true })
+  .filter(entry => entry.isDirectory());
+if (articleDirs.length === 0) {
+  throw new Error("dist/articles has no article pages");
+}
+for (const dir of articleDirs) {
+  const article = readFileSync(join(root, "dist", "articles", dir.name, "index.html"), "utf8");
+  assertIncludes(article, "progress-arc", `article ${dir.name}`);
+  assertIncludes(article, "分钟", `article ${dir.name}`);
+}
+
+// 全局样式:暗色模式、选中色、键盘焦点、hover 反馈
+const cssDir = join(root, "dist", "_astro");
+const cssBundle = readdirSync(cssDir)
+  .filter(name => name.endsWith(".css"))
+  .map(name => readFileSync(join(cssDir, name), "utf8"))
+  .join("\n");
+assertMatches(cssBundle, /prefers-color-scheme:\s*dark/, "css bundle dark mode");
+assertMatches(cssBundle, /::selection/, "css bundle selection color");
+assertMatches(cssBundle, /:focus-visible/, "css bundle focus outline");
+assertMatches(cssBundle, /:hover/, "css bundle hover feedback");
+
 function assertIncludes(html, expected, page) {
   if (!html.includes(expected)) {
     throw new Error(`${page} is missing ${expected}`);
+  }
+}
+
+function assertMatches(text, pattern, label) {
+  if (!pattern.test(text)) {
+    throw new Error(`${label} is missing ${pattern}`);
   }
 }
 

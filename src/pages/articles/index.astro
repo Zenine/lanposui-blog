@@ -48,13 +48,24 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     padding: 1.3rem 0;
     border-bottom: 1px solid var(--line);
     text-decoration: none;
+    transition: border-color 160ms ease;
+  }
+
+  .row:hover {
+    border-bottom-color: color-mix(in srgb, var(--blue) 55%, transparent);
+  }
+
+  .row:hover strong {
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--blue) 45%, transparent);
+    text-underline-offset: 0.18em;
   }
 
   .row time {
     grid-column: 2;
     grid-row: 1 / span 2;
     color: var(--muted);
-    font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    font-family: var(--sans);
     font-size: 0.86rem;
   }
 
@@ -67,7 +78,7 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     grid-column: 1;
     margin: 0;
     color: var(--muted);
-    font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    font-family: var(--sans);
     font-size: 0.86rem;
   }
 

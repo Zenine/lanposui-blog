@@ -15,6 +15,6 @@ const { article } = Astro.props;
 const { Content } = await render(article);
 ---
 
-<PostLayout frontmatter={article.data}>
+<PostLayout frontmatter={article.data} body={article.body}>
   <Content />
 </PostLayout>

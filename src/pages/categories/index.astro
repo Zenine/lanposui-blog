@@ -47,13 +47,28 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     min-height: 14rem;
     padding: 1.4rem;
     border: 1px solid var(--line);
-    background: rgba(246, 248, 245, 0.94);
+    background: var(--card);
     text-decoration: none;
+    transition:
+      border-color 160ms ease,
+      box-shadow 160ms ease,
+      transform 160ms ease;
+  }
+
+  .taxonomy-list a:hover {
+    border-color: color-mix(in srgb, var(--blue) 55%, transparent);
+    box-shadow: 0 12px 30px rgba(8, 23, 36, 0.09);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .taxonomy-list a:hover {
+      transform: translateY(-2px);
+    }
   }
 
   .taxonomy-list span {
     color: var(--blue);
-    font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    font-family: var(--sans);
     font-size: 0.82rem;
     font-weight: 700;
   }
