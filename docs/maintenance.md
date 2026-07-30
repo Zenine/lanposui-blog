@@ -36,7 +36,9 @@
 - `/sitemap-index.xml`：站点地图。
 - `/robots.txt`：爬虫入口。
 
-文章页包含 canonical、Open Graph、Twitter Card 和 BlogPosting JSON-LD。
+文章页包含 canonical、Open Graph、Twitter Card、BlogPosting 和 BreadcrumbList JSON-LD；首页额外输出 WebSite + Person 结构化数据（作者实体统一为 `ZENINEXU`，定义在 `src/data/blog.ts` 的 `site.author`）。`/404.html` 由 `src/pages/404.astro` 生成。
+
+SEO 站外事项：站点收录靠 Google Search Console 和 Bing 站长工具提交 sitemap（见 `TODO.md`）；GitHub Pages 屏蔽 Baiduspider 且无备案域名，百度收录不可行，大陆读者触达以公众号分发为主。
 
 ## 技术架构
 
@@ -120,7 +122,17 @@ http://localhost:4321/lanposui-blog/
 
    `cover` 和 `wechat` 可选。公众号原文链接暂时没有时，可以不写 `wechat`，并在 `TODO.md` 留下待补事项。
 
+   文章修订后可加可选字段 `updated: "YYYY-MM-DD"`，会输出到结构化数据的 `dateModified`。
+
 3. 把公开图片放到 `public/images/`。
+
+   超过约 150KB 的图片先转成 WebP 再入库（封面统一按 1.82 宽高比出图，文章页封面会按此比例裁切展示）：
+
+   ```sh
+   /usr/bin/python3 -c "from PIL import Image; Image.open('in.png').save('out.webp', 'WEBP', quality=82, method=6)"
+   ```
+
+   正文 Markdown 图片构建时会自动加 `loading="lazy"` 和 `decoding="async"`，不需要手写。
 
    正文里的站内图片路径使用：
 

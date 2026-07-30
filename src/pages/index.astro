@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getCategories, getCollections, sortedPosts } from "../data/blog";
+import { getCategories, getCollections, site, sortedPosts } from "../data/blog";
 
 const posts = sortedPosts;
 const latest = posts[0];
@@ -12,9 +12,32 @@ const base = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
+const siteLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      name: site.title,
+      description: site.description,
+      url: `${site.url}/`,
+      inLanguage: "zh-CN",
+      author: { "@id": `${site.url}/#author` },
+    },
+    {
+      "@type": "Person",
+      "@id": `${site.url}/#author`,
+      name: site.author,
+      url: "https://github.com/Zenine",
+    },
+  ],
+};
 ---
 
 <BaseLayout>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(siteLd)} />
+  </Fragment>
   <main>
     <section class="wrap home-grid">
       <svg class="hero-arc" viewBox="0 0 212 110" aria-hidden="true">

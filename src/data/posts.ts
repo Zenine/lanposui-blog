@@ -26,7 +26,7 @@ export const posts: Post[] = [
     tags: ["AI", "职业", "系统积累"],
     description:
       "AI 时代最大的差距，不是会不会用工具，而是有没有把一次性劳动沉淀成能够持续积累的系统。",
-    cover: "/images/002-chopping-vs-herding-cover.png",
+    cover: "/images/002-chopping-vs-herding-cover.webp",
     wechat: "http://weixin.qq.com/r/mp/njrl-WTEHTlirSCe92_M",
   },
   {
@@ -41,7 +41,7 @@ export const posts: Post[] = [
     tags: ["发刊词", "判断", "品牌"],
     description:
       "蓝破碎半圆的长期底稿：说明这个号是谁、相信什么，以及如何在 AI 时代作出判断。",
-    cover: "/images/001-blue-broken-semicircle-cover.png",
+    cover: "/images/001-blue-broken-semicircle-cover.webp",
   },
   {
     issue: 20230408,

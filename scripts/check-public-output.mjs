@@ -61,6 +61,33 @@ for (const dir of articleDirs) {
   assertIncludes(article, "分钟", `article ${dir.name}`);
 }
 
+// SEO:404 页、作者实体、站点/面包屑结构化数据、WebP 封面、正文图懒加载
+readFileSync(join(root, "dist", "404.html"), "utf8");
+assertIncludes(home, '"@type":"WebSite"', "home");
+assertIncludes(home, '"name":"ZENINEXU"', "home");
+assertIncludes(home, ".webp", "home");
+assertExcludes(home, '"name":"Azen"', "home");
+let lazyImageSeen = false;
+for (const dir of articleDirs) {
+  const article = readFileSync(join(root, "dist", "articles", dir.name, "index.html"), "utf8");
+  assertIncludes(article, '"name":"ZENINEXU"', `article ${dir.name}`);
+  assertIncludes(article, '"@type":"BreadcrumbList"', `article ${dir.name}`);
+  assertExcludes(article, '"name":"Azen"', `article ${dir.name}`);
+  if (article.includes('loading="lazy"')) {
+    lazyImageSeen = true;
+  }
+}
+if (!lazyImageSeen) {
+  throw new Error("no article page has lazy-loaded body images");
+}
+const webpCovers = [
+  join(root, "dist", "images", "001-blue-broken-semicircle-cover.webp"),
+  join(root, "dist", "images", "002-chopping-vs-herding-cover.webp"),
+];
+for (const file of webpCovers) {
+  readFileSync(file);
+}
+
 // 全局样式:暗色模式、选中色、键盘焦点、hover 反馈
 const cssDir = join(root, "dist", "_astro");
 const cssBundle = readdirSync(cssDir)

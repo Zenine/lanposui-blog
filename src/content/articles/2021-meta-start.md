@@ -172,4 +172,4 @@ metaphysics 。
 ![原文配图](/lanposui-blog/images/archive/2021-meta-start/image-002.png)
 ![原文配图](/lanposui-blog/images/archive/2021-meta-start/image-003.png)
 ![原文配图](/lanposui-blog/images/archive/2021-meta-start/image-004.png)
-![原文配图](/lanposui-blog/images/archive/2021-meta-start/image-005.png)
+![原文配图](/lanposui-blog/images/archive/2021-meta-start/image-005.webp)

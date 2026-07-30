@@ -2,6 +2,15 @@
 
 ## 2026-07-30
 
+### SEO 优化
+
+- 四张大图（两张封面、判断流程图、一张过往文章配图）由 PNG 转 WebP，公开图片总量约 6.6MB 降到 672KB；站内引用同步更新，旧 PNG 移出仓库。
+- 正文 Markdown 图片构建期自动加 `loading="lazy"` 与 `decoding="async"`（`astro.config.mjs` 内联 rehype 插件，新增依赖 `@astrojs/markdown-remark`）；文章页封面按 1.82 宽高比展示，避免布局偏移。
+- 结构化数据作者实体统一为 `ZENINEXU`（修正原 `Azen`，文章正文中的原文自称不改）；文章页补 `dateModified`（支持可选 frontmatter `updated`）与 BreadcrumbList；首页新增 WebSite + Person JSON-LD。
+- 新增 404 页（`src/pages/404.astro`，品牌弧视觉）。
+- 构建产物检查脚本扩展 SEO 断言：404 页、WebP 封面、懒加载、作者实体、面包屑与站点结构化数据。
+- SEO 站外事项（Search Console / Bing 提交、百度不可行说明）记入 `TODO.md` 与维护手册。
+
 ### 视觉与交互
 
 - 新增「蓝破碎半圆」签名视觉系统：页眉品牌弧（内联 SVG，替换公众号 Logo 图片）、首页 Hero 大弧（完整蓝色半圆自左向右碎裂、弧段位移散开，保留原轮廓虚线残影）、全站 kicker 小弧刻度。

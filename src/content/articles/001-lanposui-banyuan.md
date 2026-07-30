@@ -5,7 +5,7 @@ date: "2026-07-30"
 description: "蓝破碎半圆的长期底稿：说明这个号是谁、相信什么，以及如何在 AI 时代作出判断。"
 issue: 1
 category: "公众号品牌"
-cover: "/lanposui-blog/images/001-blue-broken-semicircle-cover.png"
+cover: "/lanposui-blog/images/001-blue-broken-semicircle-cover.webp"
 source: "公众号已发布公开版，平台链接待补"
 ---
 
@@ -51,7 +51,7 @@ source: "公众号已发布公开版，平台链接待补"
 
 也正因为如此，**AI 让答案越来越便宜，也让判断越来越昂贵。**
 
-![从破碎信息到承担结果的判断过程](/lanposui-blog/images/001-judgment-flow.png)
+![从破碎信息到承担结果的判断过程](/lanposui-blog/images/001-judgment-flow.webp)
 
 破碎的半圆，比完整的半圆更接近真实工作：你手里的信息从来不是切整齐的一半，而是碎的。
 

@@ -1,0 +1,77 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
+---
+
+<BaseLayout title="页面不存在" description="这一段弧不在这里。返回蓝破碎半圆首页继续阅读。">
+  <main class="wrap not-found">
+    <svg class="lost-arc" viewBox="0 0 212 110" aria-hidden="true">
+      <path d="M22 100 A 78 78 0 0 1 178 100" fill="none" stroke="var(--blue)" stroke-width="1" opacity="0.3" stroke-dasharray="2 4" />
+      <path d="M22 100 A 78 78 0 0 1 62 33" fill="none" stroke="var(--blue)" stroke-width="5" />
+    <g transform="translate(14 -12) rotate(14 120 30)">
+        <path d="M110.9 22.8 A 78 78 0 0 1 136.6 31.1" fill="none" stroke="var(--cyan)" stroke-width="4" />
+      </g>
+      <line x1="6" y1="100" x2="194" y2="100" stroke="var(--muted)" stroke-width="0.7" opacity="0.5" />
+    </svg>
+    <p class="kicker">404</p>
+    <h1>这一段弧不在这里</h1>
+    <p>你要找的页面可能已经移动、改名，或者从未存在。</p>
+    <nav class="lost-actions" aria-label="404 快捷入口">
+      <a href={base}>返回首页</a>
+      <a href={withBase("articles/")}>全部文章</a>
+      <a href={withBase("search/")}>站内检索</a>
+    </nav>
+  </main>
+</BaseLayout>
+
+<style>
+  .not-found {
+    max-width: 640px;
+    padding-top: 4rem;
+    padding-bottom: 6rem;
+    text-align: center;
+  }
+
+  .lost-arc {
+    width: min(340px, 70%);
+    margin: 0 auto 2rem;
+  }
+
+  h1 {
+    margin: 0.6rem 0 1rem;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    line-height: 1.15;
+  }
+
+  .not-found > p:last-of-type {
+    color: var(--muted);
+    line-height: 1.85;
+  }
+
+  .lost-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 2rem;
+    font-family: var(--sans);
+    font-size: 0.86rem;
+  }
+
+  .lost-actions a {
+    padding: 0.58rem 0.9rem;
+    border: 1px solid var(--line);
+    background: var(--card);
+    text-decoration: none;
+    transition: border-color 160ms ease, color 160ms ease;
+  }
+
+  .lost-actions a:hover {
+    border-color: color-mix(in srgb, var(--blue) 60%, transparent);
+    color: var(--blue);
+  }
+</style>

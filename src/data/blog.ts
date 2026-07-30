@@ -4,7 +4,7 @@ export const site = {
   title: "蓝破碎半圆",
   description: "一个 AI 时代技术决策者的判断笔记。",
   url: "https://zenine.github.io/lanposui-blog",
-  author: "Azen",
+  author: "ZENINEXU",
 };
 
 export const sortedPosts = [...posts].sort((a, b) => b.date.localeCompare(a.date));

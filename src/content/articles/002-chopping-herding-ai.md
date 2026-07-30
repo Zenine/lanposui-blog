@@ -5,7 +5,7 @@ date: "2026-07-29"
 description: "AI 时代最大的差距，不是会不会用工具，而是有没有把一次性劳动沉淀成能够持续积累的系统。"
 issue: 2
 category: "创作与职业"
-cover: "/lanposui-blog/images/002-chopping-vs-herding-cover.png"
+cover: "/lanposui-blog/images/002-chopping-vs-herding-cover.webp"
 wechat: "http://weixin.qq.com/r/mp/njrl-WTEHTlirSCe92_M"
 ---
 
