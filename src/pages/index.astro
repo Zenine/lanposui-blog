@@ -4,6 +4,7 @@ import { getCategories, getCollections, sortedPosts } from "../data/blog";
 
 const posts = sortedPosts;
 const latest = posts[0];
+const secondaryPosts = posts.slice(1);
 const categories = getCategories();
 const collections = getCollections();
 const recommended = posts.slice(1, 4);
@@ -18,16 +19,33 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     <section class="wrap home-grid">
       <div class="intro">
         <p class="kicker">AI 时代技术决策者的判断笔记</p>
-        <h1>在破碎信息里，留下判断的现场。</h1>
+        <h1>在破碎信息里，<br />留下判断的现场。</h1>
         <p>
           这里不追逐更响的观点，只保存问题发生时的依据、边界、选择和代价。
         </p>
+        <div class="hero-actions" aria-label="首页快捷入口">
+          <a href={withBase("search/")}>检索文章</a>
+          <a href={withBase("collections/")}>浏览合集</a>
+        </div>
       </div>
-      <a class="feature" href={withBase(latest.href)}>
-        <img src={withBase(latest.cover)} alt="" />
-        <span>最新文章</span>
-        <strong>{latest.title}</strong>
-      </a>
+      <div class="hero-panel">
+        <a class="feature" href={withBase(latest.href)}>
+          <img src={withBase(latest.cover)} alt="" />
+          <span>最新文章 · {latest.category}</span>
+          <strong>{latest.title}</strong>
+          <p>{latest.description}</p>
+        </a>
+        <dl class="signal">
+          <div>
+            <dt>Archive</dt>
+            <dd>{posts.length} 篇公开文章</dd>
+          </div>
+          <div>
+            <dt>Signal</dt>
+            <dd>{categories.length} 个判断主题</dd>
+          </div>
+        </dl>
+      </div>
     </section>
 
     <section class="wrap article-list" aria-labelledby="article-list-title">
@@ -36,15 +54,22 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
         <h2 id="article-list-title">已发布</h2>
         <a href={withBase("articles/")}>全部文章</a>
       </div>
-      <div class="posts">
-        {posts.map((post) => (
-          <a class="post-card" href={withBase(post.href)}>
-            <small>{post.category}</small>
-            <h3>{post.title}</h3>
-            <p>{post.description}</p>
-            <time datetime={post.date}>{post.date}</time>
-          </a>
-        ))}
+      <div class="posts-board">
+        <a class="lead-post" href={withBase(latest.href)}>
+          <small>{latest.category} · {latest.collection}</small>
+          <h3>{latest.title}</h3>
+          <p>{latest.description}</p>
+          <time datetime={latest.date}>{latest.date}</time>
+        </a>
+        <div class="post-list">
+          {secondaryPosts.map((post) => (
+            <a href={withBase(post.href)}>
+              <span>{post.category}</span>
+              <strong>{post.title}</strong>
+              <time datetime={post.date}>{post.date}</time>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
 
@@ -53,7 +78,7 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
         <p class="kicker">导航</p>
         <h2 id="discovery-title">按分类阅读</h2>
       </div>
-      <div class="taxonomy-grid">
+      <div class="category-strip">
         {categories.map(category => (
           <a href={withBase(`categories/${category.slug}/`)}>
             <strong>{category.name}</strong>
@@ -69,9 +94,10 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
         <h2 id="collections-title">合集</h2>
         <a href={withBase("collections/")}>全部合集</a>
       </div>
-      <div class="taxonomy-grid collections-grid">
+      <div class="collection-list">
         {collections.map(collection => (
           <a href={withBase(`collections/${collection.slug}/`)}>
+            <small>{collection.posts.length} 篇</small>
             <strong>{collection.name}</strong>
             <span>{collection.posts.map(post => post.title).join(" / ")}</span>
           </a>
@@ -103,19 +129,19 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
 
   .home-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(280px, 430px);
-    gap: 3rem;
+    grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+    gap: clamp(2rem, 6vw, 5rem);
     align-items: center;
     min-height: min(680px, calc(100vh - 7rem));
-    padding-top: 4rem;
+    padding-top: 3rem;
     padding-bottom: 4rem;
   }
 
   h1 {
     margin: 0.8rem 0 1.2rem;
     max-width: 720px;
-    font-size: clamp(3rem, 8vw, 7.4rem);
-    line-height: 0.94;
+    font-size: clamp(2.55rem, 5.4vw, 5.1rem);
+    line-height: 0.98;
     letter-spacing: 0;
   }
 
@@ -126,12 +152,37 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     line-height: 1.85;
   }
 
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.7rem;
+    font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    font-size: 0.86rem;
+  }
+
+  .hero-actions a {
+    padding: 0.58rem 0.8rem;
+    border: 1px solid var(--line);
+    background: rgba(246, 248, 245, 0.72);
+    text-decoration: none;
+  }
+
+  .hero-panel {
+    position: relative;
+    display: grid;
+    gap: 0.85rem;
+  }
+
   .feature {
     display: block;
-    padding: 0.9rem;
+    position: relative;
+    padding: 0.95rem;
     border: 1px solid var(--line);
-    background: rgba(246, 248, 245, 0.74);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 253, 0.86), rgba(246, 248, 245, 0.76));
     text-decoration: none;
+    box-shadow: 0 18px 42px rgba(26, 39, 47, 0.055);
   }
 
   .feature img {
@@ -160,6 +211,43 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     line-height: 1.35;
   }
 
+  .feature p {
+    margin: 0.7rem 0 0;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .signal {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    margin: 0;
+    border: 1px solid var(--line);
+    background: var(--line);
+  }
+
+  .signal div {
+    padding: 0.9rem 1rem;
+    background: rgba(250, 251, 248, 0.82);
+  }
+
+  .signal dt,
+  .signal dd {
+    margin: 0;
+    font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    font-size: 0.8rem;
+  }
+
+  .signal dt {
+    color: var(--blue);
+    font-weight: 700;
+  }
+
+  .signal dd {
+    margin-top: 0.35rem;
+    color: var(--muted);
+  }
+
   .article-list {
     padding-top: 3rem;
     border-top: 1px solid var(--line);
@@ -184,37 +272,77 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     font-size: 2rem;
   }
 
-  .posts {
+  .posts-board {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.9rem;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 1rem;
     margin-top: 1.5rem;
   }
 
-  .post-card {
-    min-height: 250px;
-    padding: 1.4rem;
+  .lead-post,
+  .post-list a {
     border: 1px solid var(--line);
     background: rgba(246, 248, 245, 0.92);
     text-decoration: none;
   }
 
-  .post-card small,
-  .post-card time {
+  .lead-post {
+    min-height: 22rem;
+    padding: 1.45rem;
+  }
+
+  .lead-post small,
+  .lead-post time,
+  .post-list span,
+  .post-list time {
     color: var(--muted);
     font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif;
     font-size: 0.82rem;
   }
 
-  .post-card h3 {
-    margin: 2.4rem 0 0.9rem;
-    font-size: 1.55rem;
-    line-height: 1.35;
+  .lead-post h3 {
+    margin: 4.8rem 0 1rem;
+    font-size: clamp(1.85rem, 4vw, 3rem);
+    line-height: 1.18;
   }
 
-  .post-card p {
+  .lead-post p {
     color: var(--muted);
     line-height: 1.75;
+  }
+
+  .lead-post time {
+    display: block;
+    margin-top: 1.5rem;
+  }
+
+  .post-list {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .post-list a {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 6.4rem;
+    gap: 0.5rem 1rem;
+    align-content: center;
+    min-height: 7.6rem;
+    padding: 1rem 1.1rem;
+  }
+
+  .post-list span,
+  .post-list strong {
+    grid-column: 1;
+  }
+
+  .post-list strong {
+    font-size: 1.22rem;
+    line-height: 1.45;
+  }
+
+  .post-list time {
+    grid-column: 2;
+    grid-row: 1 / span 2;
   }
 
   .discovery,
@@ -222,34 +350,33 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     padding-top: 3.4rem;
   }
 
-  .taxonomy-grid {
+  .category-strip {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0.9rem;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.75rem;
     margin-top: 1.4rem;
   }
 
-  .taxonomy-grid a,
-  .rail a {
-    min-height: 9rem;
-    padding: 1.2rem;
+  .category-strip a {
+    min-height: 7.2rem;
+    padding: 1rem;
     border: 1px solid var(--line);
     background: rgba(246, 248, 245, 0.9);
     text-decoration: none;
   }
 
-  .taxonomy-grid strong,
-  .taxonomy-grid span,
+  .category-strip strong,
+  .category-strip span,
   .rail time,
   .rail strong {
     display: block;
   }
 
-  .taxonomy-grid strong {
+  .category-strip strong {
     font-size: 1.2rem;
   }
 
-  .taxonomy-grid span,
+  .category-strip span,
   .rail time {
     margin-top: 0.75rem;
     color: var(--muted);
@@ -258,8 +385,33 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     line-height: 1.7;
   }
 
-  .collections-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .collection-list {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1.4rem;
+  }
+
+  .collection-list a {
+    display: grid;
+    grid-template-columns: 5rem minmax(10rem, 0.32fr) minmax(0, 1fr);
+    gap: 1rem;
+    align-items: baseline;
+    padding: 1.05rem 1.1rem;
+    border: 1px solid var(--line);
+    background: rgba(246, 248, 245, 0.9);
+    text-decoration: none;
+  }
+
+  .collection-list small,
+  .collection-list span {
+    color: var(--muted);
+    font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    font-size: 0.82rem;
+    line-height: 1.65;
+  }
+
+  .collection-list strong {
+    font-size: 1.2rem;
   }
 
   .rail {
@@ -277,9 +429,9 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
 
   @media (max-width: 760px) {
     .home-grid,
-    .posts,
-    .taxonomy-grid,
-    .collections-grid,
+    .posts-board,
+    .category-strip,
+    .collection-list a,
     .rail {
       grid-template-columns: 1fr;
     }
@@ -287,6 +439,27 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     .home-grid {
       min-height: auto;
       padding-top: 1rem;
+      padding-bottom: 3rem;
+    }
+
+    h1 {
+      max-width: 9.2em;
+      font-size: clamp(2.25rem, 10vw, 3.1rem);
+      line-height: 1.08;
+    }
+
+    .feature {
+      box-shadow: 0 14px 30px rgba(26, 39, 47, 0.05);
+    }
+
+    .signal,
+    .post-list a {
+      grid-template-columns: 1fr;
+    }
+
+    .post-list time {
+      grid-column: 1;
+      grid-row: auto;
     }
   }
 </style>
