@@ -18,5 +18,11 @@
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.1.6",
     "pagefind": "^1.5.2"
+  },
+  "devDependencies": {
+    "image-size": "^2.0.2",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-slug": "^6.0.0",
+    "sharp": "^0.35.3"
   }
 }

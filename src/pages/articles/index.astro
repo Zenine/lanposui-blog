@@ -3,6 +3,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { sortedPosts } from "../../data/blog";
 
 const posts = sortedPosts;
+const byYear = new Map<string, typeof posts>();
+for (const post of posts) {
+  const year = post.date.slice(0, 4);
+  byYear.set(year, [...(byYear.get(year) ?? []), post]);
+}
+const years = [...byYear.entries()];
 const base = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
@@ -13,15 +19,33 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
   <main class="wrap archive">
     <p class="kicker">Archive</p>
     <h1>文章</h1>
-    <div class="list">
-      {posts.map((post) => (
-        <a class="row" href={withBase(post.href)}>
-          <strong>{post.title}</strong>
-          <p>{post.category} · {post.collection}</p>
-          <time datetime={post.date}>{post.date}</time>
-        </a>
-      ))}
-    </div>
+    {years.map(([year, yearPosts]) => (
+      <section class="year-block" data-reveal>
+        <h2 class="year mono">{year}</h2>
+        <div class="list">
+          {yearPosts.map((post) => {
+            return (
+              <a class="row" href={withBase(post.href)}>
+                {post.cover && (
+                  <img
+                    class="thumb"
+                    src={withBase(post.cover)}
+                    alt=""
+                    width="120"
+                    height="66"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
+                <strong>{post.title}</strong>
+                <p>{post.category} · {post.collection}</p>
+                <time datetime={post.date}>{post.date}</time>
+              </a>
+            );
+          })}
+        </div>
+      </section>
+    ))}
   </main>
 </BaseLayout>
 
@@ -37,6 +61,28 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     line-height: 1;
   }
 
+  .year-block {
+    margin-top: 2.6rem;
+  }
+
+  .year {
+    margin: 0 0 0.6rem;
+    color: var(--muted);
+    font-size: 1.05rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+  }
+
+  .year::after {
+    display: inline-block;
+    width: 1em;
+    height: 0.52em;
+    margin-left: 0.55em;
+    background: var(--arc-tick) no-repeat center / contain;
+    content: "";
+    transform: scaleX(-1);
+  }
+
   .list {
     border-top: 1px solid var(--line);
   }
@@ -45,10 +91,16 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     display: grid;
     grid-template-columns: minmax(0, 1fr) 8rem;
     gap: 0.6rem 1rem;
+    align-content: center;
     padding: 1.3rem 0;
     border-bottom: 1px solid var(--line);
     text-decoration: none;
     transition: border-color 160ms ease;
+  }
+
+  .row:has(.thumb) {
+    grid-template-columns: 120px minmax(0, 1fr) 8rem;
+    align-items: center;
   }
 
   .row:hover {
@@ -61,12 +113,25 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     text-underline-offset: 0.18em;
   }
 
+  .thumb {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    width: 120px;
+    height: 66px;
+    border: 1px solid var(--line);
+    object-fit: cover;
+  }
+
   .row time {
     grid-column: 2;
     grid-row: 1 / span 2;
     color: var(--muted);
     font-family: var(--sans);
     font-size: 0.86rem;
+  }
+
+  .row:has(.thumb) time {
+    grid-column: 3;
   }
 
   .row strong {
@@ -82,12 +147,25 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     font-size: 0.86rem;
   }
 
+  .row:has(.thumb) strong,
+  .row:has(.thumb) p {
+    grid-column: 2;
+  }
+
   @media (max-width: 640px) {
-    .row {
+    .row,
+    .row:has(.thumb) {
       grid-template-columns: minmax(0, 1fr);
     }
 
-    .row time {
+    .thumb {
+      display: none;
+    }
+
+    .row time,
+    .row:has(.thumb) time,
+    .row:has(.thumb) strong,
+    .row:has(.thumb) p {
       grid-column: 1;
       grid-row: auto;
     }

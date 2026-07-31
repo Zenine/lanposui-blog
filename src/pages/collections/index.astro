@@ -13,7 +13,7 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
   <main class="wrap taxonomy-page">
     <p class="kicker">Collections</p>
     <h1>合集</h1>
-    <div class="taxonomy-list">
+    <div class="taxonomy-list" data-reveal>
       {collections.map(collection => (
         <a href={withBase(`collections/${collection.slug}/`)}>
           <span>{collection.posts.length} 篇</span>
@@ -57,7 +57,7 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
 
   .taxonomy-list a:hover {
     border-color: color-mix(in srgb, var(--blue) 55%, transparent);
-    box-shadow: 0 12px 30px rgba(8, 23, 36, 0.09);
+    box-shadow: var(--shadow-hover);
   }
 
   @media (prefers-reduced-motion: no-preference) {

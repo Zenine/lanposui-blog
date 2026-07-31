@@ -1,8 +1,8 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import { absoluteUrl, getRelatedPosts, site, sortedPosts } from "../data/blog";
+import { absoluteUrl, getRelatedPosts, imageDims, site, sortedPosts } from "../data/blog";
 
-const { frontmatter } = Astro.props;
+const { frontmatter, headings = [], ogImage } = Astro.props;
 const title = frontmatter.title;
 const description = frontmatter.description;
 const date = new Date(frontmatter.date).toLocaleDateString("zh-CN", {
@@ -21,10 +21,15 @@ const readingMinutes =
   body.length > 0
     ? Math.max(1, Math.round(body.replace(/\s+/g, "").length / 400))
     : 0;
+const toc = (headings as { depth: number; slug: string; text: string }[]).filter(
+  heading => heading.depth === 2 || heading.depth === 3,
+);
+const coverDims = frontmatter.cover ? imageDims(frontmatter.cover) : undefined;
 const base = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
+const pageImage = ogImage ?? currentPost?.cover;
 const jsonLd = currentPost
   ? {
       "@context": "https://schema.org",
@@ -63,7 +68,7 @@ const breadcrumbLd = currentPost
   : undefined;
 ---
 
-<BaseLayout title={title} description={description} pageClass="article-page" image={currentPost?.cover} type="article">
+<BaseLayout title={title} description={description} pageClass="article-page" image={pageImage} type="article">
   {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
   {breadcrumbLd && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />}
   <main class="article-shell">
@@ -77,10 +82,47 @@ const breadcrumbLd = currentPost
           {readingMinutes > 0 && <span>约 {readingMinutes} 分钟</span>}
           {frontmatter.wechat && <a href={frontmatter.wechat}>公众号原文</a>}
         </div>
-        {frontmatter.cover && <img class="cover" src={frontmatter.cover} alt="" loading="eager" />}
+        {frontmatter.cover && (
+          <img
+            class="cover"
+            src={frontmatter.cover}
+            alt=""
+            loading="eager"
+            width={coverDims?.width}
+            height={coverDims?.height}
+          />
+        )}
       </header>
-      <div class="prose">
-        <slot />
+      {toc.length > 0 && (
+        <details class="toc-inline">
+          <summary>本文目录（{toc.length} 节）</summary>
+          <ol class="toc-list">
+            {toc.map(heading => (
+              <li class={heading.depth === 3 ? "d3" : undefined}>
+                <a href={`#${heading.slug}`}>{heading.text}</a>
+              </li>
+            ))}
+          </ol>
+        </details>
+      )}
+      <div class="article-body">
+        <div class="prose">
+          <slot />
+        </div>
+        {toc.length > 0 && (
+          <nav class="toc" aria-label="本文目录">
+            <div class="toc-inner">
+              <p class="kicker">目录</p>
+              <ol class="toc-list">
+                {toc.map(heading => (
+                  <li class={heading.depth === 3 ? "d3" : undefined}>
+                    <a href={`#${heading.slug}`}>{heading.text}</a>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </nav>
+        )}
       </div>
       {relatedPosts.length > 0 && (
         <aside class="related" aria-labelledby="related-title">
@@ -120,22 +162,6 @@ const breadcrumbLd = currentPost
       />
     </svg>
   </div>
-  <script>
-    const shell = document.querySelector(".progress-arc");
-    const fill = shell?.querySelector(".fill");
-    if (shell instanceof HTMLElement && fill) {
-      const update = () => {
-        const doc = document.documentElement;
-        const max = doc.scrollHeight - window.innerHeight;
-        const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
-        fill.setAttribute("stroke-dasharray", `${(p * 100).toFixed(2)} 100`);
-        shell.classList.toggle("visible", p > 0.02);
-      };
-      addEventListener("scroll", update, { passive: true });
-      addEventListener("resize", update);
-      update();
-    }
-  </script>
 </BaseLayout>
 
 <style>
@@ -178,10 +204,109 @@ const breadcrumbLd = currentPost
 
   .cover {
     width: 100%;
+    height: auto;
     aspect-ratio: 1.82;
     object-fit: cover;
     margin: 1.5rem 0 3rem;
     border: 1px solid var(--line);
+  }
+
+  .toc-inline {
+    margin: 0 0 2.5rem;
+    padding: 0.85rem 1.1rem;
+    border: 1px solid var(--line);
+    background: var(--card);
+  }
+
+  .toc-inline summary {
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    cursor: pointer;
+  }
+
+  .toc-inline[open] summary {
+    margin-bottom: 0.6rem;
+    color: var(--ink);
+  }
+
+  .toc-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .toc-list a {
+    display: flex;
+    align-items: baseline;
+    padding: 0.18rem 0;
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 0.86rem;
+    line-height: 1.55;
+    text-decoration: none;
+    transition: color 160ms ease;
+  }
+
+  .toc-list a:hover {
+    color: var(--blue);
+  }
+
+  .toc-list .d3 a {
+    padding-left: 1.1rem;
+  }
+
+  .toc-list a::before {
+    flex: none;
+    width: 1em;
+    height: 0.52em;
+    margin-right: 0.4em;
+    background: var(--arc-tick) no-repeat center / contain;
+    content: "";
+    opacity: 0;
+    transition: opacity 160ms ease;
+  }
+
+  .toc-list a[aria-current="true"] {
+    color: var(--blue);
+    font-weight: 700;
+  }
+
+  .toc-list a[aria-current="true"]::before {
+    opacity: 1;
+  }
+
+  /* 宽屏右侧 sticky 目录，窄屏只在文首展示折叠目录 */
+  .toc {
+    display: none;
+  }
+
+  @media (min-width: 1200px) {
+    .article-body {
+      position: relative;
+    }
+
+    .toc {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: calc(100% + 2.5rem);
+      display: block;
+      width: 14rem;
+    }
+
+    .toc-inner {
+      position: sticky;
+      top: 5rem;
+      max-height: calc(100vh - 7rem);
+      padding-left: 1.2rem;
+      border-left: 1px solid var(--line);
+      overflow-y: auto;
+    }
+
+    .toc-inline {
+      display: none;
+    }
   }
 
   .progress-arc {
@@ -212,6 +337,31 @@ const breadcrumbLd = currentPost
     font-size: 1.65rem;
     line-height: 1.35;
     letter-spacing: 0;
+    scroll-margin-top: 5rem;
+  }
+
+  .prose :global(h3) {
+    scroll-margin-top: 5rem;
+  }
+
+  .prose :global(.heading-anchor) {
+    margin-left: 0.4em;
+    color: var(--blue);
+    text-decoration: none;
+    opacity: 0;
+    transition: opacity 160ms ease;
+  }
+
+  .prose :global(.anchor-icon) {
+    width: 1.05em;
+    height: 0.53em;
+    vertical-align: -0.05em;
+  }
+
+  .prose :global(h2:hover .heading-anchor),
+  .prose :global(h3:hover .heading-anchor),
+  .prose :global(.heading-anchor:focus-visible) {
+    opacity: 1;
   }
 
   .prose :global(p) {
@@ -269,6 +419,7 @@ const breadcrumbLd = currentPost
   }
 
   .prose :global(pre) {
+    position: relative;
     margin: 2rem 0;
     padding: 1rem 1.2rem;
     border: 1px solid var(--line);
@@ -277,6 +428,62 @@ const breadcrumbLd = currentPost
     font-family: var(--mono);
     font-size: 0.88em;
     line-height: 1.7;
+  }
+
+  .prose :global(pre.astro-code) {
+    background-color: var(--card) !important;
+  }
+
+  .prose :global(.copy-code) {
+    position: absolute;
+    top: 0.55rem;
+    right: 0.55rem;
+    padding: 0.22rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--card-solid);
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    cursor: pointer;
+    opacity: 0;
+    transition:
+      opacity 160ms ease,
+      color 160ms ease,
+      border-color 160ms ease;
+  }
+
+  .prose :global(pre:hover .copy-code),
+  .prose :global(.copy-code:focus-visible),
+  .prose :global(.copy-code.copied) {
+    opacity: 1;
+  }
+
+  .prose :global(.copy-code:hover),
+  .prose :global(.copy-code.copied) {
+    border-color: color-mix(in srgb, var(--blue) 55%, transparent);
+    color: var(--blue);
+  }
+
+  /* shiki 双主题：跟随手动主题，系统态由媒体查询兜底；深色代码底走 --deep */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .prose :global(pre.astro-code) {
+      background-color: var(--deep) !important;
+    }
+
+    :root:not([data-theme="light"]) .prose :global(pre.astro-code),
+    :root:not([data-theme="light"]) .prose :global(pre.astro-code span) {
+      color: var(--shiki-dark) !important;
+    }
+  }
+
+  [data-theme="dark"] .prose :global(pre.astro-code) {
+    background-color: var(--deep) !important;
+  }
+
+  [data-theme="dark"] .prose :global(pre.astro-code),
+  [data-theme="dark"] .prose :global(pre.astro-code span) {
+    color: var(--shiki-dark) !important;
   }
 
   .prose :global(pre code) {
@@ -295,6 +502,7 @@ const breadcrumbLd = currentPost
   }
 
   .prose :global(img) {
+    height: auto;
     margin: 2rem auto;
     border: 1px solid var(--line);
   }

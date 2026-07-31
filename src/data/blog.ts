@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import { imageSize } from "image-size";
 import { posts, type Post } from "./posts";
 
 export const site = {
@@ -42,6 +44,19 @@ export function getRelatedPosts(post: Pick<Post, "href" | "categorySlug" | "coll
 
 export function absoluteUrl(path = "") {
   return `${site.url}/${path.replace(/^\/+/, "")}`;
+}
+
+// 读取 public/ 下站内图片的真实宽高，构建期写入 width/height 消除 CLS。
+// 接受 posts.ts 的 "/images/..." 或 Markdown 的 "/lanposui-blog/images/..." 两种前缀。
+export function imageDims(src = "") {
+  const rel = src.replace(/^\/lanposui-blog\//, "/").replace(/^\/+/, "");
+  if (!rel.startsWith("images/")) return undefined;
+  try {
+    const size = imageSize(readFileSync(`public/${rel}`));
+    return size.width && size.height ? { width: size.width, height: size.height } : undefined;
+  } catch {
+    return undefined;
+  }
 }
 
 function groupBy<T>(items: T[], getKey: (item: T) => string) {
