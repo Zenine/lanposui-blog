@@ -18,8 +18,8 @@ function runCleanups() {
 }
 
 const THEME_ORDER = ["system", "light", "dark"];
-const THEME_LABELS = { system: "跟随系统", light: "亮色", dark: "暗色" };
-const THEME_SHORT_LABELS = { system: "系统", light: "亮色", dark: "暗色" };
+const THEME_LABELS = { system: "跟随系统主题", light: "浅色主题", dark: "深色主题" };
+const THEME_SHORT_LABELS = { system: "跟随", light: "浅色", dark: "深色" };
 
 function initThemeToggle() {
   const btn = document.querySelector(".theme-toggle");

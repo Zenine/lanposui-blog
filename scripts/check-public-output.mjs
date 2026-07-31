@@ -107,6 +107,7 @@ for (const page of pages) {
   const html = readFileSync(page, "utf8");
   assertIncludes(html, "theme-toggle", page);
   assertIncludes(html, "theme-toggle-text", page);
+  assertIncludes(html, ">跟随<", page);
   assertIncludes(html, "theme-choice", page);
 }
 assertMatches(cssBundle, /data-theme/, "css bundle manual theme selector");
@@ -119,6 +120,7 @@ assertIncludes(home, "订阅 RSS", "home");
 // 滚动显现与首页 Hero 弧生长动画
 assertIncludes(home, "data-reveal", "home");
 assertMatches(cssBundle, /arc-draw/, "css bundle hero arc draw");
+assertMatches(cssBundle, /height:\s*clamp\(12rem,\s*28vh,\s*18rem\)/, "css bundle home feature image height");
 
 // 灯箱与代码块复制按钮样式
 assertMatches(cssBundle, /lightbox/, "css bundle lightbox");
