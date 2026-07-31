@@ -11,10 +11,11 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
   <Fragment slot="head">
     <link rel="stylesheet" href={withBase("pagefind/pagefind-ui.css")} />
     <script is:inline define:vars={{ pagefindUiPath: withBase("pagefind/pagefind-ui.js") }}>
-      window.addEventListener("DOMContentLoaded", () => {
-        const script = document.createElement("script");
-        script.src = pagefindUiPath;
-        script.onload = () => {
+      const initPagefind = () => {
+        const target = document.querySelector("#search");
+        if (!target || target.dataset.pagefindReady) return;
+        target.dataset.pagefindReady = "1";
+        const mount = () => {
           new PagefindUI({
             element: "#search",
             showSubResults: true,
@@ -30,8 +31,16 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
             },
           });
         };
+        if (window.PagefindUI) {
+          mount();
+          return;
+        }
+        const script = document.createElement("script");
+        script.src = pagefindUiPath;
+        script.onload = mount;
         document.head.append(script);
-      });
+      };
+      document.addEventListener("astro:page-load", initPagefind);
     </script>
   </Fragment>
   <main class="wrap search-page">

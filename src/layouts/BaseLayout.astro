@@ -1,4 +1,6 @@
 ---
+import { ClientRouter } from "astro:transitions";
+
 const {
   title = "蓝破碎半圆",
   description = "一个 AI 时代技术决策者的判断笔记。",
@@ -14,6 +16,15 @@ const base = import.meta.env.BASE_URL.endsWith("/")
 const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
 const canonical = new URL(Astro.url.pathname, "https://zenine.github.io").toString();
 const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString();
+const now = new Date();
+const buildDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+const section = Astro.url.pathname.replace(base, "").split("/").filter(Boolean)[0] ?? "";
+const navItems = [
+  { href: "articles/", label: "文章", key: "articles" },
+  { href: "categories/", label: "分类", key: "categories" },
+  { href: "collections/", label: "合集", key: "collections" },
+  { href: "search/", label: "检索", key: "search" },
+];
 ---
 
 <!doctype html>
@@ -21,8 +32,51 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f8f5" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#081724" />
+    <meta name="theme-color" data-scheme="light" media="(prefers-color-scheme: light)" content="#f6f8f5" />
+    <meta name="theme-color" data-scheme="dark" media="(prefers-color-scheme: dark)" content="#081724" />
+    <script is:inline>
+      (() => {
+        if (window.__themeReady) return;
+        window.__themeReady = true;
+        const KEY = "theme-choice";
+        const read = () => {
+          try {
+            return localStorage.getItem(KEY);
+          } catch {
+            return null;
+          }
+        };
+        const apply = (choice) => {
+          const root = document.documentElement;
+          const normalized = choice === "light" || choice === "dark" ? choice : "system";
+          if (normalized === "system") delete root.dataset.theme;
+          else root.dataset.theme = normalized;
+          root.dataset.themeChoice = normalized;
+          const lightMeta = document.querySelector('meta[name="theme-color"][data-scheme="light"]');
+          const darkMeta = document.querySelector('meta[name="theme-color"][data-scheme="dark"]');
+          if (lightMeta && darkMeta) {
+            lightMeta.media =
+              normalized === "dark" ? "not all" : normalized === "light" ? "all" : "(prefers-color-scheme: light)";
+            darkMeta.media =
+              normalized === "light" ? "not all" : normalized === "dark" ? "all" : "(prefers-color-scheme: dark)";
+          }
+        };
+        window.__applyThemeChoice = apply;
+        apply(read());
+        document.documentElement.classList.add("js");
+        document.addEventListener("astro:before-swap", (event) => {
+          const root = document.documentElement;
+          const next = event.newDocument.documentElement;
+          next.classList.add("js");
+          next.dataset.themeChoice = root.dataset.themeChoice || "system";
+          if (root.dataset.theme) next.dataset.theme = root.dataset.theme;
+          else delete next.dataset.theme;
+        });
+        document.addEventListener("astro:after-swap", () => {
+          apply(document.documentElement.dataset.themeChoice);
+        });
+      })();
+    </script>
     <meta name="description" content={description} />
     <meta name="author" content="ZENINEXU" />
     <meta name="generator" content={Astro.generator} />
@@ -40,6 +94,7 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
     <meta name="twitter:title" content={siteTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
+    <ClientRouter />
     <slot name="head" />
     <title>{siteTitle}</title>
   </head>
@@ -61,10 +116,9 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
         </span>
       </a>
       <nav aria-label="主导航">
-        <a href={withBase("articles/")}>文章</a>
-        <a href={withBase("categories/")}>分类</a>
-        <a href={withBase("collections/")}>合集</a>
-        <a href={withBase("search/")}>检索</a>
+        {navItems.map(item => (
+          <a href={withBase(item.href)} aria-current={section === item.key ? "page" : undefined}>{item.label}</a>
+        ))}
         <a href="https://github.com/Zenine" rel="me noopener">GitHub</a>
         <span class="wechat-nav">
           <a href="https://weixin.qq.com/r/mp/njrl-WTEHTlirSCe92_M">公众号</a>
@@ -72,6 +126,23 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
             <img src={withBase("images/wechat-qr.jpg")} alt="公众号二维码" width="172" height="172" />
           </span>
         </span>
+        <button class="theme-toggle" type="button" aria-label="主题：跟随系统，点击切换" title="主题：跟随系统">
+          <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <g class="icon icon-system">
+              <path d="M4.5 17 A 7.5 7.5 0 0 1 12 9.5" />
+              <path d="M12 9.5 A 7.5 7.5 0 0 1 19.5 17" stroke-dasharray="2.4 2.4" />
+              <line x1="3" y1="17" x2="21" y2="17" stroke-width="1.2" opacity="0.5" />
+            </g>
+            <g class="icon icon-light">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 3.4v1.7M12 18.9v1.7M3.4 12h1.7M18.9 12h1.7M5.9 5.9l1.2 1.2M16.9 16.9l1.2 1.2M18.1 5.9l-1.2 1.2M7.1 16.9l-1.2 1.2" />
+            </g>
+            <g class="icon icon-dark">
+              <path d="M19.8 13.8 A 8.2 8.2 0 1 1 10.2 4.2 A 6.6 6.6 0 0 0 19.8 13.8 Z" />
+            </g>
+          </svg>
+          <span class="theme-toggle-text">系统</span>
+        </button>
       </nav>
     </header>
     <slot />
@@ -80,6 +151,10 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
         <div>
           <strong>蓝破碎半圆</strong>
           <span>ZENINEXU · 在破碎信息里，留下判断的现场。</span>
+          <span>
+            <a class="footer-rss" href={withBase("rss.xml")}>订阅 RSS</a>，第一时间收到新判断。
+          </span>
+          <span class="footer-updated">最近更新于 {buildDate}</span>
         </div>
         <nav aria-label="页脚导航">
           <a href={withBase("rss.xml")}>RSS</a>
@@ -93,12 +168,15 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
         </div>
       </div>
     </footer>
+    <script>
+      import "../scripts/site.js";
+    </script>
   </body>
 </html>
 
 <style is:global>
   :root {
-    color-scheme: light dark;
+    color-scheme: light;
     --paper: #f6f8f5;
     --ink: #121820;
     --muted: #5c6670;
@@ -110,6 +188,9 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
     --cyan: #5cd6e8;
     --deep: #081724;
     --footer-ink: #e9eef4;
+    --shadow-feature: 0 18px 42px rgba(26, 39, 47, 0.055);
+    --shadow-hover: 0 12px 30px rgba(8, 23, 36, 0.09);
+    --shadow-qr: 0 16px 38px rgba(10, 27, 46, 0.18);
     --serif: "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", Georgia, "SimSun", serif;
     --sans: "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
@@ -117,8 +198,25 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
     --max: 1120px;
   }
 
+  [data-theme="dark"] {
+    color-scheme: dark;
+    --paper: #0a1522;
+    --ink: #e6ecf2;
+    --muted: #93a1ae;
+    --line: rgba(230, 236, 242, 0.15);
+    --grid: rgba(230, 236, 242, 0.045);
+    --card: rgba(17, 29, 43, 0.92);
+    --card-solid: #101d2b;
+    --blue: #4f8dff;
+    --shadow-feature: 0 18px 42px rgba(0, 0, 0, 0.4);
+    --shadow-hover: 0 14px 36px rgba(0, 0, 0, 0.55), 0 0 20px color-mix(in srgb, var(--blue) 16%, transparent);
+    --shadow-qr: 0 16px 38px rgba(0, 0, 0, 0.6);
+    --arc-tick: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 11'%3E%3Cpath d='M2 11 A 9 9 0 0 1 11 2' fill='none' stroke='%234f8dff' stroke-width='2.4'/%3E%3Cg transform='translate(1.6 -1.2) rotate(10 17 5)'%3E%3Cpath d='M15.5 3.2 A 9 9 0 0 1 19.2 7.2' fill='none' stroke='%234f8dff' stroke-width='2.4'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
       --paper: #0a1522;
       --ink: #e6ecf2;
       --muted: #93a1ae;
@@ -127,6 +225,9 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
       --card: rgba(17, 29, 43, 0.92);
       --card-solid: #101d2b;
       --blue: #4f8dff;
+      --shadow-feature: 0 18px 42px rgba(0, 0, 0, 0.4);
+      --shadow-hover: 0 14px 36px rgba(0, 0, 0, 0.55), 0 0 20px color-mix(in srgb, var(--blue) 16%, transparent);
+      --shadow-qr: 0 16px 38px rgba(0, 0, 0, 0.6);
       --arc-tick: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 11'%3E%3Cpath d='M2 11 A 9 9 0 0 1 11 2' fill='none' stroke='%234f8dff' stroke-width='2.4'/%3E%3Cg transform='translate(1.6 -1.2) rotate(10 17 5)'%3E%3Cpath d='M15.5 3.2 A 9 9 0 0 1 19.2 7.2' fill='none' stroke='%234f8dff' stroke-width='2.4'/%3E%3C/g%3E%3C/svg%3E");
     }
   }
@@ -228,6 +329,89 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
     color: var(--blue);
   }
 
+  .site-header nav a {
+    position: relative;
+    padding-bottom: 0.35rem;
+  }
+
+  .site-header nav a::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 1.05em;
+    height: 0.52em;
+    background: var(--arc-tick) no-repeat left center / contain;
+    content: "";
+    opacity: 0;
+    transform: translateX(-0.35em);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .site-header nav a::after {
+      transition:
+        opacity 160ms ease,
+        transform 160ms ease;
+    }
+  }
+
+  .site-header nav a:hover::after,
+  .site-header nav a[aria-current="page"]::after {
+    opacity: 1;
+    transform: none;
+  }
+
+  .site-header nav a[aria-current="page"] {
+    color: var(--blue);
+    font-weight: 700;
+  }
+
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.34rem;
+    min-width: 4.1rem;
+    height: 2rem;
+    padding: 0 0.62rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--card);
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      border-color 160ms ease,
+      color 160ms ease;
+  }
+
+  .theme-toggle:hover {
+    border-color: color-mix(in srgb, var(--blue) 55%, transparent);
+    color: var(--blue);
+  }
+
+  .theme-toggle .icon {
+    display: none;
+  }
+
+  .theme-toggle-text {
+    white-space: nowrap;
+  }
+
+  :root:not([data-theme-choice]) .theme-toggle .icon-system,
+  :root[data-theme-choice="system"] .theme-toggle .icon-system {
+    display: block;
+  }
+
+  :root[data-theme-choice="light"] .theme-toggle .icon-light {
+    display: block;
+  }
+
+  :root[data-theme-choice="dark"] .theme-toggle .icon-dark {
+    display: block;
+  }
+
   .wechat-nav {
     position: relative;
     display: inline-flex;
@@ -253,7 +437,7 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
     border: 1px solid var(--line);
     border-radius: 8px;
     background: var(--card-solid);
-    box-shadow: 0 16px 38px rgba(10, 27, 46, 0.18);
+    box-shadow: var(--shadow-qr);
     opacity: 0;
     pointer-events: none;
     transform: translateY(-0.25rem);
@@ -317,6 +501,55 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
     font-variant-numeric: tabular-nums;
   }
 
+  /* 滚动显现：仅 JS 可用且未声明减少动态时先隐藏，避免无 JS 环境内容不可见 */
+  html.js [data-reveal] {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  html.js [data-reveal].revealed {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html.js [data-reveal] {
+      transition:
+        opacity 420ms ease,
+        transform 420ms ease;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html.js [data-reveal] {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4vmin;
+    background: color-mix(in srgb, var(--deep) 92%, transparent);
+    cursor: zoom-out;
+  }
+
+  .lightbox img {
+    max-width: 92vw;
+    max-height: 92vh;
+    border: 1px solid var(--line);
+    object-fit: contain;
+  }
+
+  .prose img.zoomable {
+    cursor: zoom-in;
+  }
+
   .site-footer {
     margin-top: 4rem;
     background: var(--deep);
@@ -343,6 +576,17 @@ const imageUrl = new URL(withBase(image), "https://zenine.github.io").toString()
     color: color-mix(in srgb, var(--footer-ink) 62%, transparent);
     font-family: var(--sans);
     font-size: 0.86rem;
+  }
+
+  .site-footer .footer-rss {
+    color: var(--cyan);
+    text-decoration-color: color-mix(in srgb, var(--cyan) 45%, transparent);
+  }
+
+  .site-footer .footer-updated {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
   }
 
   .site-footer nav a {
