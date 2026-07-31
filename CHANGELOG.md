@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## 2026-07-31
+
+### 前端美化与交互升级
+
+- 新增亮 / 暗主题手动切换：页眉三态按钮（跟随系统 / 强制亮 / 强制暗），localStorage 记忆，`<html data-theme>` 驱动，head 内联脚本首绘前防闪烁；暗色变量块复制为 `[data-theme="dark"]` 选择器，系统态仍由媒体查询兜底；同步维护 `theme-color` meta；深色下卡片 hover 阴影加深并叠加蓝色微光（新增 `--shadow-feature` / `--shadow-hover` / `--shadow-qr` token，全站 hover 阴影统一走变量）。
+- 主题切换按钮由纯图标改为图标 + 当前状态文案（系统 / 亮色 / 暗色），避免暗色模式能力不可见；构建产物检查同步断言按钮文案存在。
+- 首页 Hero 蓝弧描边生长入场动画（stroke-dashoffset 逐段错峰）+ 碎片小幅循环漂移（2.3–3.1s，1–2px / 0.5°以内），`prefers-reduced-motion` 下全部静止。
+- 主导航当前栏目高亮（`aria-current="page"` + 品牌蓝），hover 时下划线改为 `--arc-tick` 弧刻度滑入。
+- 代码块升级：shiki 双主题（github-light / github-dark）随主题切换，深色代码底走 `--deep`；正文 `pre` 右上角新增"复制 / 已复制"按钮（原生 JS）。
+- 文章页新增目录（TOC）：rehype-slug + rehype-autolink-headings 给 h2/h3 生成锚点（hover 显示 #）；宽屏（≥1200px）右侧 sticky 目录随滚动高亮当前小节（弧刻度标记），窄屏文首折叠为 `<details>`；目录数据取自内容集合 `render()` 的 headings。
+- 图片：封面 / 缩略图构建期写入真实 `width`/`height`（`src/data/blog.ts` 的 `imageDims()`，基于 image-size），正文 Markdown 图片由 rehype 插件自动补宽高，消除 CLS；正文图片新增轻量灯箱（点击全屏、ESC / 点背景关闭，原生 JS）。
+- 归档页按年份分组（mono 年份刻度标题 + 弧刻度），有封面的文章行内展示 120px 缩略图，保留原行 hover 语言。
+- 全站接入 Astro View Transitions（`<ClientRouter />`）：主题状态跨导航不闪烁（astro:before-swap 复制 data-theme）；交互脚本统一收口到 `src/scripts/site.js`，经 astro:page-load 重初始化、astro:before-swap 清理监听器；Pagefind 检索初始化同步适配。
+- 各区块新增滚动显现（`data-reveal` + IntersectionObserver，无 JS / 减少动态时直接可见）。
+- 页脚新增"最近更新于 YYYY-MM-DD"（构建时注入）与 RSS 订阅引导文案。
+- 文章页 OG 图构建期自动生成（`src/pages/og/[slug].png.ts`，sharp 光栅化 SVG 模板：标题 + 分类日期 + 蓝破碎半圆母题，1200×630）；中文字体自动探测（PingFang SC / Noto CJK 等），探测不到时退化为纯品牌弧 + 英文标识，任何环境下构建均可通过。
+- 新增构建期依赖（均为 devDependencies）：rehype-slug、rehype-autolink-headings、sharp、image-size；无新增运行时依赖、无外链资源。
+- 构建产物检查脚本同步扩展：主题切换、阴影 token、页脚构建日期、滚动显现、弧动画、灯箱、复制按钮、归档年份分组与缩略图、文章目录 / 锚点 / OG 图、图片宽高等断言。
+- Markdown 处理迁移到 Astro 7 推荐的 `@astrojs/markdown-remark` `unified()` processor 配置，消除 `markdown.rehypePlugins` 弃用警告。
+
 ## 2026-07-30
 
 ### QA 修复与打磨
