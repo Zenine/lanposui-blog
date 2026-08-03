@@ -5,6 +5,7 @@
 ### SEO
 
 - 新增 Google Search Console HTML 验证文件，并把验证文件纳入构建产物检查；部署后可在 Search Console 完成站点验证并提交 sitemap。
+- Google Search Console 已完成站点验证；首页实际网址测试通过，确认允许抓取且可编入索引；维护手册补充新文章发布后的 sitemap 刷新和网址检查流程。
 
 ## 2026-08-01
 

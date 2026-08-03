@@ -38,7 +38,7 @@
 
 文章页包含 canonical、Open Graph、Twitter Card、BlogPosting 和 BreadcrumbList JSON-LD；首页额外输出 WebSite + Person 结构化数据（作者实体统一为 `ZENINEXU`，定义在 `src/data/blog.ts` 的 `site.author`）。`/404.html` 由 `src/pages/404.astro` 生成。
 
-SEO 站外事项：站点收录靠 Google Search Console 和 Bing 站长工具提交 sitemap（见 `TODO.md`）；GitHub Pages 屏蔽 Baiduspider 且无备案域名，百度收录不可行，大陆读者触达以公众号分发为主。
+SEO 站外事项：站点收录靠 Google Search Console 和 Bing 站长工具提交 sitemap（见 `TODO.md`）；Google Search Console 已完成站点验证，HTML 验证文件为 `public/google2240070b3808c919.html`。GitHub Pages 屏蔽 Baiduspider 且无备案域名，百度收录不可行，大陆读者触达以公众号分发为主。
 
 ## 技术架构
 
@@ -184,6 +184,28 @@ http://localhost:4321/lanposui-blog/
    git push origin main
    ```
 
+8. 部署后更新搜索引擎提交状态。
+
+   新文章上线后，先确认 sitemap 已包含新文章 URL：
+
+   ```sh
+   curl -sL https://zenine.github.io/lanposui-blog/sitemap-0.xml | grep articles/<article-slug>/
+   ```
+
+   在 Google Search Console 中提交或刷新：
+
+   ```text
+   https://zenine.github.io/lanposui-blog/sitemap-index.xml
+   ```
+
+   如果 sitemap index 暂显示无法抓取，直接补交实际 URL 列表：
+
+   ```text
+   https://zenine.github.io/lanposui-blog/sitemap-0.xml
+   ```
+
+   然后用“网址检查”对首页和新文章 URL 执行“测试实际网址”，通过后点击“请求编入索引”。若 Bing 站长工具已启用，也同步提交 sitemap。
+
 ## 公开边界
 
 从私有写作材料同步到本仓库前，必须确认：
@@ -244,6 +266,25 @@ base: "/lanposui-blog"
 https://zenine.github.io/lanposui-blog/
 ```
 
+## 搜索引擎提交
+
+Google Search Console 已完成 `https://zenine.github.io/lanposui-blog/` 的站点验证。2026-08-03 21:52，首页实际网址测试结果为允许抓取、抓取成功、允许编入索引。
+
+常用提交地址：
+
+```text
+https://zenine.github.io/lanposui-blog/sitemap-index.xml
+https://zenine.github.io/lanposui-blog/sitemap-0.xml
+```
+
+每次发布新文章后：
+
+1. 确认线上文章 URL 返回 `200`。
+2. 确认 `sitemap-0.xml` 包含新文章 URL。
+3. 在 Google Search Console 刷新 sitemap；若 `sitemap-index.xml` 暂显示无法抓取，补交 `sitemap-0.xml`。
+4. 用“网址检查”请求首页和新文章 URL 编入索引。
+5. 把 Search Console 状态同步到 `TODO.md`；已经完成并验证的事项移入 `CHANGELOG.md`。
+
 ## 维护清单
 
 提交前确认：
@@ -251,5 +292,6 @@ https://zenine.github.io/lanposui-blog/
 - `README.md`、`TODO.md`、`CHANGELOG.md` 是否需要同步更新。
 - 新文章是否已同时更新 Markdown 和 `src/data/posts.ts`。
 - 图片是否只放入 `public/images/`，且不包含私有素材。
+- 新文章部署后是否已更新 Google Search Console / sitemap 提交状态，并同步 `TODO.md`。
 - `npm test` 是否通过。
 - 提交信息保持人工维护口径，不添加额外署名。
