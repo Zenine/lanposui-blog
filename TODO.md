@@ -4,10 +4,11 @@
 
 ## P1 · 需用户登录操作
 
-- [ ] SEO 站外提交：Google Search Console 和 Bing 站长工具验证站点并提交 `https://zenine.github.io/lanposui-blog/sitemap-index.xml`；如用 HTML meta 标签验证，把验证码告知 agent 加入 `BaseLayout.astro` 即可。百度不做（GitHub Pages 屏蔽 Baiduspider 且无备案域名）。
+- [ ] SEO 站外提交：Google Search Console 验证文件已加入 `public/google2240070b3808c919.html`，部署后在 Search Console 完成验证并提交 `https://zenine.github.io/lanposui-blog/sitemap-index.xml`；Bing 站长工具仍需验证并提交 sitemap。百度不做（GitHub Pages 屏蔽 Baiduspider 且无备案域名）。
 
 ## P2 · 小件待决/待补
 
+- [ ] 第 003 期公众号原文链接待从公众号后台补齐；补齐后同步更新 `src/content/articles/003-ai-chopping-value.md` 和 `src/data/posts.ts`。
 - [ ] （2026-07-31 审阅遗留）OG 图模板右侧蓝弧被画布右缘裁掉约 18px（`src/pages/og/[slug].png.ts` 的 `translate(830) scale(2)` 跨到 x=1218）；若为有意出血可关闭本项，否则把 translate 收到约 810。
 - [ ] （2026-07-31 审阅遗留）`scripts/check-public-output.mjs` 的 `width="1693"`、`>2021<` 等断言绑死当前文章数据，发新文换最新封面或删旧文时需同步更新断言。
 - [ ] favicon 品牌弧候选已生成在 `public/favicon-arc.svg`（亮暗自适应，未启用），当前默认仍是公众号 Logo；待用户审阅后决定是否切换（切换=改 `BaseLayout.astro` 两行 favicon link 并更新版本参数）。

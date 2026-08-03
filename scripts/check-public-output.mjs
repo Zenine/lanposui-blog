@@ -26,6 +26,7 @@ const requiredFiles = [
   join(root, "dist", "rss.xml"),
   join(root, "dist", "robots.txt"),
   join(root, "dist", "sitemap-index.xml"),
+  join(root, "dist", "google2240070b3808c919.html"),
   join(root, "dist", "pagefind", "pagefind.js"),
 ];
 
@@ -143,7 +144,11 @@ for (const dir of articleDirs) {
 }
 
 // 图片宽高属性:首页封面与正文图构建期补齐,消除 CLS
-assertIncludes(home, 'width="1693"', "home");
+assertMatches(
+  home,
+  /class="feature"[\s\S]*?<img[^>]+width="\d+"[^>]+height="\d+"/,
+  "home feature image dimensions",
+);
 const article2021 = readFileSync(join(root, "dist", "articles", "2021-meta-start", "index.html"), "utf8");
 assertIncludes(article2021, 'width="1009"', "article 2021-meta-start");
 

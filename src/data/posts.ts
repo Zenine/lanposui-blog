@@ -15,6 +15,20 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    issue: 3,
+    title: "当 AI 比你更会砍柴，你还剩什么价值？",
+    href: "/articles/003-ai-chopping-value/",
+    date: "2026-08-01",
+    category: "创作与职业",
+    categorySlug: "creation-career",
+    collection: "砍柴与放羊",
+    collectionSlug: "chopping-herding",
+    tags: ["AI", "职业", "负责人能力"],
+    description:
+      "当 AI 接走越来越多执行工作，人的价值会向目标、标准、判断、验收和责任上移。这里的负责人是一种能力，而不是管理头衔。",
+    cover: "/images/003-responsibility-gate-cover.webp",
+  },
+  {
     issue: 2,
     title: "砍柴人与放羊人都遇到了 AI",
     href: "/articles/002-chopping-herding-ai/",
