@@ -35,6 +35,7 @@ export const posts: Post[] = [
     title: "AI 时代，你真正要养的羊是什么？",
     href: "/articles/004-ai-assets/",
     date: "2026-08-04",
+    publishAt: "2026-08-04T21:00:00+08:00",
     category: "创作与职业",
     categorySlug: "creation-career",
     collection: "砍柴与放羊",

@@ -2,11 +2,12 @@
 layout: "../../layouts/PostLayout.astro"
 title: "AI 时代，你真正要养的羊是什么？"
 date: "2026-08-04"
+publishAt: "2026-08-04T21:00:00+08:00"
 description: "真正值得养的羊，不是某个具体工具，而是价值不再与当下投入时间一比一绑定、能够持续复用和积累的资产与系统。"
 issue: 4
 category: "创作与职业"
 cover: "/lanposui-blog/images/004-five-layer-assets-cover.webp"
-source: "公众号第 004 期公开发布稿，平台链接待补"
+source: "公众号第 004 期定时发布稿，平台链接待补"
 ---
 
 大家好，我是 Azen。

@@ -5,7 +5,7 @@
 ## P1 · 需用户登录操作
 
 - [ ] SEO 站外提交：Google Search Console 已完成站点验证；首页 `https://zenine.github.io/lanposui-blog/` 于 2026-08-03 21:52 通过实际网址测试，允许抓取且可编入索引。已提交 `https://zenine.github.io/lanposui-blog/sitemap-index.xml`，若仍显示无法抓取则补交 `https://zenine.github.io/lanposui-blog/sitemap-0.xml`；后续等待实际收录，并用网址检查请求新文章 URL 编入索引。Bing 站长工具仍需验证并提交 sitemap。百度不做（GitHub Pages 屏蔽 Baiduspider 且无备案域名）。
-- [ ] 第 004 期部署后 SEO 提交：确认 sitemap 包含 `https://zenine.github.io/lanposui-blog/articles/004-ai-assets/`，在 Google Search Console 用“网址检查”请求新文章编入索引；若 Bing 站长工具已启用，也同步提交 sitemap。
+- [ ] 第 004 期计划 `2026-08-04T21:00:00+08:00` 发布；到点后手动触发或由外部流程触发一次构建，确认 sitemap 包含 `https://zenine.github.io/lanposui-blog/articles/004-ai-assets/`，再在 Google Search Console 用“网址检查”请求新文章编入索引；若 Bing 站长工具已启用，也同步提交 sitemap。
 - [ ] 第 005 期计划 `2026-08-06T21:00:00+08:00` 发布；到点后手动触发或由外部流程触发一次构建，确认 sitemap 包含 `https://zenine.github.io/lanposui-blog/articles/005-agent-work-organization/`，再在 Google Search Console 用“网址检查”请求新文章编入索引。
 
 ## P2 · 小件待决/待补
