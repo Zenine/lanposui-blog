@@ -5,7 +5,9 @@ import { getCategories, getCollections, imageDims, site, sortedPosts } from "../
 const posts = sortedPosts;
 const latest = posts[0];
 const latestCoverDims = latest.cover ? imageDims(latest.cover) : undefined;
-const secondaryPosts = posts.slice(1);
+const leadPost = posts[1] ?? latest;
+const leadPostCoverDims = leadPost.cover ? imageDims(leadPost.cover) : undefined;
+const secondaryPosts = posts.slice(2);
 const categories = getCategories();
 const collections = getCollections();
 const recommended = posts.slice(1, 4);
@@ -110,19 +112,19 @@ const siteLd = {
         <a href={withBase("articles/")}>全部文章</a>
       </div>
       <div class="posts-board" data-reveal>
-        <a class="lead-post" href={withBase(latest.href)}>
-          <small>{latest.category} · {latest.collection}</small>
-          <h3>{latest.title}</h3>
-          <p>{latest.description}</p>
-          <time datetime={latest.date}>{latest.date}</time>
-          {latest.cover && (
+        <a class="lead-post" href={withBase(leadPost.href)}>
+          <small>{leadPost.category} · {leadPost.collection}</small>
+          <h3>{leadPost.title}</h3>
+          <p>{leadPost.description}</p>
+          <time datetime={leadPost.date}>{leadPost.date}</time>
+          {leadPost.cover && (
             <img
               class="lead-cover"
-              src={withBase(latest.cover)}
+              src={withBase(leadPost.cover)}
               alt=""
               loading="lazy"
-              width={latestCoverDims?.width}
-              height={latestCoverDims?.height}
+              width={leadPostCoverDims?.width}
+              height={leadPostCoverDims?.height}
             />
           )}
         </a>

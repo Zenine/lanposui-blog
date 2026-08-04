@@ -3,6 +3,7 @@ export type Post = {
   title: string;
   href: string;
   date: string;
+  publishAt?: string;
   category: string;
   categorySlug: string;
   collection: string;
@@ -14,6 +15,21 @@ export type Post = {
 };
 
 export const posts: Post[] = [
+  {
+    issue: 5,
+    title: "Agent 不是聊天机器人，而是一种工作组织方式",
+    href: "/articles/005-agent-work-organization/",
+    date: "2026-08-06",
+    publishAt: "2026-08-06T21:00:00+08:00",
+    category: "AI 与工程",
+    categorySlug: "ai-engineering",
+    collection: "Agent 工作组织",
+    collectionSlug: "agent-work-organization",
+    tags: ["AI", "Agent", "工作组织"],
+    description:
+      "区分 Agent 和聊天机器人的，不是模型智商，而是有没有调工具、看结果、再决定的闭环。",
+    cover: "/images/005-agent-work-organization-cover.webp",
+  },
   {
     issue: 4,
     title: "AI 时代，你真正要养的羊是什么？",

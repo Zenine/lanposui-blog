@@ -1,13 +1,13 @@
 ---
 import { getCollection, render } from "astro:content";
 import PostLayout from "../../layouts/PostLayout.astro";
-import { isPublishedDate } from "../../data/publishing.mjs";
+import { isPublishedPost } from "../../data/publishing.mjs";
 
 export async function getStaticPaths() {
   const articles = await getCollection("articles");
 
   return articles
-    .filter(article => isPublishedDate(article.data.date))
+    .filter(article => isPublishedPost(article.data))
     .map(article => ({
       params: { slug: article.id },
       props: { article },

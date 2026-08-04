@@ -127,6 +127,11 @@ assertMatches(
   /class="lead-post"[\s\S]*?<img[^>]+class="lead-cover"[^>]+width="\d+"[^>]+height="\d+"/,
   "home lead post cover image dimensions",
 );
+assertNotEqual(
+  extractCardHref(home, "feature"),
+  extractCardHref(home, "lead-post"),
+  "home hero feature and article lead post href",
+);
 
 // 灯箱与代码块复制按钮样式
 assertMatches(cssBundle, /lightbox/, "css bundle lightbox");
@@ -173,4 +178,18 @@ function assertExcludes(html, unexpected, page) {
   if (html.includes(unexpected)) {
     throw new Error(`${page} should not include ${unexpected}`);
   }
+}
+
+function assertNotEqual(actual, unexpected, label) {
+  if (actual === unexpected) {
+    throw new Error(`${label} should not be duplicated: ${actual}`);
+  }
+}
+
+function extractCardHref(html, className) {
+  const match = html.match(new RegExp(`<a class="${className}" href="([^"]+)"`));
+  if (!match) {
+    throw new Error(`home is missing href for ${className}`);
+  }
+  return match[1];
 }

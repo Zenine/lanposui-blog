@@ -163,7 +163,7 @@ http://localhost:4321/lanposui-blog/
    - `cover`，在 `src/data/posts.ts` 中写 `/images/example-cover.jpg`
    - `wechat`
 
-   定时发布使用 `date` 字段控制。构建期按北京时间判断，只展示 `date <= 当天` 的文章；未来日期文章可以提前提交到公开仓库，但在到日构建前不会生成文章页、OG 图、首页入口、RSS、Pagefind 索引或 sitemap URL。
+   定时发布默认使用 `date` 字段控制；未写 `publishAt` 时，文章按北京时间当天 00:00 露出。若需要精确到小时，额外写 `publishAt: "YYYY-MM-DDTHH:mm:ss+08:00"`。构建期按当前时间过滤，优先按 `publishAt` 判断；未来文章可以提前提交到公开仓库，但在发布时间到达并重新构建前不会生成文章页、OG 图、首页入口、RSS、Pagefind 索引或 sitemap URL。
 
 5. 运行完整验证。
 
@@ -246,9 +246,9 @@ npm test
 
 ## 部署
 
-推送到 `main` 后，GitHub Actions 会运行 `.github/workflows/deploy.yml`。
+推送到 `main` 后，GitHub Actions 会运行 `.github/workflows/deploy.yml`；也可以在 GitHub 页面手动触发 `workflow_dispatch`。
 
-该 workflow 也会每天北京时间 09:10 自动运行一次，用于露出已经提前提交但 `date` 到当天才应发布的文章。GitHub Actions 的 cron 使用 UTC，因此配置为 `10 1 * * *`。
+本仓库不使用 GitHub Actions cron 做定时唤醒。未来文章依赖构建时的当前时间过滤：发布时间到达后，需要由人工手动触发、推送触发，或其它外部发布流程触发一次构建，文章才会进入站点、RSS、sitemap、Pagefind 和 OG 图产物。
 
 部署流程：
 

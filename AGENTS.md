@@ -10,7 +10,7 @@
 - 同步前必须先读取 `writing-craft/AGENTS.md`、`writing-craft/README.md`，以及目标草稿 / 已发布文件；只取确认公开的标题、摘要、正文、公开链接和必要图片。不要同步原始素材区、审读意见、Prompt、库内编辑附录、发布跟踪 TODO、本机路径、客户 / 公司细节、家庭材料、投资未核实内容或任何私有上下文。
 - 正文处理顺序：先在 `writing-craft` 中确认公开版已经删去“库内编辑附录（公众号发布前删除）”等内部段落，再复制到 `src/content/articles/<slug>.md`；保留作者原文自称和正文表达，不为了结构化数据统一作者而改写正文里的“Azen”等原文。
 - 元数据处理顺序：同步或新增文章时，同时维护 Markdown frontmatter 和 `src/data/posts.ts`。Markdown 的 `cover` 使用 `/lanposui-blog/images/...`；`src/data/posts.ts` 的 `cover` 使用 `/images/...`。公众号平台链接暂时没有时不伪造，留空并同步写入 `TODO.md`。
-- 定时发布口径：可提前把未来文章同步进本公开仓库，但必须把 `date` 写为计划公开日。构建期按北京时间只展示 `date <= 当天` 的文章；GitHub Actions 每天北京时间 09:10 自动构建一次。提前提交到公开仓库意味着源码可见，只是站点、RSS、sitemap、Pagefind 和文章路由暂不露出。
+- 定时发布口径：可提前把未来文章同步进本公开仓库；`date` 写计划公开日，若需要精确到小时则同时写 `publishAt: "YYYY-MM-DDTHH:mm:ss+08:00"`。构建期按当前时间过滤，优先按 `publishAt` 判断，未写 `publishAt` 的文章按北京时间当天 00:00 露出。提前提交到公开仓库意味着源码可见，但发布时间到达前的构建不会产出站点入口、RSS、sitemap、Pagefind、OG 图或文章路由；发布时间到达后需要一次手动触发或其它外部流程触发构建。
 
 ## 图片归档与公开使用
 

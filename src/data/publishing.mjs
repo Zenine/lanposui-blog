@@ -1,21 +1,20 @@
-export const publicationTimeZone = "Asia/Shanghai";
-
 export function getPublishedPosts(posts, now = new Date()) {
-  const today = dateInTimeZone(now, publicationTimeZone);
-  return posts.filter(post => post.date <= today);
+  return posts.filter(post => isPublishedPost(post, now));
 }
 
 export function isPublishedDate(date, now = new Date()) {
-  return date <= dateInTimeZone(now, publicationTimeZone);
+  return isPublishedPost({ date }, now);
 }
 
-function dateInTimeZone(date, timeZone) {
-  const parts = new Intl.DateTimeFormat("en-CA", {
-    timeZone,
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }).formatToParts(date);
-  const values = Object.fromEntries(parts.map(part => [part.type, part.value]));
-  return `${values.year}-${values.month}-${values.day}`;
+export function isPublishedPost(post, now = new Date()) {
+  return publishInstant(post) <= now.getTime();
+}
+
+function publishInstant(post) {
+  const publishAt = post.publishAt ?? `${post.date}T00:00:00+08:00`;
+  const timestamp = Date.parse(publishAt);
+  if (Number.isNaN(timestamp)) {
+    throw new Error(`Invalid publishAt/date for post: ${post.title ?? post.date}`);
+  }
+  return timestamp;
 }
