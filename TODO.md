@@ -1,14 +1,15 @@
 # TODO
 
-按优先级排序（2026-07-30 梳理，2026-07-31 增补审阅遗留项）。
+按优先级排序（2026-07-30 梳理，2026-08-04 增补第 004 期同步项）。
 
 ## P1 · 需用户登录操作
 
 - [ ] SEO 站外提交：Google Search Console 已完成站点验证；首页 `https://zenine.github.io/lanposui-blog/` 于 2026-08-03 21:52 通过实际网址测试，允许抓取且可编入索引。已提交 `https://zenine.github.io/lanposui-blog/sitemap-index.xml`，若仍显示无法抓取则补交 `https://zenine.github.io/lanposui-blog/sitemap-0.xml`；后续等待实际收录，并用网址检查请求新文章 URL 编入索引。Bing 站长工具仍需验证并提交 sitemap。百度不做（GitHub Pages 屏蔽 Baiduspider 且无备案域名）。
+- [ ] 第 004 期部署后 SEO 提交：确认 sitemap 包含 `https://zenine.github.io/lanposui-blog/articles/004-ai-assets/`，在 Google Search Console 用“网址检查”请求新文章编入索引；若 Bing 站长工具已启用，也同步提交 sitemap。
 
 ## P2 · 小件待决/待补
 
-- [ ] 第 003 期公众号原文链接待从公众号后台补齐；补齐后同步更新 `src/content/articles/003-ai-chopping-value.md` 和 `src/data/posts.ts`。
+- [ ] 第 003 期和第 004 期公众号原文链接待从公众号后台补齐；补齐后同步更新 `src/content/articles/003-ai-chopping-value.md`、`src/content/articles/004-ai-assets.md` 和 `src/data/posts.ts`。
 - [ ] （2026-07-31 审阅遗留）OG 图模板右侧蓝弧被画布右缘裁掉约 18px（`src/pages/og/[slug].png.ts` 的 `translate(830) scale(2)` 跨到 x=1218）；若为有意出血可关闭本项，否则把 translate 收到约 810。
 - [ ] （2026-07-31 审阅遗留）`scripts/check-public-output.mjs` 的 `width="1693"`、`>2021<` 等断言绑死当前文章数据，发新文换最新封面或删旧文时需同步更新断言。
 - [ ] favicon 品牌弧候选已生成在 `public/favicon-arc.svg`（亮暗自适应，未启用），当前默认仍是公众号 Logo；待用户审阅后决定是否切换（切换=改 `BaseLayout.astro` 两行 favicon link 并更新版本参数）。

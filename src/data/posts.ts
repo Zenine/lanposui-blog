@@ -15,6 +15,20 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    issue: 4,
+    title: "AI 时代，你真正要养的羊是什么？",
+    href: "/articles/004-ai-assets/",
+    date: "2026-08-04",
+    category: "创作与职业",
+    categorySlug: "creation-career",
+    collection: "砍柴与放羊",
+    collectionSlug: "chopping-herding",
+    tags: ["AI", "职业", "系统积累"],
+    description:
+      "真正值得养的羊，不是某个具体工具，而是价值不再与当下投入时间一比一绑定、能够持续复用和积累的资产与系统。",
+    cover: "/images/004-five-layer-assets-cover.webp",
+  },
+  {
     issue: 3,
     title: "当 AI 比你更会砍柴，你还剩什么价值？",
     href: "/articles/003-ai-chopping-value/",
