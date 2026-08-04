@@ -63,6 +63,11 @@ for (const dir of articleDirs) {
   const article = readFileSync(join(root, "dist", "articles", dir.name, "index.html"), "utf8");
   assertIncludes(article, "progress-arc", `article ${dir.name}`);
   assertIncludes(article, "分钟", `article ${dir.name}`);
+  assertIncludes(article, "article-share", `article ${dir.name}`);
+  assertIncludes(article, "data-share-url=", `article ${dir.name}`);
+  assertIncludes(article, "复制链接", `article ${dir.name}`);
+  assertIncludes(article, ">分享<", `article ${dir.name}`);
+  assertIncludes(article, "公众号", `article ${dir.name}`);
 }
 
 // SEO:404 页、作者实体、站点/面包屑结构化数据、WebP 封面、正文图懒加载

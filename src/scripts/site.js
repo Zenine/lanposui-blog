@@ -189,6 +189,54 @@ function initTocHighlight() {
   });
 }
 
+function initShareActions() {
+  for (const share of document.querySelectorAll(".article-share")) {
+    if (share.dataset.shareReady === "true") continue;
+    share.dataset.shareReady = "true";
+    const url = share.getAttribute("data-share-url") || location.href;
+    const title = share.getAttribute("data-share-title") || document.title;
+    const text = share.getAttribute("data-share-text") || "";
+    const copyButton = share.querySelector("[data-share-copy]");
+    const nativeButton = share.querySelector("[data-share-native]");
+    const copy = async (button) => {
+      try {
+        await navigator.clipboard.writeText(url);
+      } catch {
+        const ta = document.createElement("textarea");
+        ta.value = url;
+        document.body.append(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+      }
+      if (button instanceof HTMLButtonElement) {
+        button.textContent = "已复制";
+        button.classList.add("copied");
+        setTimeout(() => {
+          button.textContent = button === nativeButton ? "分享" : "复制链接";
+          button.classList.remove("copied");
+        }, 1600);
+      }
+    };
+    if (copyButton instanceof HTMLButtonElement) {
+      copyButton.addEventListener("click", () => copy(copyButton));
+    }
+    if (nativeButton instanceof HTMLButtonElement) {
+      nativeButton.addEventListener("click", async () => {
+        if (navigator.share) {
+          try {
+            await navigator.share({ title, text, url });
+            return;
+          } catch (error) {
+            if (error?.name === "AbortError") return;
+          }
+        }
+        await copy(nativeButton);
+      });
+    }
+  }
+}
+
 function initPage() {
   initThemeToggle();
   initReveal();
@@ -196,6 +244,7 @@ function initPage() {
   initLightbox();
   initProgressArc();
   initTocHighlight();
+  initShareActions();
 }
 
 document.addEventListener("astro:page-load", initPage);
