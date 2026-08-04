@@ -122,6 +122,11 @@ assertIncludes(home, "订阅 RSS", "home");
 assertIncludes(home, "data-reveal", "home");
 assertMatches(cssBundle, /arc-draw/, "css bundle hero arc draw");
 assertMatches(cssBundle, /height:\s*clamp\(12rem,\s*28vh,\s*18rem\)/, "css bundle home feature image height");
+assertMatches(
+  home,
+  /class="lead-post"[\s\S]*?<img[^>]+class="lead-cover"[^>]+width="\d+"[^>]+height="\d+"/,
+  "home lead post cover image dimensions",
+);
 
 // 灯箱与代码块复制按钮样式
 assertMatches(cssBundle, /lightbox/, "css bundle lightbox");

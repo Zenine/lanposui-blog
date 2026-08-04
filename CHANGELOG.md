@@ -10,6 +10,9 @@
 
 - 将第 004 期两张 PNG 配图转为 WebP 后入库：`004-five-layer-assets-cover.webp` 和 `004-five-layer-assets-map.webp`。
 - 更新 `src/data/posts.ts`，将第 004 期加入首页、文章列表、分类、合集、RSS 和推荐数据源。
+- 首页「已发布」区左侧主文章卡复用最新文章封面，填充与右侧列表等高产生的留白；构建产物检查同步断言封面图输出宽高属性。
+- 新增轻量定时发布机制：构建期按北京时间只发布 `date <= 当天` 的文章，未来日期文章不会生成页面、OG 图、首页入口、RSS、Pagefind 或 sitemap；GitHub Actions 每天北京时间 09:10 自动构建部署一次，并保留手动触发入口。
+- 补充 `AGENTS.md` 跨库同步规则，明确从 `writing-craft` 到公开博客的正文清洗、元数据维护、图片归档、WebP 转换和验证要求。
 
 ## 2026-08-03
 

@@ -163,6 +163,8 @@ http://localhost:4321/lanposui-blog/
    - `cover`，在 `src/data/posts.ts` 中写 `/images/example-cover.jpg`
    - `wechat`
 
+   定时发布使用 `date` 字段控制。构建期按北京时间判断，只展示 `date <= 当天` 的文章；未来日期文章可以提前提交到公开仓库，但在到日构建前不会生成文章页、OG 图、首页入口、RSS、Pagefind 索引或 sitemap URL。
+
 5. 运行完整验证。
 
    ```sh
@@ -245,6 +247,8 @@ npm test
 ## 部署
 
 推送到 `main` 后，GitHub Actions 会运行 `.github/workflows/deploy.yml`。
+
+该 workflow 也会每天北京时间 09:10 自动运行一次，用于露出已经提前提交但 `date` 到当天才应发布的文章。GitHub Actions 的 cron 使用 UTC，因此配置为 `10 1 * * *`。
 
 部署流程：
 

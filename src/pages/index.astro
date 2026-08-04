@@ -115,6 +115,16 @@ const siteLd = {
           <h3>{latest.title}</h3>
           <p>{latest.description}</p>
           <time datetime={latest.date}>{latest.date}</time>
+          {latest.cover && (
+            <img
+              class="lead-cover"
+              src={withBase(latest.cover)}
+              alt=""
+              loading="lazy"
+              width={latestCoverDims?.width}
+              height={latestCoverDims?.height}
+            />
+          )}
         </a>
         <div class="post-list">
           {secondaryPosts.map((post) => (
@@ -427,6 +437,8 @@ const siteLd = {
   }
 
   .lead-post {
+    display: flex;
+    flex-direction: column;
     min-height: 22rem;
     padding: 1.45rem;
   }
@@ -454,6 +466,15 @@ const siteLd = {
   .lead-post time {
     display: block;
     margin-top: 1.5rem;
+  }
+
+  .lead-cover {
+    aspect-ratio: 1.82;
+    width: 100%;
+    height: clamp(15rem, 30vw, 25rem);
+    margin-top: auto;
+    border: 1px solid var(--line);
+    object-fit: cover;
   }
 
   .post-list {

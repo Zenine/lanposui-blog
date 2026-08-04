@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { imageSize } from "image-size";
 import { posts, type Post } from "./posts";
+import { getPublishedPosts } from "./publishing.mjs";
 
 export const site = {
   title: "蓝破碎半圆",
@@ -9,7 +10,8 @@ export const site = {
   author: "ZENINEXU",
 };
 
-export const sortedPosts = [...posts].sort((a, b) => b.date.localeCompare(a.date));
+export const allPosts = [...posts].sort((a, b) => b.date.localeCompare(a.date));
+export const sortedPosts = getPublishedPosts(allPosts);
 
 export function getCategories() {
   return groupBy(sortedPosts, post => post.categorySlug).map(group => ({

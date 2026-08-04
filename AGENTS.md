@@ -4,6 +4,22 @@
 
 文章从 `writing-craft` 同步时，只同步已经确认公开的正文和必要图片。发布前必须删除“库内编辑附录”，并复核图片路径、外链、个人信息和事实口径。
 
+## 与 writing-craft 的同步流程
+
+- `writing-craft` 是写作源和私有归档库，默认路径为 `/Users/zeninexu/github/writing-craft`；本仓库只做公开展示层。后续即使用户从 `writing-craft` 语境要求“同步到博客”“发布到博客”“更新公开博客”，也应回到本仓库完成公开层改动和验证。
+- 同步前必须先读取 `writing-craft/AGENTS.md`、`writing-craft/README.md`，以及目标草稿 / 已发布文件；只取确认公开的标题、摘要、正文、公开链接和必要图片。不要同步原始素材区、审读意见、Prompt、库内编辑附录、发布跟踪 TODO、本机路径、客户 / 公司细节、家庭材料、投资未核实内容或任何私有上下文。
+- 正文处理顺序：先在 `writing-craft` 中确认公开版已经删去“库内编辑附录（公众号发布前删除）”等内部段落，再复制到 `src/content/articles/<slug>.md`；保留作者原文自称和正文表达，不为了结构化数据统一作者而改写正文里的“Azen”等原文。
+- 元数据处理顺序：同步或新增文章时，同时维护 Markdown frontmatter 和 `src/data/posts.ts`。Markdown 的 `cover` 使用 `/lanposui-blog/images/...`；`src/data/posts.ts` 的 `cover` 使用 `/images/...`。公众号平台链接暂时没有时不伪造，留空并同步写入 `TODO.md`。
+- 定时发布口径：可提前把未来文章同步进本公开仓库，但必须把 `date` 写为计划公开日。构建期按北京时间只展示 `date <= 当天` 的文章；GitHub Actions 每天北京时间 09:10 自动构建一次。提前提交到公开仓库意味着源码可见，只是站点、RSS、sitemap、Pagefind 和文章路由暂不露出。
+
+## 图片归档与公开使用
+
+- `writing-craft/images/` 保存写作源图片、可复用母版、生成原图和正文图；图片 Prompt、用途、比例和生成记录留在 `writing-craft` 对应草稿的“视觉方案与生成 Prompt（库内使用）”小节，不复制到本公开仓库。
+- 同步到本仓库时，只复制最终采用且确认可公开的图片到 `public/images/`。封面按约 1.82 宽高比准备；正文解释图只在确实承载关系或结构信息时同步，不把库内过程图、Prompt 图、未定稿候选图或私有截图带进公开层。
+- 图片超过约 150KB 先转 WebP；源 PNG / SVG 是否保留在 `writing-craft/images/` 由写作库负责，本仓库优先保存公开展示所需的 WebP 成品。转换命令和路径规范见 `docs/maintenance.md`。
+- 站内图片引用规则：Markdown 正文和 frontmatter 使用 `/lanposui-blog/images/...`；`src/data/posts.ts` 使用 `/images/...`；不要引用 `writing-craft` 的本机绝对路径、Obsidian 附件路径或私有仓库相对路径。
+- 图片入库后必须运行 `npm test`，确认构建期宽高、懒加载、Pagefind 和公开产物断言通过；若新增文章，部署后还要确认 sitemap 包含新 URL，并按 TODO 中的搜索引擎提交项更新状态。
+
 ## 工程与视觉规范（2026-07-30 确立）
 
 - 验证入口是 `npm test`（构建 + Pagefind + `scripts/check-public-output.mjs` 产物断言）。改动行为先在检查脚本加断言、确认失败，再实现。提交信息不加任何 AI 署名。
