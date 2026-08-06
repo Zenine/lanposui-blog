@@ -10,7 +10,7 @@ wechat: "https://mp.weixin.qq.com/s/mv_QjtEXJZ_0EXMUokRobg"
 
 大家好，我是 NLP(自然语言处理）练习时长三年半的算法工程师，喜欢用 Python 来对万物进行 Embeddings[1] 和 Tokenization[2]。
 
-> 原公众号此处有图片。
+![传统 NLP 与 ChatGPT 旧文配图 1](/lanposui-blog/images/archive/2023-chatgpt-traditional-nlp/image-001.webp)
 
 在我以为离开了卷到头的 CV 后，可以沿着 NLP 技能树一步一步向上攀登的时候。ChatGPT 横空出世，对互联网上第一批使用它的人说道：「大人，时代变了。」
 
@@ -22,7 +22,7 @@ wechat: "https://mp.weixin.qq.com/s/mv_QjtEXJZ_0EXMUokRobg"
 
 终于一条回复引起了我的注意。
 
-> 原公众号此处有图片。
+![传统 NLP 与 ChatGPT 旧文配图 2](/lanposui-blog/images/archive/2023-chatgpt-traditional-nlp/image-002.webp)
 
 虽然这条回复是 ChatGPT 在为人做心理辅导，但看完后我的心理状况却没有得到宽慰，短短一段话里可以发现 ChatGPT 完成了阅读理解，情感分析并做出了非常得体的回复。
 
@@ -30,7 +30,7 @@ wechat: "https://mp.weixin.qq.com/s/mv_QjtEXJZ_0EXMUokRobg"
 
 随着与 ChatGPT 多次的对话后，我有点慌了。NLP 不存在了，NLP 算法工程师也不存在了，或者说很多传统 NLP 的任务已经不存在了。不再需要单纯的算法专家去设计单个的 NLP 能力。我距离失业也仅仅是时间的问题了。
 
-> 原公众号此处有图片。
+![传统 NLP 与 ChatGPT 旧文配图 3](/lanposui-blog/images/archive/2023-chatgpt-traditional-nlp/image-003.webp)
 
 传统 NLP 技术及研究内容(已经不重要了，后面可能没人再研究了）
 
@@ -40,7 +40,7 @@ wechat: "https://mp.weixin.qq.com/s/mv_QjtEXJZ_0EXMUokRobg"
 
 尤其任务类型还是生成式，做出来能做什么，大型的「狗屁不通文章生成器」？
 
-> 原公众号此处有图片。
+![传统 NLP 与 ChatGPT 旧文配图 4](/lanposui-blog/images/archive/2023-chatgpt-traditional-nlp/image-004.webp)
 
 GPT 家族参数量级(基于公开论文)
 
@@ -58,7 +58,7 @@ GPT 家族参数量级(基于公开论文)
 
 除了关心 ChatGPT 后的技术及原理外，开始花时间如何去使用 ChatGPT。
 
-> 原公众号此处有图片。
+![传统 NLP 与 ChatGPT 旧文配图 5](/lanposui-blog/images/archive/2023-chatgpt-traditional-nlp/image-005.webp)
 
 并同时开始试用及使用各类 AIGC 类的产品，grammarly、DeepL、Midjourney、Jasper、Stable Diffusion、Copilot。但在完成度上都没有达到 ChatGPT 的水平。
 
@@ -72,7 +72,7 @@ ChatGPT 或者说 GPT3.5 的发布，让我觉得已经又到了一个新瓶颈�
 
 GPT-4 发布了。
 
-> 原公众号此处有图片。
+![传统 NLP 与 ChatGPT 旧文配图 6](/lanposui-blog/images/archive/2023-chatgpt-traditional-nlp/image-006.webp)
 
 后续的情节就像《三体》小说里描述的「技术爆炸」一样，时间以周为单位，一个个重磅更新发布了。
 
@@ -82,7 +82,7 @@ Notion AI，midjonery V5，GPT-4 office，Copilot-X，GPT Plugin。
 
 到了这个时候，事件开始出圈，失眠的人群扩大了。
 
-> 原公众号此处有图片。
+![传统 NLP 与 ChatGPT 旧文配图 7](/lanposui-blog/images/archive/2023-chatgpt-traditional-nlp/image-007.gif)
 
 在 MIT MOOC 上 Python 及机器学习的「校友群」内，产品、UED、VR 开发、后端、前端、运维都有点坐不住了。于是群主顺势组织了线下聚会。
 
@@ -102,13 +102,13 @@ Notion AI，midjonery V5，GPT-4 office，Copilot-X，GPT Plugin。
 
 只是原来设想先从体力劳动者的工作开始替代的 AI，采用了迂回的道路，先袭击了 AI 从业者，随后开始偷袭脑力劳动者。
 
-> 原公众号此处有图片。
+![传统 NLP 与 ChatGPT 旧文配图 8](/lanposui-blog/images/archive/2023-chatgpt-traditional-nlp/image-008.webp)
 
 尤其在阅读完微软发布的这篇 154 页的《Sparks of Artificial General Intelligence: Early experiments with GPT-4》论文后。论文主要是对 GPT4 的各项指标如何做定量分析所做的实验，并提出 GPT4 可能是通用人工智能 AGI 的起点。
 
 但我主要想分享的是 10.3 这一小节。
 
-> 原公众号此处有图片。
+![传统 NLP 与 ChatGPT 旧文配图 9](/lanposui-blog/images/archive/2023-chatgpt-traditional-nlp/image-009.webp)
 
 《Sparks of Artificial General Intelligence: Early experiments with GPT-4》
 
@@ -131,7 +131,7 @@ GPT 的开源实现、数据安全、降低消耗、减少幻觉 hallucination[3
 
 同时在基于 GPT 下现有的 NLP 产品的研发新范式下。大部分 NLP 模型都需要重新研发一遍，以上都是 NLP 工程师后续可能的职业发展方向。
 
-> 原公众号此处有图片。
+![传统 NLP 与 ChatGPT 旧文配图 10](/lanposui-blog/images/archive/2023-chatgpt-traditional-nlp/image-010.webp)
 
 NLP 模型新范式
 

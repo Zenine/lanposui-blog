@@ -32,7 +32,7 @@ wechat: "https://mp.weixin.qq.com/s/3cCoRjTiBxdwAeLAQzAmTA"
 
 随口就补充了 5 个砍柴郎与放羊娃的小故事，并表示小许啊，你的格局需要打开。
 
-> 原公众号此处有图片。
+![树新风讨论截图](/lanposui-blog/images/archive/2022-chopping-herding-meta-herding/image-001.gif)
 
 ## 沟通互助
 
@@ -110,7 +110,7 @@ If you think you have fans, you have fans.
 
 于是，群内的小伙伴们就这样都变成了我的羊。
 
-> 原公众号此处有图片。
+![砍柴放羊旧文配图](/lanposui-blog/images/archive/2022-chopping-herding-meta-herding/image-002.webp)
 
 最后的最后，
 

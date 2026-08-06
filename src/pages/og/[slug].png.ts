@@ -101,7 +101,7 @@ export const GET: APIRoute = async ({ props }) => {
   <rect width="1200" height="630" fill="url(#grid)"/>
   <rect width="1200" height="630" fill="url(#glow-blue)"/>
   <rect width="1200" height="630" fill="url(#glow-cyan)"/>
-  <g transform="translate(830 320) scale(2)">
+  <g transform="translate(810 320) scale(2)">
     <path d="M22 100 A 78 78 0 0 1 178 100" fill="none" stroke="#4f8dff" stroke-width="1" opacity="0.3" stroke-dasharray="2 4"/>
     <path d="M22 100 A 78 78 0 0 1 100 22" fill="none" stroke="#4f8dff" stroke-width="5"/>
     <g transform="translate(3 -8) rotate(5 123 27)">

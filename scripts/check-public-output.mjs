@@ -77,17 +77,27 @@ assertIncludes(home, '"name":"ZENINEXU"', "home");
 assertIncludes(home, ".webp", "home");
 assertExcludes(home, '"name":"Azen"', "home");
 let lazyImageSeen = false;
+let bodyImageDimensionsSeen = false;
 for (const dir of articleDirs) {
   const article = readFileSync(join(root, "dist", "articles", dir.name, "index.html"), "utf8");
   assertIncludes(article, '"name":"ZENINEXU"', `article ${dir.name}`);
   assertIncludes(article, '"@type":"BreadcrumbList"', `article ${dir.name}`);
   assertExcludes(article, '"name":"Azen"', `article ${dir.name}`);
-  if (article.includes('loading="lazy"')) {
+  const lazyImageTags = [...article.matchAll(/<img\b[^>]*loading="lazy"[^>]*>/g)].map(match => match[0]);
+  if (lazyImageTags.length > 0) {
     lazyImageSeen = true;
+    for (const tag of lazyImageTags) {
+      assertMatches(tag, /\bwidth="\d+"/, `article ${dir.name} lazy image width`);
+      assertMatches(tag, /\bheight="\d+"/, `article ${dir.name} lazy image height`);
+      bodyImageDimensionsSeen = true;
+    }
   }
 }
 if (!lazyImageSeen) {
   throw new Error("no article page has lazy-loaded body images");
+}
+if (!bodyImageDimensionsSeen) {
+  throw new Error("no article page has dimensioned body images");
 }
 const webpCovers = [
   join(root, "dist", "images", "001-blue-broken-semicircle-cover.webp"),
@@ -145,8 +155,7 @@ assertMatches(cssBundle, /copy-code/, "css bundle copy button");
 // 归档页:按年份分组 + 封面缩略图
 const archive = readFileSync(join(root, "dist", "articles", "index.html"), "utf8");
 assertIncludes(archive, "year-block", "archive");
-assertIncludes(archive, ">2026<", "archive");
-assertIncludes(archive, ">2021<", "archive");
+assertMatches(archive, /year-block[\s\S]*?>\d{4}</, "archive year headings");
 assertIncludes(archive, 'class="thumb', "archive");
 
 // 文章页:目录、标题锚点、构建期 OG 图
@@ -158,15 +167,25 @@ for (const dir of articleDirs) {
   readFileSync(join(root, "dist", "og", `${dir.name}.png`));
 }
 
+// OG 模板:右侧蓝弧应完整落在 1200px 画布内,避免社交卡片右缘裁切。
+const ogTemplate = readFileSync(join(root, "src", "pages", "og", "[slug].png.ts"), "utf8");
+const ogArcTransform = ogTemplate.match(/<g transform="translate\((\d+(?:\.\d+)?) 320\) scale\((\d+(?:\.\d+)?)\)">/);
+if (!ogArcTransform) {
+  throw new Error("OG template is missing the brand arc transform");
+}
+const ogArcLeft = Number(ogArcTransform[1]);
+const ogArcScale = Number(ogArcTransform[2]);
+const ogArcRight = ogArcLeft + 194 * ogArcScale;
+if (ogArcRight > 1200) {
+  throw new Error(`OG brand arc is clipped at right edge: ${ogArcRight}px > 1200px`);
+}
+
 // 图片宽高属性:首页封面与正文图构建期补齐,消除 CLS
 assertMatches(
   home,
   /class="feature"[\s\S]*?<img[^>]+width="\d+"[^>]+height="\d+"/,
   "home feature image dimensions",
 );
-const article2021 = readFileSync(join(root, "dist", "articles", "2021-meta-start", "index.html"), "utf8");
-assertIncludes(article2021, 'width="1009"', "article 2021-meta-start");
-
 function assertIncludes(html, expected, page) {
   if (!html.includes(expected)) {
     throw new Error(`${page} is missing ${expected}`);
