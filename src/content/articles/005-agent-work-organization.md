@@ -2,12 +2,13 @@
 layout: "../../layouts/PostLayout.astro"
 title: "Agent 不是聊天机器人，而是一种工作组织方式"
 date: "2026-08-06"
-publishAt: "2026-08-06T21:00:00+08:00"
+publishAt: "2026-08-06T08:00:00+08:00"
 description: "区分 Agent 和聊天机器人的，不是模型智商，而是有没有调工具、看结果、再决定的闭环。"
 issue: 5
 category: "AI 与工程"
 cover: "/lanposui-blog/images/005-agent-work-organization-cover.webp"
-source: "公众号第 005 期定时发布稿，平台链接待补"
+wechat: "https://mp.weixin.qq.com/s/hIYBAW9-Y8_bidc8p_y4bQ"
+source: "公众号第 005 期（2026-08-06 08:00 实际发送，早于原定 21:00）"
 ---
 
 有开发者逆向了 Claude Code 的核心逻辑，发现它的心脏只是一段 `while(true)` 循环。

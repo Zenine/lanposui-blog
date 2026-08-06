@@ -1,12 +1,13 @@
 ---
 layout: "../../layouts/PostLayout.astro"
 title: "发刊词｜为什么这个号叫「蓝破碎半圆」？"
-date: "2026-07-30"
+date: "2026-07-24"
 description: "蓝破碎半圆的长期底稿：说明这个号是谁、相信什么，以及如何在 AI 时代作出判断。"
 issue: 1
 category: "公众号品牌"
 cover: "/lanposui-blog/images/001-blue-broken-semicircle-cover.webp"
-source: "公众号已发布公开版，平台链接待补"
+wechat: "https://mp.weixin.qq.com/s/bLIRJjYUIY-KtdJlFkMFsA"
+source: "公众号已发布公开版（2026-07-24 20:42 实际发送）"
 ---
 
 两千五百年前，萨摩斯岛上有一个叫“半圆”的地方。

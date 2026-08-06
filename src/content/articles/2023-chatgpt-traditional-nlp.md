@@ -5,6 +5,7 @@ date: "2023-04-08"
 description: "ChatGPT 刚出现时，对传统 NLP、算法工程师和语言模型范式变化的一次早期记录。"
 issue: 20230408
 category: "AI 与工程"
+wechat: "https://mp.weixin.qq.com/s/mv_QjtEXJZ_0EXMUokRobg"
 ---
 
 大家好，我是 NLP(自然语言处理）练习时长三年半的算法工程师，喜欢用 Python 来对万物进行 Embeddings[1] 和 Tokenization[2]。

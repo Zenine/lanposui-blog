@@ -7,7 +7,8 @@ description: "真正值得养的羊，不是某个具体工具，而是价值不
 issue: 4
 category: "创作与职业"
 cover: "/lanposui-blog/images/004-five-layer-assets-cover.webp"
-source: "公众号第 004 期定时发布稿，平台链接待补"
+wechat: "https://mp.weixin.qq.com/s/iP96mJMRHaYhCsVVGtEQpA"
+source: "公众号第 004 期定时发布稿（2026-08-04 21:00 实际发送）"
 ---
 
 大家好，我是 Azen。

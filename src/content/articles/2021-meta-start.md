@@ -5,7 +5,7 @@ date: "2021-03-17"
 description: "从 meta 的概念讲起，重新理解元认知、元学习和“关于什么的什么”。"
 issue: 20210317
 category: "认知与概念"
-wechat: "https://mp.weixin.qq.com/s?__biz=MzI1MDQ2OTE5Mg==&mid=100000018&idx=1&sn=97c600511e848244014a212d03f5c0bd&chksm=69808f355ef7062300322b2627f303fa413304067723786248474d0be1a8d250e78d3d60549f#rd"
+wechat: "https://mp.weixin.qq.com/s/5wYIzmqW8G5g2NSbDwXJ5A"
 ---
 
 ![2021从元开始原文首图](/lanposui-blog/images/archive/2021-meta-start/image-001.jpg)

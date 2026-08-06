@@ -6,7 +6,8 @@ description: "当 AI 接走越来越多执行工作，人的价值会向目标�
 issue: 3
 category: "创作与职业"
 cover: "/lanposui-blog/images/003-responsibility-gate-cover.webp"
-source: "公众号第 003 期公开发布稿"
+wechat: "https://mp.weixin.qq.com/s/un3uXTJlTIppb4DPj-iSeg"
+source: "公众号第 003 期公开发布稿（2026-08-01 09:00 实际发送）"
 ---
 
 大家好，我是 Azen。

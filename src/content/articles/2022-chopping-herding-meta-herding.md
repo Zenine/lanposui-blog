@@ -5,6 +5,7 @@ date: "2022-06-08"
 description: "旧版砍柴与放羊故事：公开写作的愿景、元放羊，以及把劳动变成持续系统的早期思考。"
 issue: 20220608
 category: "写作与成长"
+wechat: "https://mp.weixin.qq.com/s/3cCoRjTiBxdwAeLAQzAmTA"
 ---
 
 ## 砍柴与放羊
