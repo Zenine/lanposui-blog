@@ -1,10 +1,10 @@
 # TODO
 
-按优先级排序（2026-07-30 梳理，2026-08-06 清理已上线文章项）。
+按优先级排序（2026-07-30 梳理，2026-08-11 更新第 100 期同步项）。
 
 ## P1 · 需用户登录操作
 
-- [ ] SEO 站外提交：Google Search Console 已完成站点验证；首页 `https://zenine.github.io/lanposui-blog/` 于 2026-08-03 21:52 通过实际网址测试，允许抓取且可编入索引。已提交 `https://zenine.github.io/lanposui-blog/sitemap-index.xml`，若仍显示无法抓取则补交 `https://zenine.github.io/lanposui-blog/sitemap-0.xml`；第 004 / 005 期已上线且 sitemap 已包含，后续只需在 Search Console 用“网址检查”请求新文章 URL 编入索引。Bing 站长工具仍需验证并提交 sitemap。百度不做（GitHub Pages 屏蔽 Baiduspider 且无备案域名）。
+- [ ] SEO 站外提交：Google Search Console 已完成站点验证；首页 `https://zenine.github.io/lanposui-blog/` 于 2026-08-03 21:52 通过实际网址测试，允许抓取且可编入索引。已提交 `https://zenine.github.io/lanposui-blog/sitemap-index.xml`，若仍显示无法抓取则补交 `https://zenine.github.io/lanposui-blog/sitemap-0.xml`；第 004 / 005 期已上线且 sitemap 已包含；第 100 期已同步到博客源码，部署后需在 Search Console 用“网址检查”请求 `https://zenine.github.io/lanposui-blog/articles/100-open-models-negotiation/` 编入索引。Bing 站长工具仍需验证并提交 sitemap。百度不做（GitHub Pages 屏蔽 Baiduspider 且无备案域名）。
 
 ## P2 · 小件待决/待补
 

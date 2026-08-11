@@ -16,6 +16,22 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    issue: 100,
+    title: "开源模型不再追赶，它开始讨价还价了",
+    href: "/articles/100-open-models-negotiation/",
+    date: "2026-08-10",
+    publishAt: "2026-08-10T21:07:00+08:00",
+    category: "AI 与工程",
+    categorySlug: "ai-engineering",
+    collection: "AI 商业战略",
+    collectionSlug: "ai-business-strategy",
+    tags: ["AI", "大模型", "开源模型", "Agent"],
+    description:
+      "从 Kimi K3、DeepSeek V4 Flash 和真实调用趋势看开源模型对闭源模型的价格压力：开源不是全面打赢，而是在足够多真实任务中越过够用线，逼闭源模型证明自己的溢价。",
+    cover: "/images/100-open-models-negotiation-cover.webp",
+    wechat: "https://mp.weixin.qq.com/s/gSt38U21VKemg2LccnfDUw",
+  },
+  {
     issue: 5,
     title: "Agent 不是聊天机器人，而是一种工作组织方式",
     href: "/articles/005-agent-work-organization/",
