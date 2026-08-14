@@ -16,6 +16,21 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    issue: 108,
+    title: "企业 AI 部署的新瓶颈：以前等模型，现在等硬件",
+    href: "/articles/108-enterprise-ai-hardware/",
+    date: "2026-08-14",
+    publishAt: "2026-08-14T21:00:00+08:00",
+    category: "AI 与工程",
+    categorySlug: "ai-engineering",
+    collection: "AI 商业战略",
+    collectionSlug: "ai-business-strategy",
+    tags: ["AI", "企业AI", "医疗信息化", "Agent"],
+    description:
+      "从医疗信息化的真实部署困境看企业 AI 的瓶颈转移：过去等模型能力追上来，现在模型够了但硬件、内网部署和合规条件还没到位。开源大模型改变的不只是价格，而是让以前做不了的院内 Agent 工作流第一次变成可落地的项目。",
+    cover: "/images/108-enterprise-ai-hardware-cover.webp",
+  },
+  {
     issue: 100,
     title: "开源模型不再追赶，它开始讨价还价了",
     href: "/articles/100-open-models-negotiation/",
