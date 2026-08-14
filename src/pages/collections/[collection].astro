@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getCollections } from "../../data/blog";
+import { getCollections, publishInstant } from "../../data/blog";
 
 export function getStaticPaths() {
   return getCollections().map(collection => ({
@@ -22,7 +22,7 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     <h1>{collection.name}</h1>
     <div class="list">
       {collection.posts.map(post => (
-        <a class="row" href={withBase(post.href)}>
+        <a class="row" href={withBase(post.href)} data-publish-at={publishInstant(post)}>
           <strong>{post.title}</strong>
           <p>{post.description}</p>
           <time datetime={post.date}>{post.date}</time>

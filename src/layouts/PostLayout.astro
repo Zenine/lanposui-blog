@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import { absoluteUrl, getRelatedPosts, imageDims, site, sortedPosts } from "../data/blog";
+import { absoluteUrl, getRelatedPosts, imageDims, publishInstant, site, sortedPosts } from "../data/blog";
 
 const { frontmatter, headings = [], ogImage } = Astro.props;
 const title = frontmatter.title;
@@ -147,7 +147,7 @@ const breadcrumbLd = currentPost
           <h2 id="related-title">继续读相关判断</h2>
           <div>
             {relatedPosts.map(post => (
-              <a href={withBase(post.href)}>
+              <a href={withBase(post.href)} data-publish-at={publishInstant(post)}>
                 <strong>{post.title}</strong>
                 <span>{post.description}</span>
               </a>

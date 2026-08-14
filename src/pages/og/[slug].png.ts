@@ -2,8 +2,6 @@ import { existsSync } from "node:fs";
 import type { APIRoute, GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import sharp from "sharp";
-import { isPublishedPost } from "../../data/publishing.mjs";
-
 // 构建期为每篇文章生成带标题与蓝弧母题的 og:image。
 // 文本光栅化依赖系统中文字体（macOS PingFang SC / Linux Noto CJK 等）；
 // 探测不到字体时退化为纯品牌弧 + 英文标识，保证任何环境下构建都能通过。
@@ -50,9 +48,7 @@ function wrapTitle(title: string, perLine = 11) {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const articles = await getCollection("articles");
-  return articles
-    .filter(article => isPublishedPost(article.data))
-    .map(article => ({
+  return articles.map(article => ({
       params: { slug: article.id },
       props: {
         title: article.data.title,

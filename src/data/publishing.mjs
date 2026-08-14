@@ -10,7 +10,7 @@ export function isPublishedPost(post, now = new Date()) {
   return publishInstant(post) <= now.getTime();
 }
 
-function publishInstant(post) {
+export function publishInstant(post) {
   const publishAt = post.publishAt ?? `${post.date}T00:00:00+08:00`;
   const timestamp = Date.parse(publishAt);
   if (Number.isNaN(timestamp)) {

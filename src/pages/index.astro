@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getCategories, getCollections, imageDims, site, sortedPosts } from "../data/blog";
+import { getCategories, getCollections, imageDims, publishedPosts, publishInstant, site, sortedPosts } from "../data/blog";
 
 const posts = sortedPosts;
 const latest = posts[0];
@@ -80,7 +80,7 @@ const siteLd = {
         </div>
       </div>
       <div class="hero-panel" data-reveal>
-        <a class="feature" href={withBase(latest.href)}>
+        <a class="feature" href={withBase(latest.href)} data-publish-at={publishInstant(latest)}>
           <img
             src={withBase(latest.cover)}
             alt=""
@@ -95,7 +95,7 @@ const siteLd = {
         <dl class="signal">
           <div>
             <dt>Archive</dt>
-            <dd>{posts.length} 篇公开文章</dd>
+            <dd>{publishedPosts.length} 篇公开文章</dd>
           </div>
           <div>
             <dt>Signal</dt>
@@ -112,7 +112,7 @@ const siteLd = {
         <a href={withBase("articles/")}>全部文章</a>
       </div>
       <div class="posts-board" data-reveal>
-        <a class="lead-post" href={withBase(leadPost.href)}>
+        <a class="lead-post" href={withBase(leadPost.href)} data-publish-at={publishInstant(leadPost)}>
           <small>{leadPost.category} · {leadPost.collection}</small>
           <h3>{leadPost.title}</h3>
           <p>{leadPost.description}</p>
@@ -130,7 +130,7 @@ const siteLd = {
         </a>
         <div class="post-list">
           {secondaryPosts.map((post) => (
-            <a href={withBase(post.href)}>
+            <a href={withBase(post.href)} data-publish-at={publishInstant(post)}>
               <span>{post.category}</span>
               <strong>{post.title}</strong>
               <time datetime={post.date}>{post.date}</time>
@@ -179,7 +179,7 @@ const siteLd = {
       </div>
       <div class="rail" data-reveal>
         {recommended.map(post => (
-          <a href={withBase(post.href)}>
+          <a href={withBase(post.href)} data-publish-at={publishInstant(post)}>
             <time datetime={post.date}>{post.date}</time>
             <strong>{post.title}</strong>
           </a>

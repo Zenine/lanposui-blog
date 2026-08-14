@@ -237,7 +237,17 @@ function initShareActions() {
   }
 }
 
+function initPublishFilter() {
+  const now = Date.now();
+  for (const el of document.querySelectorAll("[data-publish-at]")) {
+    if (Number(el.dataset.publishAt) > now) {
+      el.hidden = true;
+    }
+  }
+}
+
 function initPage() {
+  initPublishFilter();
   initThemeToggle();
   initReveal();
   initCopyButtons();

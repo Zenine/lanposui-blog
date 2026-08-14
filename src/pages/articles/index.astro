@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { sortedPosts } from "../../data/blog";
+import { publishInstant, sortedPosts } from "../../data/blog";
 
 const posts = sortedPosts;
 const byYear = new Map<string, typeof posts>();
@@ -25,7 +25,7 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
         <div class="list">
           {yearPosts.map((post) => {
             return (
-              <a class="row" href={withBase(post.href)}>
+              <a class="row" href={withBase(post.href)} data-publish-at={publishInstant(post)}>
                 {post.cover && (
                   <img
                     class="thumb"
