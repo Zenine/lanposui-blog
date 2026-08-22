@@ -16,6 +16,21 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    issue: 77,
+    title: "医疗大模型高分之后,为什么还不能直接用?",
+    href: "/articles/077-medical-ai-benchmark/",
+    date: "2026-08-22",
+    publishAt: "2026-08-22T12:53:28+08:00",
+    category: "AI 与工程",
+    categorySlug: "ai-engineering",
+    collection: "医疗 AI",
+    collectionSlug: "medical-ai",
+    tags: ["AI", "医疗AI", "大模型评测", "Agent"],
+    description:
+      "医疗大模型刷出高分，不代表真的能进诊室。真正危险的不是答错一道题，而是漏问关键病史、看不出风险边界，还给出一个很自信的结论。",
+    cover: "/images/077-medical-ai-benchmark-cover.webp",
+  },
+  {
     issue: 108,
     title: "企业 AI 部署的新瓶颈：以前等模型，现在等硬件",
     href: "/articles/108-enterprise-ai-hardware/",
