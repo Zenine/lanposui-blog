@@ -339,8 +339,9 @@ const siteLd = {
   .feature img {
     aspect-ratio: 1.82;
     width: 100%;
-    height: clamp(12rem, 28vh, 18rem);
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
+    background: var(--paper);
     border: 1px solid var(--line);
   }
 
@@ -473,10 +474,11 @@ const siteLd = {
   .lead-cover {
     aspect-ratio: 1.82;
     width: 100%;
-    height: clamp(15rem, 30vw, 25rem);
+    height: auto;
     margin-top: auto;
     border: 1px solid var(--line);
-    object-fit: cover;
+    object-fit: contain;
+    background: var(--paper);
   }
 
   .post-list {

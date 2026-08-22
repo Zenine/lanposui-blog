@@ -9,6 +9,7 @@
 ## P2 · 小件待决/待补
 
 - [ ] favicon 品牌弧候选已生成在 `public/favicon-arc.svg`（亮暗自适应，未启用），当前默认仍是公众号 Logo；待用户审阅后决定是否切换（切换=改 `BaseLayout.astro` 两行 favicon link 并更新版本参数）。
+- [ ] 文章 URL 期号 slug 的 SEO / GEO 长期评估：当前保留 `/articles/077-medical-ai-benchmark/` 这类“期号 + 语义关键词”格式，理由是稳定链接、跨库期号映射和公众号同步价值高；后续若决定改为纯语义 slug，必须同时设计 canonical、301/静态重定向、sitemap 更新、历史外链兼容和 `writing-craft` 映射回填，不做单点改名。
 
 ## 暂缓（有明确决策）
 

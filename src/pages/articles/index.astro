@@ -119,7 +119,8 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     width: 120px;
     height: 66px;
     border: 1px solid var(--line);
-    object-fit: cover;
+    object-fit: contain;
+    background: var(--paper);
   }
 
   .row time {

@@ -136,7 +136,8 @@ assertIncludes(home, "订阅 RSS", "home");
 // 滚动显现与首页 Hero 弧生长动画
 assertIncludes(home, "data-reveal", "home");
 assertMatches(cssBundle, /arc-draw/, "css bundle hero arc draw");
-assertMatches(cssBundle, /height:\s*clamp\(12rem,\s*28vh,\s*18rem\)/, "css bundle home feature image height");
+assertMatches(cssBundle, /\.feature[^{]* img[^{]*\{[^}]*object-fit:contain/, "css bundle home feature image contains full cover");
+assertMatches(cssBundle, /\.lead-cover[^{]*\{[^}]*object-fit:contain/, "css bundle home lead cover contains full cover");
 assertMatches(
   home,
   /class="lead-post"[\s\S]*?<img[^>]+class="lead-cover"[^>]+width="\d+"[^>]+height="\d+"/,
