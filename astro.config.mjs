@@ -44,6 +44,15 @@ function rehypeLazyImages() {
 export default defineConfig({
   site: 'https://zenine.github.io',
   base,
+  redirects: {
+    '/articles/001-lanposui-banyuan/': `${base}/articles/lanposui-banyuan/`,
+    '/articles/002-chopping-herding-ai/': `${base}/articles/chopping-herding-ai/`,
+    '/articles/003-ai-chopping-value/': `${base}/articles/chopping-value/`,
+    '/articles/004-ai-assets/': `${base}/articles/ai-assets/`,
+    '/articles/005-agent-work-organization/': `${base}/articles/agent-work-organization/`,
+    '/articles/100-open-models-negotiation/': `${base}/articles/open-models-negotiation/`,
+    '/articles/108-enterprise-ai-hardware/': `${base}/articles/enterprise-ai-hardware/`,
+  },
   integrations: [sitemap()],
   markdown: {
     shikiConfig: {

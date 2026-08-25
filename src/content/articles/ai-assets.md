@@ -189,5 +189,5 @@ AI 接走越来越多执行工作，就像水位在退。别等水退下去，�
 
 ## 延伸阅读
 
-- [砍柴人与放羊人都遇到了 AI](/lanposui-blog/articles/002-chopping-herding-ai/) — 系列第 1 篇，说明什么是放羊。
-- [当 AI 比你更会砍柴，你还剩什么价值？](/lanposui-blog/articles/003-ai-chopping-value/) — 系列第 2 篇，说明为什么现在更需要学会放羊。
+- [砍柴人与放羊人都遇到了 AI](/lanposui-blog/articles/chopping-herding-ai/) — 系列第 1 篇，说明什么是放羊。
+- [当 AI 比你更会砍柴，你还剩什么价值？](/lanposui-blog/articles/chopping-value/) — 系列第 2 篇，说明为什么现在更需要学会放羊。

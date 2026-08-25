@@ -95,6 +95,6 @@ Agent 时代，你更像是在把事情交代清楚，中间看看进展，最�
 
 ## 延伸阅读
 
-- [砍柴人与放羊人都遇到了 AI](/lanposui-blog/articles/002-chopping-herding-ai/) — AI 到底改变了谁的工作？从这篇开始看。
-- [当 AI 比你更会砍柴，你还剩什么价值？](/lanposui-blog/articles/003-ai-chopping-value/) — 如果你想知道"管 Agent"到底要管什么，这篇给了五个具体动作。
-- [AI 时代，你真正要养的羊是什么？](/lanposui-blog/articles/004-ai-assets/) — 如果你想接上"放羊"到 Agent 工作流这一层，可以看这篇。
+- [砍柴人与放羊人都遇到了 AI](/lanposui-blog/articles/chopping-herding-ai/) — AI 到底改变了谁的工作？从这篇开始看。
+- [当 AI 比你更会砍柴，你还剩什么价值？](/lanposui-blog/articles/chopping-value/) — 如果你想知道"管 Agent"到底要管什么，这篇给了五个具体动作。
+- [AI 时代，你真正要养的羊是什么？](/lanposui-blog/articles/ai-assets/) — 如果你想接上"放羊"到 Agent 工作流这一层，可以看这篇。

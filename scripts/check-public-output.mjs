@@ -55,7 +55,11 @@ assertIncludes(home, "fetchpriority", "home");
 
 // 文章页:阅读进度弧 + 阅读时长
 const articleDirs = readdirSync(join(root, "dist", "articles"), { withFileTypes: true })
-  .filter(entry => entry.isDirectory());
+  .filter(entry => entry.isDirectory())
+  .filter(entry => {
+    const html = readFileSync(join(root, "dist", "articles", entry.name, "index.html"), "utf8");
+    return !html.includes('http-equiv="refresh"');
+  });
 if (articleDirs.length === 0) {
   throw new Error("dist/articles has no article pages");
 }

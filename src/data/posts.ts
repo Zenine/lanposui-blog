@@ -33,7 +33,7 @@ export const posts: Post[] = [
   {
     issue: 108,
     title: "企业 AI 部署的新瓶颈：以前等模型，现在等硬件",
-    href: "/articles/108-enterprise-ai-hardware/",
+    href: "/articles/enterprise-ai-hardware/",
     date: "2026-08-14",
     publishAt: "2026-08-14T21:00:00+08:00",
     category: "AI 与工程",
@@ -48,7 +48,7 @@ export const posts: Post[] = [
   {
     issue: 100,
     title: "开源模型不再追赶，它开始讨价还价了",
-    href: "/articles/100-open-models-negotiation/",
+    href: "/articles/open-models-negotiation/",
     date: "2026-08-10",
     publishAt: "2026-08-10T21:07:00+08:00",
     category: "AI 与工程",
@@ -64,7 +64,7 @@ export const posts: Post[] = [
   {
     issue: 5,
     title: "Agent 不是聊天机器人，而是一种工作组织方式",
-    href: "/articles/005-agent-work-organization/",
+    href: "/articles/agent-work-organization/",
     date: "2026-08-06",
     publishAt: "2026-08-06T08:00:00+08:00",
     category: "AI 与工程",
@@ -80,7 +80,7 @@ export const posts: Post[] = [
   {
     issue: 4,
     title: "AI 时代，你真正要养的羊是什么？",
-    href: "/articles/004-ai-assets/",
+    href: "/articles/ai-assets/",
     date: "2026-08-04",
     publishAt: "2026-08-04T21:00:00+08:00",
     category: "创作与职业",
@@ -96,7 +96,7 @@ export const posts: Post[] = [
   {
     issue: 3,
     title: "当 AI 比你更会砍柴，你还剩什么价值？",
-    href: "/articles/003-ai-chopping-value/",
+    href: "/articles/chopping-value/",
     date: "2026-08-01",
     category: "创作与职业",
     categorySlug: "creation-career",
@@ -111,7 +111,7 @@ export const posts: Post[] = [
   {
     issue: 2,
     title: "砍柴人与放羊人都遇到了 AI",
-    href: "/articles/002-chopping-herding-ai/",
+    href: "/articles/chopping-herding-ai/",
     date: "2026-07-29",
     category: "创作与职业",
     categorySlug: "creation-career",
@@ -126,7 +126,7 @@ export const posts: Post[] = [
   {
     issue: 1,
     title: "发刊词｜为什么这个号叫「蓝破碎半圆」？",
-    href: "/articles/001-lanposui-banyuan/",
+    href: "/articles/lanposui-banyuan/",
     date: "2026-07-24",
     category: "公众号品牌",
     categorySlug: "brand",
