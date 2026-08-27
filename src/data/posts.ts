@@ -20,7 +20,7 @@ export const posts: Post[] = [
     title: "DeepSeek 近百页论文在证什么：不是万能安全，是更清楚的边界",
     href: "/articles/cordis-boundary-safety/",
     date: "2026-09-02",
-    publishAt: "2026-09-02T00:00:00+08:00",
+    publishAt: "2026-09-02T19:00:00+08:00",
     category: "AI 与工程",
     categorySlug: "ai-engineering",
     collection: "Agent Harness",

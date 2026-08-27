@@ -2,12 +2,12 @@
 layout: "../../layouts/PostLayout.astro"
 title: "DeepSeek 近百页论文在证什么：不是万能安全，是更清楚的边界"
 date: "2026-09-02"
-publishAt: "2026-09-02T00:00:00+08:00"
+publishAt: "2026-09-02T19:00:00+08:00"
 description: "Cordis 论文的形式化结果在工程上买到的不是万能安全，而是几类边界更清楚的运行时能力：HMR 可以复用组件生命周期边界，依赖可以声明式收窄，开放插件生态可以少写一类清理和通知胶水。"
 issue: 150
 category: "AI 与工程"
 cover: "/lanposui-blog/images/150-cordis-hmr-boundaries-cover.webp"
-source: "公众号第 150 期定时发布稿（计划 2026-09-02 00:00 发布）"
+source: "公众号第 150 期定时发布稿（计划 2026-09-02 19:00 发布）"
 ---
 
 
