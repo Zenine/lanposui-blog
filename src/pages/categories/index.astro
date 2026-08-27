@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getCategories } from "../../data/blog";
+import { getCategories, publishInstant } from "../../data/blog";
 
 const categories = getCategories();
 const base = import.meta.env.BASE_URL.endsWith("/")
@@ -18,7 +18,11 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
         <a href={withBase(`categories/${category.slug}/`)}>
           <span>{category.posts.length} 篇</span>
           <strong>{category.name}</strong>
-          <p>{category.posts.map(post => post.title).join(" / ")}</p>
+          <p class="title-fragments">
+            {category.posts.map(post => (
+              <span data-publish-at={publishInstant(post)}>{post.title}</span>
+            ))}
+          </p>
         </a>
       ))}
     </div>
@@ -80,6 +84,8 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
   }
 
   .taxonomy-list p {
+    display: grid;
+    gap: 0.2rem;
     color: var(--muted);
     line-height: 1.8;
   }

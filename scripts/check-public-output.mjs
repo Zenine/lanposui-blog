@@ -162,6 +162,16 @@ const archive = readFileSync(join(root, "dist", "articles", "index.html"), "utf8
 assertIncludes(archive, "year-block", "archive");
 assertMatches(archive, /year-block[\s\S]*?>\d{4}</, "archive year headings");
 assertIncludes(archive, 'class="thumb', "archive");
+assertIncludes(archive, "/lanposui-blog/articles/149-cordis-context-ledger/", "archive scheduled future post");
+assertIncludes(archive, "data-publish-at=", "archive scheduled publish metadata");
+
+const collectionsIndex = readFileSync(join(root, "dist", "collections", "index.html"), "utf8");
+assertIncludes(collectionsIndex, "/lanposui-blog/collections/agent-harness/", "collections scheduled collection");
+assertIncludes(collectionsIndex, "data-publish-at=", "collections scheduled publish metadata");
+
+const categoriesIndex = readFileSync(join(root, "dist", "categories", "index.html"), "utf8");
+assertIncludes(categoriesIndex, "/lanposui-blog/categories/ai-engineering/", "categories scheduled category");
+assertIncludes(categoriesIndex, "data-publish-at=", "categories scheduled publish metadata");
 
 // 文章页:目录、标题锚点、构建期 OG 图
 for (const dir of articleDirs) {
@@ -171,6 +181,8 @@ for (const dir of articleDirs) {
   assertIncludes(article, `/lanposui-blog/og/${dir.name}.png`, `article ${dir.name}`);
   readFileSync(join(root, "dist", "og", `${dir.name}.png`));
 }
+readFileSync(join(root, "dist", "articles", "149-cordis-context-ledger", "index.html"), "utf8");
+readFileSync(join(root, "dist", "og", "149-cordis-context-ledger.png"));
 
 // OG 模板:右侧蓝弧应完整落在 1200px 画布内,避免社交卡片右缘裁切。
 const ogTemplate = readFileSync(join(root, "src", "pages", "og", "[slug].png.ts"), "utf8");

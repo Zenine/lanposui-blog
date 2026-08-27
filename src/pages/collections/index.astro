@@ -1,12 +1,14 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getCollections } from "../../data/blog";
+import { getCollections, publishInstant } from "../../data/blog";
+import type { Post } from "../../data/posts";
 
 const collections = getCollections();
 const base = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
+const firstPublishInstant = (posts: Post[]) => Math.min(...posts.map(post => publishInstant(post)));
 ---
 
 <BaseLayout title="合集" description="按连续主题阅读蓝破碎半圆文章合集。">
@@ -15,10 +17,14 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
     <h1>合集</h1>
     <div class="taxonomy-list" data-reveal>
       {collections.map(collection => (
-        <a href={withBase(`collections/${collection.slug}/`)}>
+        <a href={withBase(`collections/${collection.slug}/`)} data-publish-at={firstPublishInstant(collection.posts)}>
           <span>{collection.posts.length} 篇</span>
           <strong>{collection.name}</strong>
-          <p>{collection.posts.map(post => post.title).join(" / ")}</p>
+          <p class="title-fragments">
+            {collection.posts.map(post => (
+              <span data-publish-at={publishInstant(post)}>{post.title}</span>
+            ))}
+          </p>
         </a>
       ))}
     </div>
@@ -80,6 +86,8 @@ const withBase = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
   }
 
   .taxonomy-list p {
+    display: grid;
+    gap: 0.2rem;
     color: var(--muted);
     line-height: 1.8;
   }

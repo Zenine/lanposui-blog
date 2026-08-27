@@ -16,6 +16,51 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    issue: 150,
+    title: "DeepSeek 近百页论文在证什么：不是万能安全，是更清楚的边界",
+    href: "/articles/150-cordis-boundary-safety/",
+    date: "2026-09-02",
+    publishAt: "2026-09-02T00:00:00+08:00",
+    category: "AI 与工程",
+    categorySlug: "ai-engineering",
+    collection: "Agent Harness",
+    collectionSlug: "agent-harness",
+    tags: ["AI", "Agent", "DeepSeek", "Harness"],
+    description:
+      "Cordis 论文的形式化结果在工程上买到的不是万能安全，而是几类边界更清楚的运行时能力：HMR 可以复用组件生命周期边界，依赖可以声明式收窄，开放插件生态可以少写一类清理和通知胶水。",
+    cover: "/images/150-cordis-hmr-boundaries-cover.webp",
+  },
+  {
+    issue: 149,
+    title: "DeepSeek 近百页论文在答什么：卸载和依赖是同一件事",
+    href: "/articles/149-cordis-context-ledger/",
+    date: "2026-08-30",
+    publishAt: "2026-08-30T19:00:00+08:00",
+    category: "AI 与工程",
+    categorySlug: "ai-engineering",
+    collection: "Agent Harness",
+    collectionSlug: "agent-harness",
+    tags: ["AI", "Agent", "DeepSeek", "Cordis"],
+    description:
+      "卸载清理和依赖通知看起来是两套机制。Cordis 论文把它们放进同一个 Context：修改环境是 effect，依赖环境是 coeffect，而服务注册本身就是一种可逆 effect。本文解释为什么同一个上下文对象能同时承担清理、依赖和通知。",
+    cover: "/images/149-cordis-context-ledger-cover.webp",
+  },
+  {
+    issue: 148,
+    title: "DeepSeek 近百页论文在问什么：拔掉插件以后凭什么不崩",
+    href: "/articles/148-deepseek-harness-plugin-runtime/",
+    date: "2026-08-27",
+    publishAt: "2026-08-27T19:00:00+08:00",
+    category: "AI 与工程",
+    categorySlug: "ai-engineering",
+    collection: "Agent Harness",
+    collectionSlug: "agent-harness",
+    tags: ["AI", "Agent", "DeepSeek", "Harness"],
+    description:
+      "DeepSeek Pro 模型和 DeepSeek Harness 把模型能力与 Agent 运行框架同时推到行业讨论中心，但真正值得细读的是随 Harness 一起出现的近百页论文。它不是模型报告，而是在回答一个运行时工程问题：当软件具备持续演化能力后，系统应建立在什么样的架构之上。",
+    cover: "/images/148-cordis-spatiotemporal-harness-cover.webp",
+  },
+  {
     issue: 77,
     title: "医疗大模型高分之后,为什么还不能直接用?",
     href: "/articles/077-medical-ai-benchmark/",
@@ -29,6 +74,7 @@ export const posts: Post[] = [
     description:
       "医疗大模型刷出高分，不代表真的能进诊室。真正危险的不是答错一道题，而是漏问关键病史、看不出风险边界，还给出一个很自信的结论。",
     cover: "/images/077-medical-ai-benchmark-cover.webp",
+    wechat: "https://mp.weixin.qq.com/s/a3bjrLEzuLbtPA8_Yd0HCA",
   },
   {
     issue: 108,

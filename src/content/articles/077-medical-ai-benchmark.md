@@ -7,7 +7,8 @@ description: "医疗大模型刷出高分，不代表真的能进诊室。真正
 issue: 77
 category: "AI 与工程"
 cover: "/lanposui-blog/images/077-medical-ai-benchmark-cover.webp"
-source: "公众号第 077 期公开发布稿（博客先行发布，公众号链接待回填）"
+wechat: "https://mp.weixin.qq.com/s/a3bjrLEzuLbtPA8_Yd0HCA"
+source: "公众号第 077 期公开发布稿（博客先行发布，公众号链接已回填）"
 ---
 
 # 医疗大模型高分之后,为什么还不能直接用?
