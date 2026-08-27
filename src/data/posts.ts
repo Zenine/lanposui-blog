@@ -18,7 +18,7 @@ export const posts: Post[] = [
   {
     issue: 150,
     title: "DeepSeek 近百页论文在证什么：不是万能安全，是更清楚的边界",
-    href: "/articles/150-cordis-boundary-safety/",
+    href: "/articles/cordis-boundary-safety/",
     date: "2026-09-02",
     publishAt: "2026-09-02T00:00:00+08:00",
     category: "AI 与工程",
@@ -33,7 +33,7 @@ export const posts: Post[] = [
   {
     issue: 149,
     title: "DeepSeek 近百页论文在答什么：卸载和依赖是同一件事",
-    href: "/articles/149-cordis-context-ledger/",
+    href: "/articles/cordis-context-ledger/",
     date: "2026-08-30",
     publishAt: "2026-08-30T19:00:00+08:00",
     category: "AI 与工程",
@@ -48,7 +48,7 @@ export const posts: Post[] = [
   {
     issue: 148,
     title: "DeepSeek 近百页论文在问什么：拔掉插件以后凭什么不崩",
-    href: "/articles/148-deepseek-harness-plugin-runtime/",
+    href: "/articles/deepseek-harness-plugin-runtime/",
     date: "2026-08-27",
     publishAt: "2026-08-27T19:00:00+08:00",
     category: "AI 与工程",
@@ -63,7 +63,7 @@ export const posts: Post[] = [
   {
     issue: 77,
     title: "医疗大模型高分之后,为什么还不能直接用?",
-    href: "/articles/077-medical-ai-benchmark/",
+    href: "/articles/medical-ai-benchmark/",
     date: "2026-08-22",
     publishAt: "2026-08-22T12:53:28+08:00",
     category: "AI 与工程",

@@ -50,8 +50,12 @@ export default defineConfig({
     '/articles/003-ai-chopping-value/': `${base}/articles/chopping-value/`,
     '/articles/004-ai-assets/': `${base}/articles/ai-assets/`,
     '/articles/005-agent-work-organization/': `${base}/articles/agent-work-organization/`,
+    '/articles/077-medical-ai-benchmark/': `${base}/articles/medical-ai-benchmark/`,
     '/articles/100-open-models-negotiation/': `${base}/articles/open-models-negotiation/`,
     '/articles/108-enterprise-ai-hardware/': `${base}/articles/enterprise-ai-hardware/`,
+    '/articles/148-deepseek-harness-plugin-runtime/': `${base}/articles/deepseek-harness-plugin-runtime/`,
+    '/articles/149-cordis-context-ledger/': `${base}/articles/cordis-context-ledger/`,
+    '/articles/150-cordis-boundary-safety/': `${base}/articles/cordis-boundary-safety/`,
   },
   integrations: [sitemap()],
   markdown: {
