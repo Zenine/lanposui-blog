@@ -29,6 +29,7 @@ export const posts: Post[] = [
     description:
       "Cordis 论文的形式化结果在工程上买到的不是万能安全，而是几类边界更清楚的运行时能力：HMR 可以复用组件生命周期边界，依赖可以声明式收窄，开放插件生态可以少写一类清理和通知胶水。",
     cover: "/images/150-cordis-hmr-boundaries-cover.webp",
+    wechat: "https://mp.weixin.qq.com/s/XCiP-gnHkVZaTt5wsBT1ZQ",
   },
   {
     issue: 149,
@@ -44,6 +45,7 @@ export const posts: Post[] = [
     description:
       "卸载清理和依赖通知看起来是两套机制。Cordis 论文把它们放进同一个 Context：修改环境是 effect，依赖环境是 coeffect，而服务注册本身就是一种可逆 effect。本文解释为什么同一个上下文对象能同时承担清理、依赖和通知。",
     cover: "/images/149-cordis-context-ledger-cover.webp",
+    wechat: "https://mp.weixin.qq.com/s/6KCnW1RYb21-AozHEJFIeA",
   },
   {
     issue: 148,
@@ -59,6 +61,7 @@ export const posts: Post[] = [
     description:
       "DeepSeek Pro 模型和 DeepSeek Harness 把模型能力与 Agent 运行框架同时推到行业讨论中心，但真正值得细读的是随 Harness 一起出现的近百页论文。它不是模型报告，而是在回答一个运行时工程问题：当软件具备持续演化能力后，系统应建立在什么样的架构之上。",
     cover: "/images/148-cordis-spatiotemporal-harness-cover.webp",
+    wechat: "https://mp.weixin.qq.com/s/wW-IWH1qvQ1ul1kmNBxTGA",
   },
   {
     issue: 77,

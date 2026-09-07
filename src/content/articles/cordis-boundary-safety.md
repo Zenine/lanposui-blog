@@ -7,7 +7,8 @@ description: "Cordis 论文的形式化结果在工程上买到的不是万能�
 issue: 150
 category: "AI 与工程"
 cover: "/lanposui-blog/images/150-cordis-hmr-boundaries-cover.webp"
-source: "公众号第 150 期定时发布稿（计划 2026-09-02 19:00 发布）"
+wechat: "https://mp.weixin.qq.com/s/XCiP-gnHkVZaTt5wsBT1ZQ"
+source: "公众号第 150 期（已发布；计划 2026-09-02 19:00）"
 ---
 
 

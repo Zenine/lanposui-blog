@@ -1,6 +1,6 @@
 # TODO
 
-按优先级排序（2026-07-30 梳理，2026-08-27 更新 148—150 定时同步与纯语义 slug 项）。
+按优先级排序（2026-07-30 梳理，2026-09-07 更新 148—150 公众号链接项）。
 
 ## P1 · 需用户登录操作
 
@@ -9,7 +9,6 @@
 ## P2 · 小件待决/待补
 
 - [ ] favicon 品牌弧候选已生成在 `public/favicon-arc.svg`（亮暗自适应，未启用），当前默认仍是公众号 Logo；待用户审阅后决定是否切换（切换=改 `BaseLayout.astro` 两行 favicon link 并更新版本参数）。
-- [ ] 公众号链接待补：148、149、150 已按定时发布计划同步到博客，待公众号正式发出后回填 `wechat` 字段与 source 说明；后台 `tempkey` 预览链接不入库。
 ## 暂缓（有明确决策）
 
 - 域根 `robots.txt`（需新建 `Zenine/zenine.github.io` 根仓库）暂缓：Search Console / Bing 手动提交 sitemap 后它无增量价值，且根仓库会占据 github.io 根路径，属域级决策；未来做根域个人主页时捎带。项目内 `/lanposui-blog/robots.txt` 爬虫不读（robots 协议只认域根），保留仅作声明。

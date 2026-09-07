@@ -7,7 +7,8 @@ description: "卸载清理和依赖通知看起来是两套机制。Cordis 论�
 issue: 149
 category: "AI 与工程"
 cover: "/lanposui-blog/images/149-cordis-context-ledger-cover.webp"
-source: "公众号第 149 期定时发布稿（计划 2026-08-30 19:00 发布）"
+wechat: "https://mp.weixin.qq.com/s/6KCnW1RYb21-AozHEJFIeA"
+source: "公众号第 149 期（已发布；计划 2026-08-30 19:00）"
 ---
 
 

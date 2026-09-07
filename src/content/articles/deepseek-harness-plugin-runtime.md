@@ -7,7 +7,8 @@ description: "DeepSeek Pro 模型和 DeepSeek Harness 把模型能力与 Agent �
 issue: 148
 category: "AI 与工程"
 cover: "/lanposui-blog/images/148-cordis-spatiotemporal-harness-cover.webp"
-source: "公众号第 148 期定时发布稿（计划 2026-08-27 19:00 发布）"
+wechat: "https://mp.weixin.qq.com/s/wW-IWH1qvQ1ul1kmNBxTGA"
+source: "公众号第 148 期（已发布；计划 2026-08-27 19:00）"
 ---
 
 
