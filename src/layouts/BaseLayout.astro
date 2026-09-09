@@ -63,11 +63,11 @@ const navItems = [
         };
         window.__applyThemeChoice = apply;
         apply(read());
-        document.documentElement.classList.add("js");
         document.addEventListener("astro:before-swap", (event) => {
           const root = document.documentElement;
           const next = event.newDocument.documentElement;
-          next.classList.add("js");
+          // js 类只跟随打包脚本:脚本没跑时不加,内容默认可见(安全失败)
+          if (root.classList.contains("js")) next.classList.add("js");
           next.dataset.themeChoice = root.dataset.themeChoice || "system";
           if (root.dataset.theme) next.dataset.theme = root.dataset.theme;
           else delete next.dataset.theme;
@@ -121,7 +121,7 @@ const navItems = [
         ))}
         <a href="https://github.com/Zenine" rel="me noopener">GitHub</a>
         <span class="wechat-nav">
-          <a href="https://weixin.qq.com/r/mp/njrl-WTEHTlirSCe92_M">公众号</a>
+          <button class="wechat-trigger" type="button" aria-label="公众号，悬停或聚焦查看二维码">公众号</button>
           <span class="wechat-qr" role="tooltip" aria-label="公众号二维码">
             <img src={withBase("images/wechat-qr.jpg")} alt="公众号二维码" width="172" height="172" />
           </span>
@@ -425,6 +425,24 @@ const navItems = [
     width: 12rem;
     height: 0.8rem;
     content: "";
+  }
+
+  /* 公众号没有长期网页地址,只有二维码。这里用按钮而非链接:
+     既保持导航视觉一致,又可聚焦,让键盘用户也能通过 :focus-within 唤出二维码。 */
+  .wechat-trigger {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    line-height: inherit;
+    cursor: pointer;
+    transition: color 160ms ease;
+  }
+
+  .wechat-trigger:hover {
+    color: var(--blue);
   }
 
   .wechat-qr {

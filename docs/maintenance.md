@@ -17,7 +17,7 @@
 - Hero 文案：`在破碎信息里，留下判断的现场。`
 - 签名视觉：「蓝破碎半圆」品牌弧，出现在页眉品牌位（内联 SVG）、首页 Hero 大弧、全站 kicker 小弧刻度、文章页右下角阅读进度弧。叙事方向是"半圆碎掉"（完整蓝色半圆自左向右碎裂、弧段位移散开），不是"碎片拼成半圆"；用户 2026-07-30 拍板，改图前先确认。
 - 暗色模式：跟随系统 `prefers-color-scheme`，色板集中在 `src/layouts/BaseLayout.astro` 的 `:root` 变量与其暗色覆写块；新增颜色一律走变量，不写死色值。
-- 公众号 Logo：`public/images/wechat-logo.jpg`
+- 公众号 Logo：`public/images/wechat-logo.jpg`（仅作备份，页眉已改用内联品牌弧，`src/` 下无引用）
 - 公众号二维码：`public/images/wechat-qr.jpg`
 - 公众号入口：顶部导航的“公众号”，鼠标悬停或键盘聚焦时浮出二维码。
 - GitHub 首页：顶部导航和页脚的 `GitHub` 入口，指向 `https://github.com/Zenine`。
@@ -99,7 +99,7 @@ http://localhost:4321/lanposui-blog/
    文件名建议使用稳定 slug，例如：
 
    ```text
-   src/content/articles/003-example-title.md
+   src/content/articles/example-title.md
    ```
 
 2. 检查文章 frontmatter。
@@ -126,7 +126,7 @@ http://localhost:4321/lanposui-blog/
 
 3. 把公开图片放到 `public/images/`。
 
-   超过约 150KB 的图片先转成 WebP 再入库（封面统一按 1.82 宽高比出图，文章页封面会按此比例裁切展示）：
+   超过约 150KB 的图片先转成 WebP 再入库（封面按 1.82 宽高比出图；页面用 `object-fit: contain` 完整展示，不裁切）：
 
    ```sh
    /usr/bin/python3 -c "from PIL import Image; Image.open('in.png').save('out.webp', 'WEBP', quality=82, method=6)"
@@ -225,13 +225,14 @@ http://localhost:4321/lanposui-blog/
 npm test
 ```
 
+> **本机验证陷阱**：`npm test` 不是隔离的。Astro 把 markdown 渲染结果缓存在 `node_modules/.astro`，只删 `.astro` 和 `dist` 不够。**改动 `astro.config.mjs` 的 markdown 配置（rehype / remark 插件）后，必须先 `rm -rf .astro node_modules/.astro dist` 再跑 `npm test`**，否则会拿到基于旧渲染结果的假绿。CI 是全新 checkout，不受影响。来历见 `docs/assertion-ablation-2026-09-08.md`。
+
 `npm test` 会执行：
 
-1. `npm run build`
-2. `astro build`
-3. `pagefind --site dist`
-4. 复制 Pagefind 静态资源到 `public/pagefind/`
-5. `node scripts/check-public-output.mjs`
+1. `node scripts/check-scheduled-publishing.mjs` —— 定时发布过滤逻辑（fixture 驱动，不碰真实数据）
+2. `node scripts/check-content-consistency.mjs` —— md 与 `posts.ts` 双源字段一致、公众号链接格式、图片文件存在性、跨库 slug（纯源码检查，不联网）
+3. `npm run build` —— `astro build` + `pagefind --site dist` + 把 Pagefind 产物回拷到 `public/pagefind/`
+4. `node scripts/check-public-output.mjs` —— 构建产物断言
 
 公开输出检查覆盖：
 

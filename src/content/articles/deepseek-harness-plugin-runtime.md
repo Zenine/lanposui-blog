@@ -11,9 +11,6 @@ wechat: "https://mp.weixin.qq.com/s/wW-IWH1qvQ1ul1kmNBxTGA"
 source: "公众号第 148 期（已发布；计划 2026-08-27 19:00）"
 ---
 
-
-# DeepSeek 近百页论文在问什么：拔掉插件以后凭什么不崩
-
 DeepSeek 最近连续发布了两项重量级成果。
 
 最新的旗舰 Pro 模型，把模型能力再次拉到了行业焦点；DeepSeek Harness（运行框架），则让国内也有了一个可以跟 Codex、Claude Code 放在同一张桌子上讨论的 Agent 框架，而且它是开源的。

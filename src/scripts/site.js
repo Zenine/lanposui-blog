@@ -3,6 +3,10 @@
 
 const cleanups = [];
 
+// 滚动显现依赖 html.js [data-reveal]{opacity:0}。这个类只在本模块真正加载后才添加,
+// 脚本一旦失联,元素保持默认可见,而不是永久透明。见 docs/assertion-ablation-2026-09-08.md。
+document.documentElement.classList.add("js");
+
 function onCleanup(fn) {
   cleanups.push(fn);
 }

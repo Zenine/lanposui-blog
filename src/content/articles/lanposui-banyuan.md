@@ -134,5 +134,3 @@ Rich Sutton 在《The Bitter Lesson》里写过一个让工程师不太舒服的
 这个号，就从这里出发。
 
 前进四。
-
----

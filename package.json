@@ -7,8 +7,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && pagefind --site dist && cp -R dist/pagefind public/",
-    "test": "node scripts/check-scheduled-publishing.mjs && npm run build && node scripts/check-public-output.mjs",
+    "build": "rm -rf public/pagefind && astro build && pagefind --site dist && cp -R dist/pagefind public/",
+    "test": "node scripts/check-scheduled-publishing.mjs && node scripts/check-content-consistency.mjs && npm run build && node scripts/check-public-output.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
