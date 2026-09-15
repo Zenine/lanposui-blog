@@ -16,6 +16,21 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    issue: 78,
+    title: "医疗 AI 喊了三年，为什么还没进医院账本？",
+    href: "/articles/medical-ai-hospital-budget/",
+    date: "2026-09-15",
+    publishAt: "2026-09-15T19:00:00+08:00",
+    category: "AI 与工程",
+    categorySlug: "ai-engineering",
+    collection: "医疗 AI",
+    collectionSlug: "medical-ai",
+    tags: ["AI", "医疗AI", "医疗信息化", "商业模式"],
+    description:
+      "部署不等于付费，试点不等于收入。医疗 AI 的持续预算，最终取决于它能否守住医院的结算与合规防线。",
+    cover: "/images/078-medical-ai-hospital-budget-cover.webp",
+  },
+  {
     issue: 150,
     title: "DeepSeek 近百页论文在证什么：不是万能安全，是更清楚的边界",
     href: "/articles/cordis-boundary-safety/",
