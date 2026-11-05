@@ -16,6 +16,20 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    issue: 115,
+    title: "健康画像真正的用户，是大模型",
+    href: "/articles/personal-health-world-model/",
+    date: "2026-11-05",
+    category: "AI 与工程",
+    categorySlug: "ai-engineering",
+    collection: "医疗 AI",
+    collectionSlug: "medical-ai",
+    tags: ["AI", "医疗AI", "健康管理", "World Model"],
+    description:
+      "什么是健康画像？为什么提了这么多年，却一直没真正用起来？也许，我们一直把它做给了错的人……",
+    cover: "/images/115-health-baseline-cover-opaque.webp",
+  },
+  {
     issue: 78,
     title: "医疗 AI 喊了三年，为什么还没进医院账本？",
     href: "/articles/medical-ai-hospital-budget/",

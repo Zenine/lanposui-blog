@@ -9,6 +9,11 @@
 - [x] **公开承诺提供规避境外访问封锁的资源** —— 用户 2026-09-09 选 A，两句「后台回复」已全部删除（`ps1` 领取论文、`ps2` 突破封锁）。第 142 行「四重封锁」属描述性表述，按讨论保留。验证：`grep -rn '阿拉霍洞开\|后台回复' src/content/articles/` 无命中。
 - [x] **雇主内部信息披露** —— 用户 2026-09-08 决定按现状定稿：岗位称谓已脱敏为「公司战略技术领导」（工作树改动，尚未提交），同段的「医院和我们自己都承受不了」、`:15-17` 客户质疑原话、`:100-104` 产品策略陈述、`:62-68` 院内数据流字段层级**均保留原样**，不再改写。本条销账。
 
+## 115 期发布准备
+
+- [ ] 115 公众号补链：作者授权网站先行发布；公众号尚未正式发表，待补正式链接及真实发送时间。网站日期 2026-11-05 记录本次博客上线日，不据此倒推公众号发送日期；正式发表后核对两端版本并回填链接。
+- [ ] 115 搜索引擎提交：部署后在 Search Console 刷新 sitemap，并请求 `https://zenine.github.io/lanposui-blog/articles/personal-health-world-model/` 编入索引；Bing 提交按既有待办执行。
+
 ## P1 · 需用户登录或本人拍板
 
 - [ ] SEO 站外提交：Google Search Console 已完成站点验证；首页 `https://zenine.github.io/lanposui-blog/` 于 2026-08-03 21:52 通过实际网址测试，允许抓取且可编入索引。已提交 `https://zenine.github.io/lanposui-blog/sitemap-index.xml`，若仍显示无法抓取则补交 `https://zenine.github.io/lanposui-blog/sitemap-0.xml`；第 077 / 078 / 108 / 148 / 149 / 150 期已同步到博客源码，部署后需在 Search Console 用「网址检查」请求对应纯语义文章 URL 编入索引。Bing 站长工具仍需验证并提交 sitemap。百度不做（GitHub Pages 屏蔽 Baiduspider 且无备案域名）。
