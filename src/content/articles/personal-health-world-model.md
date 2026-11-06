@@ -2,11 +2,13 @@
 layout: "../../layouts/PostLayout.astro"
 title: "健康画像真正的用户，是大模型"
 date: "2026-11-05"
+publishAt: "2026-11-05T18:40:00+08:00"
 description: "什么是健康画像？为什么提了这么多年，却一直没真正用起来？也许，我们一直把它做给了错的人……"
 issue: 115
 category: "AI 与工程"
 cover: "/lanposui-blog/images/115-health-baseline-cover-opaque.webp"
-source: "作者确认稿"
+wechat: "https://mp.weixin.qq.com/s/nIW49X_0_pDBR6RYsXSWzA"
+source: "公众号第 115 期公开发布稿（2026-11-05 18:40 实际发送）"
 ---
 
 手表能告诉你数字变了。**健康画像要帮助大模型理解：这次变化，对你意味着什么。**

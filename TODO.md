@@ -9,14 +9,14 @@
 - [x] **公开承诺提供规避境外访问封锁的资源** —— 用户 2026-09-09 选 A，两句「后台回复」已全部删除（`ps1` 领取论文、`ps2` 突破封锁）。第 142 行「四重封锁」属描述性表述，按讨论保留。验证：`grep -rn '阿拉霍洞开\|后台回复' src/content/articles/` 无命中。
 - [x] **雇主内部信息披露** —— 用户 2026-09-08 决定按现状定稿：岗位称谓已脱敏为「公司战略技术领导」（工作树改动，尚未提交），同段的「医院和我们自己都承受不了」、`:15-17` 客户质疑原话、`:100-104` 产品策略陈述、`:62-68` 院内数据流字段层级**均保留原样**，不再改写。本条销账。
 
-## 115 期发布准备
+## 115 / 158 期搜索收录跟踪
 
-- [ ] 115 公众号补链：作者授权网站先行发布；公众号尚未正式发表，待补正式链接及真实发送时间。网站日期 2026-11-05 记录本次博客上线日，不据此倒推公众号发送日期；正式发表后核对两端版本并回填链接。
 - [ ] 115 搜索收录跟踪：2026-11-05 已在 Search Console 为新文章请求编入索引，页面确认“已请求编入索引”，已加入优先抓取队列；实际收录仍待 Google 处理。本轮已补交 `sitemap-0.xml`，后台仍显示“无法抓取”（线上 XML 已实测返回 200 且含新文章）；后续复查抓取状态。Bing 提交沿用既有待办。
+- [ ] 158 搜索引擎提交：部署后确认 sitemap 包含 `https://zenine.github.io/lanposui-blog/articles/medical-ai-next-bet/`，在 Google Search Console 刷新 sitemap 并用“网址检查”请求新文章编入索引；Bing 已启用时同步提交。
 
 ## P1 · 需用户登录或本人拍板
 
-- [ ] SEO 站外提交：Google Search Console 已完成站点验证；首页 `https://zenine.github.io/lanposui-blog/` 于 2026-08-03 21:52 通过实际网址测试，允许抓取且可编入索引。已提交 `https://zenine.github.io/lanposui-blog/sitemap-index.xml`，若仍显示无法抓取则补交 `https://zenine.github.io/lanposui-blog/sitemap-0.xml`；第 077 / 078 / 108 / 148 / 149 / 150 期已同步到博客源码，部署后需在 Search Console 用「网址检查」请求对应纯语义文章 URL 编入索引。Bing 站长工具仍需验证并提交 sitemap。百度不做（GitHub Pages 屏蔽 Baiduspider 且无备案域名）。
+- [ ] SEO 站外提交：Google Search Console 已完成站点验证；首页 `https://zenine.github.io/lanposui-blog/` 于 2026-08-03 21:52 通过实际网址测试，允许抓取且可编入索引。已提交 `https://zenine.github.io/lanposui-blog/sitemap-index.xml`，若仍显示无法抓取则补交 `https://zenine.github.io/lanposui-blog/sitemap-0.xml`；第 077 / 078 / 108 / 115 / 148 / 149 / 150 / 158 期已同步到博客源码，部署后需在 Search Console 用「网址检查」请求对应纯语义文章 URL 编入索引。Bing 站长工具仍需验证并提交 sitemap。百度不做（GitHub Pages 屏蔽 Baiduspider 且无备案域名）。
 - [ ] 第 078 期公众号正式链接待作者从后台提供后回填：`https://mp.weixin.qq.com/s/...`。届时同步 `src/content/articles/medical-ai-hospital-budget.md`、`src/data/posts.ts` 与 `writing-craft/docs/publishing/正式发布跟踪清单.md`；首发时间已按用户确认的 2026-09-15 19:00 记录，无需另追页面实测。
 - [x] **正文单一事实源** —— 用户 2026-09-09 裁决：**以公众号版为准，回退博客正文**。执行前先抓公众号线上原文核实，确认 `writing-craft/published/` 存的就是公众号发出的那一版（逐句吻合），而博客版自首次提交 `4878df5` 起就是另一版、并非同步漂移。已把 6 篇分叉正文对齐（第 005 期整篇重写，其余五篇差异主要是首行标题与内嵌封面）；7 对可配对文章现已全部一致。规则连同五条发布层例外已写入本库 `AGENTS.md`「与 writing-craft 的同步流程」首条。**遗留**：同一段措辞尚未写进 `writing-craft/AGENTS.md`，需在对方库按其 PR 流程补。
 - [x] **导航公众号入口** —— 用户 2026-09-09 选 B，并确认公众号没有长期网页地址、只有二维码。2026-09-09 实测该短链已失效：返回 200 但内容是跳转脚本，中文用户被送到微信下载页 `weixin.qq.com/d`，不再通向公众号。处理：文字链改为不可导航的 `<button class="wechat-trigger">`，沿用导航视觉且保持可聚焦，使键盘用户仍能通过 `:focus-within` 唤出二维码；悬停二维码与页脚二维码两个入口原样保留。新增断言 `assertExcludes(html, "weixin.qq.com/r/mp/")` 锁死此类会过期的短链，加断言时确认过它在旧代码下失败。验证：全站 33 个页面短链残留归零，`npm test` 通过。

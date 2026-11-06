@@ -16,10 +16,27 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    issue: 158,
+    title: "医院没钱，医疗 AI 还在赌什么？",
+    href: "/articles/medical-ai-next-bet/",
+    date: "2026-11-06",
+    publishAt: "2026-11-06T22:08:00+08:00",
+    category: "AI 与工程",
+    categorySlug: "ai-engineering",
+    collection: "医疗 AI",
+    collectionSlug: "medical-ai",
+    tags: ["AI", "医疗AI", "医疗信息化", "HIS"],
+    description:
+      "当评级、卫健、医保三大需求源收紧，医疗信息化厂商该如何止血、渐进改造存量系统，并找到新的买单方？",
+    cover: "/images/158-medical-ai-subject-cover.webp",
+    wechat: "https://mp.weixin.qq.com/s/O3ojpL06BBy0RolKCPGiwg",
+  },
+  {
     issue: 115,
     title: "健康画像真正的用户，是大模型",
     href: "/articles/personal-health-world-model/",
     date: "2026-11-05",
+    publishAt: "2026-11-05T18:40:00+08:00",
     category: "AI 与工程",
     categorySlug: "ai-engineering",
     collection: "医疗 AI",
@@ -28,6 +45,7 @@ export const posts: Post[] = [
     description:
       "什么是健康画像？为什么提了这么多年，却一直没真正用起来？也许，我们一直把它做给了错的人……",
     cover: "/images/115-health-baseline-cover-opaque.webp",
+    wechat: "https://mp.weixin.qq.com/s/nIW49X_0_pDBR6RYsXSWzA",
   },
   {
     issue: 78,
