@@ -16,6 +16,21 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    issue: 92,
+    title: "医疗大模型扎堆进院，为什么落地的全在写病历？",
+    href: "/articles/hospital-agent-ready/",
+    date: "2026-11-09",
+    publishAt: "2026-11-09T20:10:00+08:00",
+    category: "AI 与工程",
+    categorySlug: "ai-engineering",
+    collection: "医疗 AI",
+    collectionSlug: "medical-ai",
+    tags: ["AI", "医疗AI", "智能体", "HIS"],
+    description: "医疗大模型扎堆进院，为什么落地的仍集中在导诊、预问诊和写病历？从老 HIS 的业务状态、模块接口和受控执行能力寻找答案。",
+    cover: "/images/092-agent-ready-gap-cover.webp",
+    wechat: "https://mp.weixin.qq.com/s/h9Ph_nvQYnc2A5-vUsKPWA",
+  },
+  {
     issue: 158,
     title: "医院没钱，医疗 AI 还在赌什么？",
     href: "/articles/medical-ai-next-bet/",
