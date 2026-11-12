@@ -3,6 +3,7 @@
 ## 2026-11-12
 
 - 按公众号正式已发版同步第 092 期公开正文、双源元数据、封面和正文图；实际发送时间为 2026-11-09 20:10。公开路径为 `articles/hospital-agent-ready/`，部署核验与搜索引擎提交状态见 TODO。
+- `npm test` 通过；GitHub Pages 工作流 `43244197685` 成功，线上文章、两图及 sitemap 返回 200，确认 sitemap 包含新文章。Search Console / Bing 人工提交仍留 TODO。
 
 ## 2026-11-06
 

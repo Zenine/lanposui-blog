@@ -1,6 +1,6 @@
 # TODO
 
-- [ ] 092 部署与索引：已获提交推送授权；推送后确认文章和 sitemap，再于 Search Console 刷新 sitemap，并请求 `https://zenine.github.io/lanposui-blog/articles/hospital-agent-ready/` 编入索引；若已启用 Bing，同步提交 sitemap。验证入口：`npm test`、GitHub Pages 工作流、线上文章及 sitemap。
+- [ ] 092 搜索引擎提交：文章、两张图片与 sitemap 已于 2026-11-12 部署核验通过，sitemap 已包含新 URL。待在 Search Console 刷新 sitemap，并请求 `https://zenine.github.io/lanposui-blog/articles/hospital-agent-ready/` 编入索引；若已启用 Bing，同步提交 sitemap。
 
 按优先级排序（2026-07-30 梳理；2026-09-07 更新 148—150 公众号链接项；2026-09-08 并入三份只读审阅产物的全部未决条目，源文件已删除，本文件是唯一待办入口）。
 
