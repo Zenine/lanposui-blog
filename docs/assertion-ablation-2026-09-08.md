@@ -18,13 +18,11 @@
 
 结果：**27 次消融，12 次被抓到，15 次漏掉。**
 
-## 方法学插曲：第一轮结果有两条是假的
+## 方法学发现：本机缓存导致假绿
 
-第一轮跑批时，改动 `astro.config.mjs` 里 markdown 图片插件的两次消融都显示「漏掉」。反证时发现产物根本没变——`node_modules/.astro` 的内容缓存让 markdown 渲染结果被复用，只删 `.astro` 和 `dist` 不够。
+改动 `astro.config.mjs` 里 markdown 图片插件的两次消融，第一轮显示「漏掉」，实为 `node_modules/.astro` 内容缓存复用了旧的 markdown 渲染结果，只删 `.astro` 和 `dist` 不够。探针属性 `data-ablation-probe` 在不清缓存时出现 0 次，清掉后出现 25 次。全批清缓存重跑后，其中一条翻转为「抓到」。
 
-用一个探针属性证实了这一点：给插件加一个 `data-ablation-probe` 属性，不清 `node_modules/.astro` 时产物里出现 0 次，清掉后出现 25 次。全批清缓存重跑后，其中一条从「漏掉」翻转为「抓到」。
-
-**这本身是一个发现**：本机 `npm test` 不是隔离的。改动 markdown 处理链路后直接跑测试，会拿到一个基于旧渲染结果的假绿。CI 是全新 checkout 所以不受影响，但本机验证会骗人。规避方式是改动 `astro.config.mjs` 的 markdown 配置后先 `rm -rf .astro node_modules/.astro dist`。
+本机 `npm test` 因此不是隔离的；CI 是全新 checkout 不受影响。改动 `astro.config.mjs` 的 markdown 配置后先 `rm -rf .astro node_modules/.astro dist`。
 
 ## 发现一：整个前端脚本失效不会被发现，而且是「危险失败」
 
@@ -92,7 +90,7 @@ html.js [data-reveal]{opacity:0;transform:translateY(12px)}
 
 ## 由此产生的整改项
 
-按性价比排序，已写入 `TODO.md`：
+以下五项已于 2026-09-08 全部完成（见 CHANGELOG 归档）：
 
 1. 让滚动显现改为安全失败。要么把 `opacity:0` 的兜底交给 `@media (prefers-reduced-motion)` 之外的超时兜底，要么由脚本自己加 `js` 类而不是内联脚本加，这样脚本没跑时内容默认可见。这一条不改，任何一次 JS 打包事故都会让站点看起来是空的。
 2. 断言里加一条「打包产物中存在 `revealed` 字样」或等价的脚本存活检查，让整个 `site.js` 失联能被发现。
